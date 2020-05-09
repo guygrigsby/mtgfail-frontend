@@ -12,6 +12,8 @@ class DeckConverter extends Component {
 
     this.state = {
       deck: '',
+      uri: '',
+      isDecksite: false,
       convertedDeck: '',
       errorMessage: '',
       isError: false,
@@ -24,6 +26,10 @@ class DeckConverter extends Component {
   handleChange(event) {
     this.setState({deck: event.target.value});
   }
+  handleURIChange(event) {
+    this.setState({uri: event.target.value});
+    this.setState({isDecksite: true});
+  }
 
   handleSubmit(event) {
     const form = event.currentTarget;
@@ -34,15 +40,32 @@ class DeckConverter extends Component {
     // Simple POST request with a JSON body using fetch
     // curl -X POST https://api.mtg.fail -H 'Content-Type: text/plain' --data-binary @deck.txt
     const b = this.state.deck;
-    const requestOptions = {
-      method: 'POST',
-      headers: { 
-        'Content-Type': 'text/plain', 
-        'Cache-Control': 'no-store,no-cache,must-revalidate',
-      }, 
-      body: b
-    };
-    fetch('https://api.mtg.fail', requestOptions)
+    const u = this.state.uri;
+    let requestOptions;
+    let url = new URL("https://api.mtg.fail")
+
+    if (this.state.isDecksite) {
+      let params = {deck: this.state.uri}
+      Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+      requestOptions = {
+        method: 'GET',
+        headers: { 
+          'Content-Type': 'text/plain', 
+          'Cache-Control': 'no-store,no-cache,must-revalidate',
+        }, 
+        //deck\=https://tappedout.net/mtg-decks/22-01-20-kess-storm
+      };
+    } else {
+      requestOptions = {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'text/plain', 
+          'Cache-Control': 'no-store,no-cache,must-revalidate',
+        }, 
+        body: b
+      };
+    }
+    fetch(url, requestOptions)
       .then(async response => {
         console.log(response)
         const data = await response.json();
@@ -74,7 +97,9 @@ class DeckConverter extends Component {
     if (this.state.converted) {
       convertBox = <Container>this.state.convertedDeck</Container>;
     } else if (this.state.isError) {
-      convertBox = <Container>this.state.errorMessage</Container>;A
+      convertBox = <Container>this.state.errorMessage</Container>;
+    } else {
+      convertBox = <Container>Welcome to mtg.fail!</Container>;
     }
     const deck = this.state.deck;
     return(
@@ -85,6 +110,10 @@ class DeckConverter extends Component {
             <Button variant="primary" type="submit">
               Convert
             </Button>
+            <Form.Group controlId="deckurl">
+              <Form.Label>Deck URL for tappedout or deckbox.org</Form.Label>
+              <Form.Control type="url" placeholder="https://deckbox.org/sets/2653175" onChange={this.handleURIChange}/>
+            </Form.Group>
             <Form.Group controlId="decklist.ControlTextarea1">
               <Form.Label>Deck List</Form.Label>
               <Form.Control as="textarea" rows="25" value={deck} onChange={this.handleChange} />
@@ -96,6 +125,7 @@ class DeckConverter extends Component {
 
     );
   }
+
 
 }
 
