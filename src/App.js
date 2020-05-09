@@ -32,14 +32,15 @@ class DeckConverter extends Component {
     }
     // Simple POST request with a JSON body using fetch
     // curl -X POST https://api.mtg.fail -H 'Content-Type: text/plain' --data-binary @deck.txt
+    const b = this.state.deck;
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: this.state.deck
+      headers: { 'Content-Type': 'text/plain', 'Access-Control-Allow-Origin': '*' }, //TODO local only. remove
+      body: b
     };
     fetch('https://api.mtg.fail', requestOptions)
       .then(async response => {
-        console.print(response)
+        console.log(response)
         const data = await response.json();
 
         // check for error response
@@ -50,13 +51,15 @@ class DeckConverter extends Component {
         }
 
         this.setState({ convertedDeck: data.value })
-        this.setState({converted: true});
+        this.setState({ converted: true });
         this.handleChange(event);
       })
       .catch(error => {
         this.setState({ errorMessage: error });
         console.error('There was an error!', error);
       });
+
+    console.log(b)
 
 
   };
@@ -67,6 +70,7 @@ class DeckConverter extends Component {
     if (this.state.converted) {
       convertBox = <Container>this.state.convertedDeck</Container>;
     } 
+    const deck = this.state.deck;
     return(
       <Container className="p-3">
         <Jumbotron>
@@ -77,7 +81,7 @@ class DeckConverter extends Component {
             </Button>
             <Form.Group controlId="decklist.ControlTextarea1">
               <Form.Label>Deck List</Form.Label>
-              <Form.Control as="textarea" rows="25" value={this.state.value} onChange={this.handleChange} />
+              <Form.Control as="textarea" rows="25" value={deck} onChange={this.handleChange} />
             </Form.Group>
 
           </Form>
