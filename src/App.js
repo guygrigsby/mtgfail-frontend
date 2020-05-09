@@ -14,6 +14,7 @@ class DeckConverter extends Component {
       deck: '',
       convertedDeck: '',
       errorMessage: '',
+      isError: false,
       converted: false
     }
     this.handleChange = this.handleChange.bind(this);
@@ -72,7 +73,9 @@ class DeckConverter extends Component {
     let convertBox;
     if (this.state.converted) {
       convertBox = <Container>this.state.convertedDeck</Container>;
-    } 
+    } else if (this.state.isError) {
+      convertBox = <Container>this.state.errorMessage</Container>;A
+    }
     const deck = this.state.deck;
     return(
       <Container className="p-3">
