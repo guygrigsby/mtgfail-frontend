@@ -50,15 +50,14 @@ class DeckConverter extends Component {
         }
 
         this.setState({ convertedDeck: data.value })
+        this.setState({converted: true});
+        this.handleChange(event);
       })
       .catch(error => {
         this.setState({ errorMessage: error });
         console.error('There was an error!', error);
-        alert(error)
       });
 
-    this.setState({converted: true});
-    this.handleChange(event);
 
   };
 
