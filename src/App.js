@@ -35,7 +35,7 @@ class DeckConverter extends Component {
     const b = this.state.deck;
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'text/plain', 'Access-Control-Allow-Origin': '*' }, //TODO local only. remove
+      headers: { 'Content-Type': 'text/plain' }, 
       body: b
     };
     fetch('https://api.mtg.fail', requestOptions)
