@@ -5,18 +5,17 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
-
-var panelStyle = {
-  'max-width': '80%',
-  margin: '0 auto'
-}
 
 class DeckConverter extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {deck: ''}
+    this.state = {
+      deck: '',
+      convertedDeck: '',
+      errorMessage: '',
+      converted: false
+    }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -26,20 +25,21 @@ class DeckConverter extends Component {
   }
 
   handleSubmit(event) {
-    alert(this.state.deck)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
     // Simple POST request with a JSON body using fetch
+    // curl -X POST https://api.mtg.fail -H 'Content-Type: text/plain' --data-binary @deck.txt
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/text' },
+      headers: { 'Content-Type': 'text/plain' },
       body: this.state.deck
     };
     fetch('https://api.mtg.fail', requestOptions)
       .then(async response => {
+        console.print(response)
         const data = await response.json();
 
         // check for error response
@@ -49,30 +49,38 @@ class DeckConverter extends Component {
           return Promise.reject(error);
         }
 
-        this.setState({ postId: data.id })
+        this.setState({ convertedDeck: data.value })
       })
       .catch(error => {
         this.setState({ errorMessage: error });
         console.error('There was an error!', error);
+        alert(error)
       });
+
+    this.setState({converted: true});
+    this.handleChange(event);
 
   };
 
 
   render() {
+    let convertBox;
+    if (this.state.converted) {
+      convertBox = <Container>this.state.convertedDeck</Container>;
+    } 
     return(
       <Container className="p-3">
         <Jumbotron>
-
+          {convertBox}
           <Form onSubmit={this.handleSubmit}>
+            <Button variant="primary" type="submit">
+              Convert
+            </Button>
             <Form.Group controlId="decklist.ControlTextarea1">
               <Form.Label>Deck List</Form.Label>
               <Form.Control as="textarea" rows="25" value={this.state.value} onChange={this.handleChange} />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
-              Convert
-            </Button>
           </Form>
         </Jumbotron>
       </Container>
