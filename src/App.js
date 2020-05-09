@@ -34,7 +34,7 @@ class DeckConverter extends Component {
     // curl -X POST https://api.mtg.fail -H 'Content-Type: text/plain' --data-binary @deck.txt
     const b = this.state.deck;
     const requestOptions = {
-      method: 'GET',
+      method: 'POST',
       headers: { 
         'Content-Type': 'text/plain', 
         'Cache-Control': 'no-store,no-cache,must-revalidate',
