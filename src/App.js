@@ -21,6 +21,7 @@ class DeckConverter extends Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleURIChange = this.handleURIChange.bind(this);
   }
 
   handleChange(event) {
@@ -45,7 +46,7 @@ class DeckConverter extends Component {
     let url = new URL("https://api.mtg.fail")
 
     if (this.state.isDecksite) {
-      let params = {deck: this.state.uri}
+      let params = {deck: u}
       Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
       requestOptions = {
         method: 'GET',
