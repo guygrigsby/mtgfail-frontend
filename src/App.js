@@ -9,7 +9,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 class DeckConverter extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       deck: '',
       uri: '',
@@ -31,6 +30,7 @@ class DeckConverter extends Component {
     this.setState({uri: event.target.value});
     this.setState({isDecksite: true});
   }
+
 
   handleSubmit(event) {
     const form = event.currentTarget;
@@ -84,11 +84,9 @@ class DeckConverter extends Component {
       })
       .catch(error => {
         this.setState({ errorMessage: error });
+        this.setState({ isError: true });
         console.error('There was an error!', error);
       });
-
-    console.log(b)
-
 
   };
 
@@ -96,13 +94,13 @@ class DeckConverter extends Component {
   render() {
     let convertBox;
     if (this.state.converted) {
-      convertBox = <Container>this.state.convertedDeck</Container>;
+      convertBox = <Container>{this.state.convertedDeck}</Container>;
     } else if (this.state.isError) {
       convertBox = <Container>this.state.errorMessage</Container>;
     } else {
       convertBox = <Container>Welcome to mtg.fail!</Container>;
     }
-    const deck = this.state.deck;
+    console.log(this.state)
     return(
       <Container className="p-3">
         <Jumbotron>
@@ -117,9 +115,11 @@ class DeckConverter extends Component {
             </Form.Group>
             <Form.Group controlId="decklist.ControlTextarea1">
               <Form.Label>Deck List</Form.Label>
-              <Form.Control as="textarea" rows="25" value={deck} onChange={this.handleChange} />
+              <Form.Control as="textarea" rows="25" value={this.state.deck} onChange={this.handleChange} />
             </Form.Group>
-
+            <Button variant="primary" type="submit">
+              Convert
+            </Button>
           </Form>
         </Jumbotron>
       </Container>
