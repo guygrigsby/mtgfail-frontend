@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Navbar from 'react-bootstrap/Navbar';
+import Tab from 'react-bootstrap/Tab'
+import Tabs from 'react-bootstrap/Tabs'
+import Alert from 'react-bootstrap/Alert'
 class DeckConverter extends Component {
   constructor(props) {
     super(props);
@@ -98,30 +103,62 @@ class DeckConverter extends Component {
     } else if (this.state.isError) {
       convertBox = <Container>this.state.errorMessage</Container>;
     } else {
-      convertBox = <Container>Welcome to mtg.fail!</Container>;
+      convertBox = <h1 className="text-center">Welcome to mtg.fail</h1>;
     }
     console.log(this.state)
     return(
-      <Container className="p-3">
-        <Jumbotron>
-          {convertBox}
-          <Form onSubmit={this.handleSubmit}>
-            <Button variant="primary" type="submit">
-              Convert
-            </Button>
-            <Form.Group controlId="deckurl">
-              <Form.Label>Deck URL for tappedout or deckbox.org</Form.Label>
-              <Form.Control type="url" placeholder="https://deckbox.org/sets/2653175" onChange={this.handleURIChange}/>
-            </Form.Group>
-            <Form.Group controlId="decklist.ControlTextarea1">
-              <Form.Label>Deck List</Form.Label>
-              <Form.Control as="textarea" rows="25" value={this.state.deck} onChange={this.handleChange} />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Convert
-            </Button>
-          </Form>
-        </Jumbotron>
+      <Container fluid>
+        <Row>
+          <Col>
+            <Container>
+              <Navbar bg="primary" variant="dark">
+                <Navbar.Brand href="#home">mtg.fail</Navbar.Brand>
+                <Navbar.Toggle />
+                <Navbar.Collapse className="justify-content-end">
+                  <Navbar.Text>
+                    fail so hard
+                  </Navbar.Text>
+                </Navbar.Collapse>
+              </Navbar>
+            </Container>
+          </Col>
+        </Row>
+        <Row>
+          <Container>
+            <Jumbotron fluid>
+              {convertBox}
+              <Col>
+                <Form onSubmit={this.handleSubmit}>
+                  <Tabs defaultActiveKey="deckurltab" id="uncontrolled-tab-example">
+                    <Tab eventKey="deckurltab" title="Deck URL">
+                      <Form.Group controlId="deckurl">
+                        <Form.Control type="url" placeholder="https://deckbox.org/sets/2653175" onChange={this.handleURIChange}/>
+                      </Form.Group>
+                      <Alert variant="primary">
+                        <Alert.Heading>Supported Sites</Alert.Heading>
+                        <p>
+                          Currently we only support deckbox.org and tappedout.net. If you have a
+                          request for another site, please drop us a line at our contact link below.
+                        </p>
+                        <hr />
+                        <p className="mb-0">
+                        </p>
+                      </Alert>
+                    </Tab>
+                    <Tab eventKey="decklist" title="Deck List">
+                      <Form.Group controlId="decklist.ControlTextarea1">
+                        <Form.Control as="textarea" rows="25" value={this.state.deck} onChange={this.handleChange} />
+                      </Form.Group>
+                    </Tab>
+                  </Tabs>
+                  <Button variant="primary" type="submit">
+                    Convert
+                  </Button>
+                </Form>
+              </Col>
+            </Jumbotron>
+          </Container>
+        </Row>
       </Container>
 
     );
