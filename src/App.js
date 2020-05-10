@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Alert from 'react-bootstrap/Alert';
-
+import Toast from 'react-bootstrap/Toast';
 //import Downloader from './Download';
 import NavBar from './NavBar';
 
@@ -61,7 +61,7 @@ class DeckConverter extends Component {
         method: 'GET',
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
+        credentials: 'omit', // include, *same-origin, omit
         redirect: 'follow', // manual, *follow, error
         headers: { 
           'Content-Type': 'text/plain', 
@@ -73,7 +73,7 @@ class DeckConverter extends Component {
         method: 'POST',
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
+        credentials: 'omit', // include, *same-origin, omit
         redirect: 'follow', // manual, *follow, error
         headers: { 
           'Content-Type': 'text/plain', 
@@ -105,19 +105,44 @@ class DeckConverter extends Component {
       });
 
   };
-
-
-  render() {
+  alertBox() {
+    console.log(this.state)
     let convertBox;
     if (this.state.converted) {
       convertBox = <Container>{this.state.convertedDeck}</Container>;
     } else if (this.state.isError) {
-      convertBox = <Container>this.state.errorMessage</Container>;
+      convertBox = <div
+        aria-live="polite"
+        aria-atomic="true"
+        style={{
+          position: 'relative',
+          minHeight: '100px',
+        }}
+      >
+        <Toast
+          style={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+          }}
+        >
+          <Toast.Header>
+            <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
+            <strong className="mr-auto">Error</strong>
+            <small>this.state.error</small>
+          </Toast.Header>
+          <Toast.Body>this.state.errorMessage</Toast.Body>
+        </Toast>
+      </div>;
     } else {
       convertBox = <h1 className="text-center">Welcome to mtg.fail</h1>;
     }
+    return convertBox;
+  }
 
-    console.log(this.state)
+  render() {
+
+
     return(
       <>
         <NavBar />
@@ -125,7 +150,7 @@ class DeckConverter extends Component {
           <Row>
             <Col>
               <Jumbotron fluid>
-                {convertBox}
+                {this.alertBox()}
               </Jumbotron>
             </Col>
           </Row>
@@ -150,7 +175,8 @@ class DeckConverter extends Component {
                   </Tab>
                   <Tab eventKey="decklist" title="Deck List">
                     <Form.Group controlId="decklist.ControlTextarea1">
-                      <Form.Control as="textarea" rows="25" value={this.state.deck} onChange={this.handleChange} />
+                      <Form.Control as="textarea" placeholder="1 Phyrexian Arena"
+                      rows="25" value={this.state.deck} onChange={this.handleChange} />
                     </Form.Group>
                   </Tab>
                 </Tabs>

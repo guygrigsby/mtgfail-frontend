@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import ReactBootstrap, {Nav, Navbar, NavDropdown, Button, Modal} from 'react-bootstrap';
+import {Nav, Navbar, NavDropdown, Button, Modal} from 'react-bootstrap';
 
 const NavBar = () => {
   const [show, setShow] = useState(false);
