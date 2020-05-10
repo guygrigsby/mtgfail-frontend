@@ -1,6 +1,6 @@
-import React, { useState, Component } from 'react';
+import React, { useState } from 'react';
 
-import ReactBootstrap, {Container, Nav, Navbar, NavDropdown, Button, Modal} from 'react-bootstrap'
+import ReactBootstrap, {Nav, Navbar, NavDropdown, Button, Modal} from 'react-bootstrap';
 
 const NavBar = () => {
   const [show, setShow] = useState(false);
@@ -10,7 +10,7 @@ const NavBar = () => {
 
   return (
 
-    <Container>
+    <>
       <Navbar bg="primary" variant="dark">
         <Navbar.Brand href="#home">mtg.fail</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -43,7 +43,7 @@ const NavBar = () => {
         </Modal.Footer>
       </Modal>
 
-    </Container>
+    </>
   );
 }
 
