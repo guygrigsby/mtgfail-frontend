@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from 'react-bootstrap/Navbar';
-import Tab from 'react-bootstrap/Tab'
-import Tabs from 'react-bootstrap/Tabs'
-import Alert from 'react-bootstrap/Alert'
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+import Alert from 'react-bootstrap/Alert';
+
+import Downloader from './Download';
+import NavBar from './NavBar';
+
 class DeckConverter extends Component {
   constructor(props) {
     super(props);
@@ -95,6 +98,9 @@ class DeckConverter extends Component {
 
   };
 
+  download() {
+  }
+
 
   render() {
     let convertBox;
@@ -105,22 +111,13 @@ class DeckConverter extends Component {
     } else {
       convertBox = <h1 className="text-center">Welcome to mtg.fail</h1>;
     }
+
     console.log(this.state)
     return(
       <Container fluid>
         <Row>
           <Col>
-            <Container>
-              <Navbar bg="primary" variant="dark">
-                <Navbar.Brand href="#home">mtg.fail</Navbar.Brand>
-                <Navbar.Toggle />
-                <Navbar.Collapse className="justify-content-end">
-                  <Navbar.Text>
-                    fail so hard
-                  </Navbar.Text>
-                </Navbar.Collapse>
-              </Navbar>
-            </Container>
+            <NavBar />
           </Col>
         </Row>
         <Row>
