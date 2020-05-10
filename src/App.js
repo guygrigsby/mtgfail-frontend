@@ -52,7 +52,7 @@ class DeckConverter extends Component {
     const b = this.state.deck;
     const u = this.state.uri;
     let requestOptions;
-    let url = new URL("http://localhost:8080")
+    let url = new URL("https://api.mtg.fail")
 
     if (this.state.isDecksite) {
       let params = {deck: u}
