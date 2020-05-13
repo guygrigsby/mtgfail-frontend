@@ -15,22 +15,22 @@ import Toast from "react-bootstrap/Toast";
 //import Downloader from './Download';
 import NavBar from "./NavBar";
 
-const Upstream = "https://api.mtg.fail";
+//const Upstream = "https://api.mtg.fail";
 
-//const Upstream = "http://localhost:8080";
+const Upstream = "http://localhost:8080";
 class DeckConverter extends Component {
   constructor(props) {
     super(props);
     this.state = {
       deck: "",
       uri: "",
-      isDecksite: false,
       convertedDeck: "",
       errorMessage: "",
       isError: false,
       converted: false
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleURIChange = this.handleURIChange.bind(this);
     this.handleURLSubmit = this.handleURLSubmit.bind(this);
     this.handleListSubmit = this.handleListSubmit.bind(this);
     this.callAPI = this.callAPI.bind(this);
@@ -42,20 +42,16 @@ class DeckConverter extends Component {
   }
   handleURIChange(event) {
     this.setState({ uri: event.target.value });
-    this.setState({ isDecksite: true });
   }
   handleListSubmit(event) {
     const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+    event.preventDefault();
+    event.stopPropagation();
     // curl -X POST https://api.mtg.fail -H 'Content-Type: text/plain' --data-binary @deck.txt
-    const b = this.state.deck;
-    let requestOptions;
+    const b = form.decklist.ControlTextarea1;
     let url = new URL(Upstream);
 
-    requestOptions = {
+    let requestOptions = {
       method: "POST",
       mode: "cors", // no-cors, *cors, same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -73,38 +69,48 @@ class DeckConverter extends Component {
 
   handleURLSubmit(event) {
     const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    // curl -X POST https://api.mtg.fail -H 'Content-Type: text/plain' --data-binary @deck.txt
-    const u = this.state.uri;
-    let url = new URL(Upstream);
+    event.preventDefault();
+    event.stopPropagation();
 
-    let params = { deck: u };
+    let url = new URL(Upstream);
+    const uri = this.state.uri;
+    if (uri === "") {
+      this.popup("no URL");
+      return;
+    }
+    const params = { deck: uri };
     Object.keys(params).forEach(key =>
       url.searchParams.append(key, params[key])
     );
-    let requestOptions = (requestOptions = {
+    console.log("href", url.href);
+    console.log(params);
+    console.log("upstream", url);
+    let requestOptions = {
       method: "GET",
       mode: "cors", // no-cors, *cors, same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "omit", // include, *same-origin, omit
-      redirect: "follow", // manual, *follow, error
       headers: {
         "Content-Type": "text/plain"
       }
       //deck\=https://tappedout.net/mtg-decks/22-01-20-kess-storm
-    });
+    };
 
     this.callAPI(url, requestOptions);
+  }
+
+  popup(msg) {
+    console.error(msg);
   }
 
   callAPI(url, requestOptions) {
     fetch(url, requestOptions)
       .then(async response => {
-        console.log(response);
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new TypeError("Oops, we haven't got JSON!");
+        }
         const data = await response.json();
+        console.log(response);
         console.log("Response", data);
 
         // check for error response
@@ -205,9 +211,6 @@ class DeckConverter extends Component {
           </Row>
           <Row>
             <Col>
-              <Button variant="secondary" onClick={this.makeErr}>
-                test
-              </Button>
               <Tabs defaultActiveKey="deckurltab" id="uncontrolled-tab">
                 <Tab eventKey="deckurltab" title="Deck URL">
                   <Form onSubmit={this.handleURLSubmit}>
@@ -215,20 +218,23 @@ class DeckConverter extends Component {
                       <Form.Control
                         type="url"
                         placeholder="https://deckbox.org/sets/2653175"
-                        onChange={this.handleChange}
+                        onChange={this.handleURIChange}
                       />
+                      <Alert variant="primary">
+                        <Alert.Heading>Supported Sites</Alert.Heading>
+                        <p>
+                          Currently we only support deckbox.org and
+                          tappedout.net. If you have a request for another site,
+                          please drop us a line at our contact link below.
+                        </p>
+                        <hr />
+                        <p className="mb-0"></p>
+                      </Alert>
                     </Form.Group>
+                    <Button variant="primary" type="submit">
+                      Convert
+                    </Button>
                   </Form>
-                  <Alert variant="primary">
-                    <Alert.Heading>Supported Sites</Alert.Heading>
-                    <p>
-                      Currently we only support deckbox.org and tappedout.net.
-                      If you have a request for another site, please drop us a
-                      line at our contact link below.
-                    </p>
-                    <hr />
-                    <p className="mb-0"></p>
-                  </Alert>
                 </Tab>
                 <Tab eventKey="decklist" title="Deck List">
                   <Form onSubmit={this.handleListSubmit}>
@@ -241,12 +247,12 @@ class DeckConverter extends Component {
                         onChange={this.handleChange}
                       />
                     </Form.Group>
+                    <Button variant="primary" type="submit">
+                      Convert
+                    </Button>
                   </Form>
                 </Tab>
               </Tabs>
-              <Button variant="primary" type="submit">
-                Convert
-              </Button>
             </Col>
           </Row>
         </Container>
