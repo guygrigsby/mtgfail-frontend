@@ -14,6 +14,7 @@ import Badge from "react-bootstrap/Badge";
 import Toast from "react-bootstrap/Toast";
 //import Downloader from './Download';
 import NavBar from "./NavBar";
+import TTSDeck from "./TTSDeck.js";
 
 //const Upstream = "https://api.mtg.fail";
 
@@ -24,10 +25,11 @@ class DeckConverter extends Component {
     this.state = {
       deck: "",
       uri: "",
-      convertedDeck: "",
+      convertedDeck: {},
       errorMessage: "",
       isError: false,
-      converted: false
+      converted: false,
+      wrapper: React.createRef()
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleURIChange = this.handleURIChange.bind(this);
@@ -44,11 +46,10 @@ class DeckConverter extends Component {
     this.setState({ uri: event.target.value });
   }
   handleListSubmit(event) {
-    const form = event.currentTarget;
     event.preventDefault();
     event.stopPropagation();
     // curl -X POST https://api.mtg.fail -H 'Content-Type: text/plain' --data-binary @deck.txt
-    const b = form.decklist.ControlTextarea1;
+    const b = this.state.deck;
     let url = new URL(Upstream);
 
     let requestOptions = {
@@ -68,7 +69,6 @@ class DeckConverter extends Component {
   }
 
   handleURLSubmit(event) {
-    const form = event.currentTarget;
     event.preventDefault();
     event.stopPropagation();
 
@@ -82,9 +82,6 @@ class DeckConverter extends Component {
     Object.keys(params).forEach(key =>
       url.searchParams.append(key, params[key])
     );
-    console.log("href", url.href);
-    console.log(params);
-    console.log("upstream", url);
     let requestOptions = {
       method: "GET",
       mode: "cors", // no-cors, *cors, same-origin
@@ -109,19 +106,20 @@ class DeckConverter extends Component {
         if (!contentType || !contentType.includes("application/json")) {
           throw new TypeError("Oops, we haven't got JSON!");
         }
-        const data = await response.json();
-        console.log(response);
-        console.log("Response", data);
+        console.log("response", response);
 
         // check for error response
         if (!response.ok) {
           // get error message from body or default to response status
-          const error = (data && data.message) || response.status;
+          const error = response.status;
           console.log("error", error, "status", response.status);
           return Promise.reject(error);
         }
-
-        this.setState({ convertedDeck: data.value });
+        return await response.json();
+      })
+      .then(data => {
+        console.log("JSONdata", data);
+        this.setState({ convertedDeck: data });
         this.setState({ converted: true });
       })
       .catch(error => {
@@ -148,13 +146,7 @@ class DeckConverter extends Component {
   }
 
   hero() {
-    let convertBox;
-    if (this.state.converted) {
-      convertBox = <Container>{this.state.convertedDeck}</Container>;
-    } else {
-      convertBox = <h1 className="text-center">Welcome to mtg.fail</h1>;
-    }
-    return convertBox;
+    return <h1 className="text-center">Welcome to mtg.fail</h1>;
   }
 
   alertBox() {
@@ -203,7 +195,7 @@ class DeckConverter extends Component {
       <>
         <NavBar />
         {this.alertBox()}
-        <Container fluid="lg">
+        <Container>
           <Row>
             <Col>
               <Jumbotron fluid>{this.hero()}</Jumbotron>
@@ -211,10 +203,15 @@ class DeckConverter extends Component {
           </Row>
           <Row>
             <Col>
-              <Tabs defaultActiveKey="deckurltab" id="uncontrolled-tab">
-                <Tab eventKey="deckurltab" title="Deck URL">
+              <Tabs defaultActiveKey="deckurltab" id="tabs">
+                <Tab
+                  ref={this.state.wrapper}
+                  eventKey="deckurltab"
+                  title="Deck URL"
+                >
                   <Form onSubmit={this.handleURLSubmit}>
                     <Form.Group controlId="deckurl">
+                      <p>https://deckbox.org/sets/2654229</p>
                       <Form.Control
                         type="url"
                         placeholder="https://deckbox.org/sets/2653175"
@@ -227,8 +224,6 @@ class DeckConverter extends Component {
                           tappedout.net. If you have a request for another site,
                           please drop us a line at our contact link below.
                         </p>
-                        <hr />
-                        <p className="mb-0"></p>
                       </Alert>
                     </Form.Group>
                     <Button variant="primary" type="submit">
@@ -236,7 +231,11 @@ class DeckConverter extends Component {
                     </Button>
                   </Form>
                 </Tab>
-                <Tab eventKey="decklist" title="Deck List">
+                <Tab
+                  ref={this.state.wrapper}
+                  eventKey="decklist"
+                  title="Deck List"
+                >
                   <Form onSubmit={this.handleListSubmit}>
                     <Form.Group controlId="decklist.ControlTextarea1">
                       <Form.Control
@@ -253,6 +252,24 @@ class DeckConverter extends Component {
                   </Form>
                 </Tab>
               </Tabs>
+              <Container>
+                {this.state.converted ? (
+                  <>
+                    <Row>
+                      <Col>Deck Name</Col>
+                      <Col>Something</Col>
+                    </Row>
+                    <Row>
+                      {console.log("deck", this.state.convertedDeck)}
+                      <TTSDeck
+                        deck={this.state.convertedDeck.ObjectStates[0]}
+                      />
+                    </Row>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </Container>
             </Col>
           </Row>
         </Container>
