@@ -1,9 +1,6 @@
-import React, { Component, useState } from "react";
-import Row from "react-bootstrap/Row";
+import React, { Component } from "react";
 import Card from "./Card.js";
 import ParseDeck from "./Deck.js";
-import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
-import ToggleButton from "react-bootstrap/ToggleButton";
 import Table from "react-bootstrap/Table";
 
 class ListDeck extends Component {

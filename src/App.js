@@ -12,13 +12,16 @@ import Tabs from "react-bootstrap/Tabs";
 import Alert from "react-bootstrap/Alert";
 import Badge from "react-bootstrap/Badge";
 import Toast from "react-bootstrap/Toast";
-import Download from "./Download";
 import NavBar from "./NavBar";
-import TTSDeck from "./TTSDeck.js";
 import ListDeck from "./ListDeck.js";
+import TTSDeck from "./TTSDeck.js";
+import FileSaver from "file-saver";
 
 //const Upstream = "https://api.mtg.fail";
 
+const download = payload => {
+  FileSaver.saveAs(payload, "deck.json");
+};
 const Upstream = "http://localhost:8080";
 class DeckConverter extends Component {
   constructor(props) {
@@ -239,11 +242,20 @@ class DeckConverter extends Component {
               </Tabs>
               {this.state.converted ? (
                 <>
-                  <Download
-                    blob={this.state.convertedDeck}
-                    type="application/json"
-                  />
+                  <Button
+                    variant="success"
+                    onClick={() =>
+                      download(
+                        new Blob([JSON.stringify(this.state.convertedDeck)], {
+                          type: "application/json"
+                        })
+                      )
+                    }
+                  >
+                    Download
+                  </Button>
                   <ListDeck deck={this.state.convertedDeck.ObjectStates[0]} />
+                  <TTSDeck deck={this.state.convertedDeck.ObjectStates[0]} />
                 </>
               ) : (
                 <></>
