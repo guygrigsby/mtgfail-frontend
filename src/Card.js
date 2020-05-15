@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Row from "react-bootstrap/Row";
 import Image from "react-bootstrap/Image";
 
 class Card extends Component {
@@ -9,19 +8,15 @@ class Card extends Component {
       Name: props.Name,
       Image: props.Image
     };
-    console.log("card created", this.state);
+  }
+  display() {
+    if (this.state.Image === undefined) {
+      return this.state.Name;
+    }
+    return <Image src={this.state.Image} thumbnail />;
   }
   render() {
-    return (
-      <>
-        <Row>
-          <h3>{this.state.Name}</h3>
-        </Row>
-        <Row>
-          <Image src={this.state.Image} rounded />
-        </Row>
-      </>
-    );
+    return <div>{this.display()}</div>;
   }
 }
 

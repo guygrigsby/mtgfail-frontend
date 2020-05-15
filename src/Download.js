@@ -1,32 +1,22 @@
-import React, { useState, Component } from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button';
+import React, { useState, Component } from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import FileSaver from "file-saver";
 
-const Download = () => {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+const Download = props => {
+  const download = props => {
+    var blob = new Blob(props.blob, {
+      type: props.type
+    });
+    FileSaver.saveAs(blob, "deck.json");
+  };
   return (
-
-    <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
-        <Button variant="primary" onClick={handleClose}>
-          Save Changes
-        </Button>
-      </Modal.Footer>
-    </Modal>
+    <Button variant="success" onClick={download}>
+      Download
+    </Button>
   );
-}
+};
 
 export default Download;

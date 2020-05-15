@@ -12,9 +12,10 @@ import Tabs from "react-bootstrap/Tabs";
 import Alert from "react-bootstrap/Alert";
 import Badge from "react-bootstrap/Badge";
 import Toast from "react-bootstrap/Toast";
-//import Downloader from './Download';
+import Download from "./Download";
 import NavBar from "./NavBar";
 import TTSDeck from "./TTSDeck.js";
+import ListDeck from "./ListDeck.js";
 
 //const Upstream = "https://api.mtg.fail";
 
@@ -129,22 +130,6 @@ class DeckConverter extends Component {
       });
   }
 
-  health() {
-    let res = <Badge variant="success">Server OK</Badge>;
-    fetch(Upstream + "/healthz")
-      .then(response => {
-        if (response.status !== 200) {
-          console.warn("Server Unhealthy");
-          res = <Badge variant="error">Server Unhealthy</Badge>;
-          return Promise.reject(response.status);
-        }
-      })
-      .catch(error => {
-        console.error("Error:", error.message);
-      });
-    return res;
-  }
-
   hero() {
     return <h1 className="text-center">Welcome to mtg.fail</h1>;
   }
@@ -252,24 +237,17 @@ class DeckConverter extends Component {
                   </Form>
                 </Tab>
               </Tabs>
-              <Container>
-                {this.state.converted ? (
-                  <>
-                    <Row>
-                      <Col>Deck Name</Col>
-                      <Col>Something</Col>
-                    </Row>
-                    <Row>
-                      {console.log("deck", this.state.convertedDeck)}
-                      <TTSDeck
-                        deck={this.state.convertedDeck.ObjectStates[0]}
-                      />
-                    </Row>
-                  </>
-                ) : (
-                  <></>
-                )}
-              </Container>
+              {this.state.converted ? (
+                <>
+                  <Download
+                    blob={this.state.convertedDeck}
+                    type="application/json"
+                  />
+                  <ListDeck deck={this.state.convertedDeck.ObjectStates[0]} />
+                </>
+              ) : (
+                <></>
+              )}
             </Col>
           </Row>
         </Container>
