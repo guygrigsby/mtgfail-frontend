@@ -10,19 +10,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Alert from "react-bootstrap/Alert";
-import Badge from "react-bootstrap/Badge";
 import Toast from "react-bootstrap/Toast";
 import NavBar from "./NavBar";
 import ListDeck from "./ListDeck.js";
 import TTSDeck from "./TTSDeck.js";
 import FileSaver from "file-saver";
 
-//const Upstream = "https://api.mtg.fail";
-
 const download = payload => {
   FileSaver.saveAs(payload, "deck.json");
 };
-const Upstream = "https://api.mtg.fail";
+const Upstream =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:8080"
+    : "https://api.mtg.fail";
 class DeckConverter extends Component {
   constructor(props) {
     super(props);
@@ -35,6 +35,7 @@ class DeckConverter extends Component {
       converted: false,
       wrapper: React.createRef()
     };
+    this.ReadFile(process.env.MOTD_LOCATION);
     this.handleChange = this.handleChange.bind(this);
     this.handleURIChange = this.handleURIChange.bind(this);
     this.handleURLSubmit = this.handleURLSubmit.bind(this);
@@ -42,6 +43,19 @@ class DeckConverter extends Component {
     this.callAPI = this.callAPI.bind(this);
     this.makeErr = this.makeErr.bind(this);
   }
+  ReadFile = path => {
+    if (path === undefined) {
+      path = "./motd.txt";
+    }
+    fetch(path, { mode: "no-cors" })
+      .then(res => res.text())
+      .then(data => {
+        this.setState({ motd: data });
+      })
+      .catch(error => {
+        console.error("Can't read file", path, error);
+      });
+  };
 
   handleChange(event) {
     this.setState({ deck: event.target.value });
@@ -110,19 +124,17 @@ class DeckConverter extends Component {
         if (!contentType || !contentType.includes("application/json")) {
           throw new TypeError("Oops, we haven't got JSON!");
         }
-        console.log("response", response);
 
         // check for error response
         if (!response.ok) {
           // get error message from body or default to response status
           const error = response.status;
-          console.log("error", error, "status", response.status);
+          console.error("error", error, "status", response.status);
           return Promise.reject(error);
         }
         return await response.json();
       })
       .then(data => {
-        console.log("JSONdata", data);
         this.setState({ convertedDeck: data });
         this.setState({ converted: true });
       })
@@ -177,6 +189,13 @@ class DeckConverter extends Component {
     this.setState({ isError: true });
     this.setState({ errorMessage: "boom" });
   }
+  motd() {
+    let motd = "";
+    if (this.state.motd !== "") {
+      motd = <div>{this.state.motd}</div>;
+    }
+    return motd;
+  }
 
   render() {
     return (
@@ -185,9 +204,7 @@ class DeckConverter extends Component {
         {this.alertBox()}
         <Container>
           <Row>
-            <Col>
-              <Jumbotron fluid>{this.hero()}</Jumbotron>
-            </Col>
+            <Col>{this.motd()}</Col>
           </Row>
           <Row>
             <Col>
@@ -255,7 +272,6 @@ class DeckConverter extends Component {
                     Download
                   </Button>
                   <ListDeck deck={this.state.convertedDeck.ObjectStates[0]} />
-                  <TTSDeck deck={this.state.convertedDeck.ObjectStates[0]} />
                 </>
               ) : (
                 <></>
