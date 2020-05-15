@@ -22,7 +22,7 @@ import FileSaver from "file-saver";
 const download = payload => {
   FileSaver.saveAs(payload, "deck.json");
 };
-const Upstream = "http://localhost:8080";
+const Upstream = "https://api.mtg.fail";
 class DeckConverter extends Component {
   constructor(props) {
     super(props);
