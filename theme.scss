@@ -1,0 +1,26 @@
+@import "react-toolbox/lib/colors";
+
+$color-primary: rgb(103, 58, 183);
+$primary-color: $color-primary;
+
+$color-primary-dark: rgb(81, 45, 168);
+
+
+body {
+	color: $primary-color;
+
+}
+
+.appbar{
+	text-align: center;
+
+}
+
+//rgb(209, 196, 233)
+//rgb(179, 157, 219)
+//rgb(149, 117, 205)
+//rgb(126, 87, 194);
+//rgb(94, 53, 177);
+//rgb(81, 45, 168);
+//rgb(69, 39, 160);
+//rgb(49, 27, 146);

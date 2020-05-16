@@ -1,4 +1,7 @@
 const ParseDeck = deck => {
+  if (deck === undefined) {
+    return;
+  }
   const obs = deck.ContainedObjects;
   const imgs = deck.CustomDeck;
   let cards = [];

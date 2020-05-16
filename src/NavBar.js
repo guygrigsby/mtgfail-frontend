@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { AppBar } from "react-toolbox/lib/app_bar";
+import { AppBar, Sidebar, IconButton } from "react-toolbox/lib/app_bar";
+import { Layout, Panel, NavDrawer } from "react-toolbox/lib/layout";
+import Dialog from "react-toolbox/lib/dialog";
 import Navigation from "react-toolbox/lib/navigation";
 import Link from "react-toolbox/lib/link";
 
@@ -10,33 +12,4 @@ const GithubIcon = () => (
     </g>
   </svg>
 );
-
-const NavBar = () => {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  return (
-    <>
-      <AppBar
-        title="mtg.fail: fail so hard"
-        leftIcon="menu"
-        rightIcon={<GithubIcon />}
-      >
-        <Navigation type="horizontal">
-          <Link href="http://" label="Inbox" icon="inbox" />
-          <Link href="http://" active label="Profile" icon="person" />
-          <Link href="mailto:devs@mtg.fail">Contact</Link>
-          <Link href="https://github.com/guygrigsby/mtgfail" target="_blank">
-            Contribute
-          </Link>
-
-          <Link onClick={handleShow}>Donate</Link>
-        </Navigation>
-      </AppBar>
-    </>
-  );
-};
-
-export default NavBar;
+export default GithubIcon;
