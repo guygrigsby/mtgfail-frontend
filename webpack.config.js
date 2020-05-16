@@ -272,6 +272,7 @@ module.exports = function(webpackEnv) {
             {
               options: {
                 cache: true,
+                failOnError: false,
                 formatter: require.resolve("react-dev-utils/eslintFormatter"),
                 eslintPath: require.resolve("eslint"),
                 resolvePluginsRelativeTo: __dirname
@@ -381,9 +382,7 @@ module.exports = function(webpackEnv) {
                   loader: "sass-loader",
                   options: {
                     prependData:
-                      '@import "' +
-                      path.resolve(__dirname, "theme.scss") +
-                      '";'
+                      '@import "' + path.resolve(__dirname, "theme.scss") + '";'
                   }
                 },
                 "postcss-loader"

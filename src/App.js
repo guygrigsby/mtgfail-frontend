@@ -1,8 +1,8 @@
+/* eslint-env es6 */
+/* eslint-disable */
 import React, { Component, useState } from "react";
 import ReactDOM from "react-dom";
 import { hot } from "react-hot-loader";
-
-import { AppBar } from "react-toolbox/lib/app_bar";
 import {
   List,
   ListItem,
@@ -20,8 +20,11 @@ import FontIcon from "react-toolbox/lib/font_icon";
 import GithubIcon from "./NavBar";
 import SplitPane from "./form";
 import ListDeck from "./ListDeck.js";
+import TestData from "./Data.js";
 import TTSDeck from "./TTSDeck.js";
 import TappedOut from "./Translate.js";
+import Display from "./Display.js";
+import Page from "./Page.js";
 import FileSaver from "file-saver";
 import "./App.scss";
 
@@ -132,35 +135,6 @@ class DeckConverter extends Component {
     console.error(msg);
   }
 
-  callAPI(url, requestOptions) {
-    fetch(url, requestOptions)
-      .then(async response => {
-        const contentType = response.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-          throw new TypeError("Oops, we haven't got JSON!");
-        }
-
-        // check for error response
-        if (!response.ok) {
-          // get error message from body or default to response status
-          const error = response.status;
-          console.error("error", error, "status", response.status);
-          return Promise.reject(error);
-        }
-        return await response.json();
-      })
-      .then(data => {
-        this.setState({ convertedDeck: data });
-        this.setState({ converted: true });
-        console.log(data);
-      })
-      .catch(error => {
-        this.setState({ errorMessage: error.message });
-        this.setState({ isError: true });
-        console.error("Error:", error.message);
-      });
-  }
-
   hero() {
     return <h1 className="text-center">Welcome to mtg.fail</h1>;
   }
@@ -201,6 +175,35 @@ class DeckConverter extends Component {
       </div>
     );
   }
+
+  callAPI(url, requestOptions) {
+    fetch(url, requestOptions)
+      .then(async response => {
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new TypeError("Oops, we haven't got JSON!");
+        }
+
+        // check for error response
+        if (!response.ok) {
+          // get error message from body or default to response status
+          const error = response.status;
+          console.error("error", error, "status", response.status);
+          return Promise.reject(error);
+        }
+        return await response.json();
+      })
+      .then(data => {
+        this.setState({ convertedDeck: data });
+        this.setState({ converted: true });
+        console.log(data);
+      })
+      .catch(error => {
+        this.setState({ errorMessage: error.message });
+        this.setState({ isError: true });
+        console.error("Error:", error.message);
+      });
+  }
   makeErr() {
     this.setState({ isError: true });
     this.setState({ errorMessage: "boom" });
@@ -237,6 +240,7 @@ class DeckConverter extends Component {
       this.handleListSubmit(event);
     }
   };
+
   importDeck = url => {
     const deck = this.callOut(this.state.uri);
   };
@@ -283,140 +287,105 @@ class DeckConverter extends Component {
 
   render() {
     return (
-      <Layout>
-        <div>
-          <NavDrawer
-            active={this.state.drawerActive}
-            pinned={this.state.drawerPinned}
-            permanentAt="xxxl"
-            onOverlayClick={this.toggleDrawerActive}
-          >
-            <List selectable ripple>
-              <ListSubHeader caption="section i" />
-              <ListItem>
-                <Link href="mailto:devs@mtg.fail">Contact</Link>
-              </ListItem>
-              <ListItem>
-                <Link onClick={this.toggleModal}>Donate</Link>
-              </ListItem>
-              <ListSubHeader caption="section ii" />
-              <p>You are a failure. </p>
-            </List>
-          </NavDrawer>
-        </div>
-        <Dialog
-          actions={[{ label: "Close", onClick: this.toggleModal }]}
-          active={this.state.modalopen}
-          onEscKeyDown={this.toggleModal}
-          onOverlayClick={this.toggleModal}
-          title="Donate"
-        >
-          <p>BTC</p>
-          <p>bc1qw07j7spyavapez2kakknmu4k0dtftl57mrzup4</p>
-        </Dialog>
-
-        <Panel>
-          <AppBar
-            scrollHide={true}
-            title="mtg.fail"
-            leftIcon="menu"
-            onLeftIconClick={this.toggleDrawerActive}
-            rightIcon={<GithubIcon />}
-            onRightIconClick={this.openGH}
-          ></AppBar>
-          <div
-            style={{
-              flexdirection: "column",
-              overflowY: "auto",
-              padding: "1.8rem"
-            }}
-          >
-            <section>
-              <Tabs index={this.state.index} onChange={this.setIndex}>
-                <Tab label="Import">
-                  <small>Import your decks</small>
-                  <SplitPane
-                    middle={
-                      <Button
-                        label="Import"
-                        onClick={this.importDeck}
-                        raised
-                        primary
-                      >
-                        <FontIcon value="import_export" />
-                      </Button>
-                    }
-                    left={
-                      <Input
-                        type="text"
-                        label="Deck URI"
-                        name="deckuri"
-                        value={this.state.uri}
-                        onChange={this.handleURIChange}
-                        maxLength={64}
-                      />
-                    }
-                    right={
-                      <Input
-                        type="text"
-                        label="Deck List"
-                        name="decklsit"
-                        value={this.state.deck}
-                        onChange={this.handleChange}
-                        multiline={true}
-                        rows={15}
-                      />
-                    }
-                  />
-                  {this.state.deck}
-                  table={<ListDeck json={this.state.deckimport} />}
-                </Tab>
-                <Tab label="Build">
-                  <small>Build Decks</small>
-                  <div
-                    style={{
-                      flexdirection: "column",
-                      padding: "1.8rem"
-                    }}
-                  >
-                    <ListDeck json={this.state.deckimport} />
-                  </div>
-                </Tab>
-                <Tab label="Export">
-                  <small>Export your decks to Tabletop Simulator</small>
-                  <Button label="TTS" onClick={this.submitInput} raised primary>
-                    <FontIcon value="3d_rotation" />
-                  </Button>
-                </Tab>
-              </Tabs>
-            </section>
-
-            <div>
-              {this.state.converted ? (
-                <>
+      <Page
+        drawerList={
+          <List selectable ripple>
+            <ListSubHeader caption="section i" />
+            <ListItem>
+              <Link href="mailto:devs@mtg.fail">Contact</Link>
+            </ListItem>
+            <ListItem>
+              <Link onClick={this.toggleModal}>Donate</Link>
+            </ListItem>
+            <ListSubHeader caption="section ii" />
+            <p>You are a failure. </p>
+          </List>
+        }
+        table={<ListDeck func={TestData} />}
+        tabs={
+          <Tabs index={this.state.index} onChange={this.setIndex}>
+            <Tab label="Import">
+              <small>Import your decks</small>
+              <SplitPane
+                middle={
                   <Button
-                    variant="success"
-                    onClick={() =>
-                      download(
-                        new Blob([JSON.stringify(this.state.convertedDeck)], {
-                          type: "application/json"
-                        })
-                      )
-                    }
+                    label="Import"
+                    onClick={this.importDeck}
+                    raised
+                    primary
                   >
-                    Download TTS Deck
+                    <FontIcon value="import_export" />
                   </Button>
-                </>
-              ) : (
-                <>
-                  <h1> Welcome </h1>
-                  <p> mtg.fail is your place to fail</p>
-                </>
-              )}
-            </div>
-          </div>
-        </Panel>
-      </Layout>
+                }
+                left={
+                  <Input
+                    type="text"
+                    label="Deck URI"
+                    name="deckuri"
+                    value={this.state.uri}
+                    onChange={this.handleURIChange}
+                    maxLength={64}
+                  />
+                }
+                right={
+                  <Input
+                    type="text"
+                    label="Deck List"
+                    name="decklsit"
+                    value={this.state.deck}
+                    onChange={this.handleChange}
+                    multiline={true}
+                    rows={15}
+                  />
+                }
+              />
+              {this.state.deck}
+            </Tab>
+            <Tab label="Build">
+              <small>Build Decks</small>
+              <div
+                style={{
+                  flexdirection: "column",
+                  padding: "1.8rem"
+                }}
+              >
+                <ListDeck json={this.state.deckimport} />
+              </div>
+            </Tab>
+            <Tab label="Export">
+              <small>Export your decks to Tabletop Simulator</small>
+              <Button label="TTS" onClick={this.submitInput} raised primary>
+                <FontIcon value="3d_rotation" />
+              </Button>
+            </Tab>
+          </Tabs>
+        }
+        display=<Display
+          display={
+            this.state.converted ? (
+              <>
+                <Button
+                  variant="success"
+                  onClick={() =>
+                    download(
+                      new Blob([JSON.stringify(this.state.convertedDeck)], {
+                        type: "application/json"
+                      })
+                    )
+                  }
+                >
+                  Download TTS Deck
+                </Button>
+              </>
+            ) : (
+              <>
+                <h1> Welcome </h1>
+                <p> mtg.fail is your place to fail</p>
+              </>
+            )
+          }
+        />
+      />
     );
   }
 }

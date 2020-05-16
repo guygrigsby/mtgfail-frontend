@@ -1,0 +1,19 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true,
+      "experimentalObjectRestSpread": true
+    },
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    },
+    "rules": {
+      "eqeqeq": "off",
+      "curly": "warn",
+      "quotes": ["warn", "double"]
+    }
+  }

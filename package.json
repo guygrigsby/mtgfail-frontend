@@ -4,6 +4,14 @@
   "main": "index.js",
   "repository": "github.com/guygrigsby/mtgfail-frontend",
   "author": "Guy J Grigsby",
+  "eslintConfig": {
+    "env": {
+      "es6": true ,
+      "browser": false,
+      "node": true
+    },
+    "parserOptions": { "ecmaVersion": 2020 }
+  } ,
   "license": "MIT",
   "dependencies": {
     "@babel/cli": "7.1.0",
@@ -90,10 +98,7 @@
     "sugarss": "^2.0.0"
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not op_mini all"
-    ],
+    "production": [">0.2%", "not op_mini all"],
     "development": []
   }
 }
