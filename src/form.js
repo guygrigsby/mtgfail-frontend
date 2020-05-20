@@ -119,14 +119,16 @@ export const TabForm = props => {
   };
 
   return (
-    <div style={{ display: "flex" }}>
-      <div style={{ flex: "2 200px" }}>
+    <SplitPane
+      left={
         <Input
           type="text"
           label="Deck URI"
           name="deckuri"
           onChange={s => setURI(s.trim())}
         />
+      }
+      right={
         <Input
           type="text"
           label="Deck List"
@@ -136,24 +138,14 @@ export const TabForm = props => {
           multiline={true}
           rows={5}
         />
-        <div>
-          <Button label="Import" onClick={load} raised primary>
-            <FontIcon value="import_export" />
-          </Button>
-        </div>
-      </div>
-
-      <div
-        style={{
-          flex: "2 200px",
-          display: "flex",
-          flexFlow: "column",
-          overflowY: "scroll"
-        }}
-      >
-        {GetDeck()}
-      </div>
-    </div>
+      }
+      button={
+        <Button label="Import" onClick={load} raised primary>
+          <FontIcon value="import_export" />
+        </Button>
+      }
+      table={GetDeck()}
+    />
   );
 };
 export default SplitPane;

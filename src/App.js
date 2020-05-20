@@ -100,44 +100,6 @@ class DeckConverter extends Component {
   hero() {
     return <h1 className="text-center">Welcome to mtg.fail</h1>;
   }
-
-  alertBox() {
-    const iserror = this.state.isError;
-    if (!iserror) {
-      return <div></div>;
-    }
-    let msg = this.state.errorMessage;
-    return (
-      <div
-        aria-live="polite"
-        aria-atomic="true"
-        style={{
-          position: "relative",
-          minHeight: "100px"
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            right: 0
-          }}
-        >
-          <div>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded mr-2"
-              alt=""
-            />
-            <strong className="mr-auto">Error</strong>
-            <small>Error</small>
-          </div>
-          <div>{msg}</div>
-        </div>
-      </div>
-    );
-  }
-
   makeErr() {
     this.setState({ isError: true });
     this.setState({ errorMessage: "boom" });

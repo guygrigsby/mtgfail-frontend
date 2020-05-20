@@ -4,6 +4,7 @@ import { Layout, Panel, NavDrawer } from "react-toolbox/lib/layout";
 import { AppBar } from "react-toolbox/lib/app_bar";
 import { Button } from "react-toolbox/lib/button";
 import Dialog from "react-toolbox/lib/dialog";
+import "./Page.scss"
 class Page extends React.Component {
   constructor(props) {
     super(props);
@@ -46,12 +47,7 @@ class Page extends React.Component {
             rightIcon={<GithubIcon />}
             onRightIconClick={this.openGH}
           ></AppBar>
-          <div
-            style={{
-              flexdirection: "column",
-              overflowY: "auto",
-              padding: "1.8rem"
-            }}
+          <div className="page"
           >
             <section>{this.props.tabs}</section>
 
