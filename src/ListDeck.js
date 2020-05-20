@@ -8,45 +8,71 @@ const CardModel = {
   Name: { type: String },
   Image: { type: String }
 };
+
+const sortByNamesAsc = (a, b) => {
+  if (a.localeCompare(b)) return -1;
+  if (b.localeCompare(a)) return 1;
+  return 0;
+};
+
+const sortByNamesDesc = (a, b) => {
+  if (a.calories > b.calories) return -1;
+  if (a.calories < b.calories) return 1;
+  return 0;
+};
+
 class ListDeck extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
+      sorted: "asc",
       cards: null,
       tableData: null,
-      selected: []
+      selected: [""]
     };
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.log(props);
     return { cards: props.cards };
   }
-  handleChange(event) {
-    this.setState({ selected: event.target.value });
-  }
+
+  getSortedData = () => {
+    const compare =
+      this.state.sorted === "asc" ? sortByNamesAsc : sortByNamesDesc;
+    return this.state.cards.sort(compare);
+  };
+
+  handleRowSelect = selected => {
+    console.log("selected", selected);
+    //const sortedData = this.getSortedData();
+    //this.setState({ selected: selected.map(item => sortedData[item].name) });
+    this.setState({ selected: selected });
+  };
+
+  handleSortClick = () => {
+    const { sorted } = this.state;
+    const nextSorting = sorted === "asc" ? "desc" : "asc";
+    this.setState({ sorted: nextSorting });
+  };
 
   render() {
-    console.log(this.state.cards);
     return (
       <Table
         model={CardModel}
-        onChange={this.handleChange}
-        onSelect={this.handleSelect}
+        onRowSelect={this.handleRowSelect}
         selectable
         multiSelectable
-        selected={this.state.selected}
-        source={this.state.cards}
       >
         <TableHead>
-          <TableCell string>name</TableCell>
-          <TableCell numeric>image</TableCell>
+          <TableCell onClick={this.handleSortClick} string>
+            name
+          </TableCell>
+          <TableCell url>image</TableCell>
         </TableHead>
         {this.state.cards.map((item, idx) => (
           <TableRow
             key={idx}
-            selected={this.state.selected.indexOf(item.name) !== -1}
+            selected={() => this.state.selected.indexOf(item.name) !== -1}
           >
             <TableCell>{item.Name}</TableCell>
             <TableCell numeric>{item.Image}</TableCell>
