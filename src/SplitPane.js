@@ -3,16 +3,16 @@ import "./SplitPane.scss";
 
 const SplitPane = props => {
   return (
-    <>
+    <div className="wrapper">
       <div className="left">
-        <div>{props.table}</div>
-      </div>
-      <div className="right">
         {props.left}
         {props.right}
         <div>{props.button}</div>
       </div>
-    </>
+      <div className="right">
+        <div>{props.table}</div>
+      </div>
+    </div>
   );
 };
 

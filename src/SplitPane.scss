@@ -1,11 +1,14 @@
-.left {
+.wrapper {
+  display: "flex";
+  flex: "2 200px";
+}
 
-	flexDirection: "column";
+.left {
+  flexdirection: "column";
 }
 
 .right {
-	flex: 1;
-	flexDirection: "row";
-	justifyContent: "flex-start";
-
+  flex: 1;
+  flexdirection: "row";
+  justifycontent: "flex-start";
 }
