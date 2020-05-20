@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import "./SplitPane.css";
+import "./SplitPane.scss";
 
 const SplitPane = props => {
   return (
