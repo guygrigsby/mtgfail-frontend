@@ -1,0 +1,1004 @@
+{
+  "Cards": [
+    {
+      "Name": "Prairie Stream",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/c/6/c6bc665f-fb17-43e1-b93b-6a7b168759eb.jpg",
+      "Rarity": "mythic",
+      "Set": "exp",
+      "Colors": [],
+      "Text": "({T}: Add {W} or {U}.)\nPrairie Stream enters the battlefield tapped unless you control two or more basic lands."
+    },
+    {
+      "Name": "Armillary Sphere",
+      "Cost": "{2}",
+      "Cmc": 2,
+      "Image": "https://img.scryfall.com/cards/large/front/b/0/b06cdd3b-3f8d-4b5e-882b-130b1db750a0.jpg",
+      "Rarity": "common",
+      "Set": "con",
+      "Colors": [],
+      "Text": "{2}, {T}, Sacrifice Armillary Sphere: Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle your library."
+    },
+    {
+      "Name": "Commander's Sphere",
+      "Cost": "{3}",
+      "Cmc": 3,
+      "Image": "https://img.scryfall.com/cards/large/front/6/1/61e0a922-1689-484f-abb3-902ce1c964ca.jpg",
+      "Rarity": "common",
+      "Set": "c14",
+      "Colors": [],
+      "Text": "{T}: Add one mana of any color in your commander's color identity.\nSacrifice Commander's Sphere: Draw a card."
+    },
+    {
+      "Name": "Gideon Blackblade",
+      "Cost": "{1}{W}{W}",
+      "Cmc": 3,
+      "Image": "https://img.scryfall.com/cards/large/front/3/9/39d51c5e-26cb-4276-a676-fabfef866248.jpg",
+      "Rarity": "mythic",
+      "Set": "war",
+      "Colors": ["W"],
+      "Text": "As long as it's your turn, Gideon Blackblade is a 4/4 Human Soldier creature with indestructible that's still a planeswalker.\nPrevent all damage that would be dealt to Gideon Blackblade during your turn.\n+1: Up to one other target creature you control gains your choice of vigilance, lifelink, or indestructible until end of turn.\n−6: Exile target nonland permanent."
+    },
+    {
+      "Name": "Lightning Greaves",
+      "Cost": "{2}",
+      "Cmc": 2,
+      "Image": "https://img.scryfall.com/cards/large/front/6/1/61a28870-cf78-4323-9d82-cee764067764.jpg",
+      "Rarity": "uncommon",
+      "Set": "mrd",
+      "Colors": [],
+      "Text": "Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}"
+    },
+    {
+      "Name": "Spellskite",
+      "Cost": "{2}",
+      "Cmc": 2,
+      "Image": "https://img.scryfall.com/cards/large/front/1/a/1a84bada-ed6a-4e97-8a0c-05b7cb32d66f.jpg",
+      "Rarity": "rare",
+      "Set": "nph",
+      "Colors": [],
+      "Text": "{U/P}: Change a target of target spell or ability to Spellskite. ({U/P} can be paid with either {U} or 2 life.)"
+    },
+    {
+      "Name": "Teferi, Time Raveler",
+      "Cost": "{1}{W}{U}",
+      "Cmc": 3,
+      "Image": "https://img.scryfall.com/cards/large/front/5/c/5cb76266-ae50-4bbc-8f96-d98f309b02d3.jpg",
+      "Rarity": "rare",
+      "Set": "war",
+      "Colors": ["U", "W"],
+      "Text": "Each opponent can cast spells only any time they could cast a sorcery.\n+1: Until your next turn, you may cast sorcery spells as though they had flash.\n−3: Return up to one target artifact, creature, or enchantment to its owner's hand. Draw a card."
+    },
+    {
+      "Name": "Teyo, the Shieldmage",
+      "Cost": "{2}{W}",
+      "Cmc": 3,
+      "Image": "https://img.scryfall.com/cards/large/front/a/9/a974571c-d8d5-4860-9077-2023e5f32a24.jpg",
+      "Rarity": "uncommon",
+      "Set": "war",
+      "Colors": ["W"],
+      "Text": "You have hexproof. (You can't be the target of spells or abilities your opponents control.)\n−2: Create a 0/3 white Wall creature token with defender."
+    },
+    {
+      "Name": "The Chain Veil",
+      "Cost": "{4}",
+      "Cmc": 4,
+      "Image": "https://img.scryfall.com/cards/large/front/0/4/0415cc0e-979e-42cc-a56d-88d13153a7de.jpg",
+      "Rarity": "mythic",
+      "Set": "m15",
+      "Colors": [],
+      "Text": "At the beginning of your end step, if you didn't activate a loyalty ability of a planeswalker this turn, you lose 2 life.\n{4}, {T}: For each planeswalker you control, you may activate one of its loyalty abilities once this turn as though none of its loyalty abilities have been activated this turn."
+    },
+    {
+      "Name": "Polluted Delta",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/0/f/0f7585c8-9e21-4eef-afc1-2852de23db2f.jpg",
+      "Rarity": "rare",
+      "Set": "ons",
+      "Colors": [],
+      "Text": "{T}, Pay 1 life, Sacrifice Polluted Delta: Search your library for an Island or Swamp card, put it onto the battlefield, then shuffle your library."
+    },
+    {
+      "Name": "Cyclonic Rift",
+      "Cost": "{1}{U}",
+      "Cmc": 2,
+      "Image": "https://img.scryfall.com/cards/large/front/2/0/205c4689-8b02-4d40-9274-3c1fcafa8b82.jpg",
+      "Rarity": "rare",
+      "Set": "rtr",
+      "Colors": ["U"],
+      "Text": "Return target nonland permanent you don't control to its owner's hand.\nOverload {6}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of \"target\" with \"each.\")"
+    },
+    {
+      "Name": "Cyclonic Rift",
+      "Cost": "{1}{U}",
+      "Cmc": 2,
+      "Image": "https://img.scryfall.com/cards/large/front/2/0/205c4689-8b02-4d40-9274-3c1fcafa8b82.jpg",
+      "Rarity": "rare",
+      "Set": "rtr",
+      "Colors": ["U"],
+      "Text": "Return target nonland permanent you don't control to its owner's hand.\nOverload {6}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of \"target\" with \"each.\")"
+    },
+    {
+      "Name": "Deflecting Palm",
+      "Cost": "{R}{W}",
+      "Cmc": 2,
+      "Image": "https://img.scryfall.com/cards/large/front/3/2/32374918-1bcb-4516-96af-f27da752517e.jpg",
+      "Rarity": "rare",
+      "Set": "ktk",
+      "Colors": ["R", "W"],
+      "Text": "The next time a source of your choice would deal damage to you this turn, prevent that damage. If damage is prevented this way, Deflecting Palm deals that much damage to that source's controller."
+    },
+    {
+      "Name": "Narset's Reversal",
+      "Cost": "{U}{U}",
+      "Cmc": 2,
+      "Image": "https://img.scryfall.com/cards/large/front/6/3/63754036-d51e-47bb-925b-564d9dc922ff.jpg",
+      "Rarity": "rare",
+      "Set": "war",
+      "Colors": ["U"],
+      "Text": "Copy target instant or sorcery spell, then return it to its owner's hand. You may choose new targets for the copy."
+    },
+    {
+      "Name": "Narset, Enlightened Master",
+      "Cost": "{3}{U}{R}{W}",
+      "Cmc": 6,
+      "Image": "https://img.scryfall.com/cards/large/front/f/2/f210adb7-b389-4672-a3eb-0ced9bfe190c.jpg",
+      "Rarity": "mythic",
+      "Set": "ktk",
+      "Colors": ["R", "U", "W"],
+      "Text": "First strike, hexproof\nWhenever Narset, Enlightened Master attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with Narset this turn without paying their mana costs."
+    },
+    {
+      "Name": "Nexus of Fate",
+      "Cost": "{5}{U}{U}",
+      "Cmc": 7,
+      "Image": "https://img.scryfall.com/cards/large/front/f/1/f163cfbf-6df6-4af5-9fe4-23b0d511586a.jpg",
+      "Rarity": "mythic",
+      "Set": "m19",
+      "Colors": ["U"],
+      "Text": "Take an extra turn after this one.\nIf Nexus of Fate would be put into a graveyard from anywhere, reveal Nexus of Fate and shuffle it into its owner's library instead."
+    },
+    {
+      "Name": "Strionic Resonator",
+      "Cost": "{2}",
+      "Cmc": 2,
+      "Image": "https://img.scryfall.com/cards/large/front/9/4/94d1fc0f-5c8b-4e47-aaf8-8888c025f70f.jpg",
+      "Rarity": "rare",
+      "Set": "m14",
+      "Colors": [],
+      "Text": "{2}, {T}: Copy target triggered ability you control. You may choose new targets for the copy. (A triggered ability uses the words \"when,\" \"whenever,\" or \"at.\")"
+    },
+    {
+      "Name": "Wooded Foothills",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/c/d/cdad38f7-9dfa-4f1b-9fac-41ab2b253f53.jpg",
+      "Rarity": "rare",
+      "Set": "ons",
+      "Colors": [],
+      "Text": "{T}, Pay 1 life, Sacrifice Wooded Foothills: Search your library for a Mountain or Forest card, put it onto the battlefield, then shuffle your library."
+    },
+    {
+      "Name": "Brainstorm",
+      "Cost": "{U}",
+      "Cmc": 1,
+      "Image": "https://img.scryfall.com/cards/large/front/8/d/8d42d7aa-7f53-4cfc-842a-086aab2448d1.jpg",
+      "Rarity": "common",
+      "Set": "ice",
+      "Colors": ["U"],
+      "Text": "Draw three cards, then put two cards from your hand on top of your library in any order."
+    },
+    {
+      "Name": "Epic Experiment",
+      "Cost": "{X}{U}{R}",
+      "Cmc": 2,
+      "Image": "https://img.scryfall.com/cards/large/front/4/2/42f0b68a-de4b-4c0c-98ac-a812017f88a7.jpg",
+      "Rarity": "mythic",
+      "Set": "rtr",
+      "Colors": ["R", "U"],
+      "Text": "Exile the top X cards of your library. For each instant and sorcery card with converted mana cost X or less among them, you may cast that card without paying its mana cost. Then put all cards exiled this way that weren't cast into your graveyard."
+    },
+    {
+      "Name": "Sensei's Divining Top",
+      "Cost": "{1}",
+      "Cmc": 1,
+      "Image": "https://img.scryfall.com/cards/large/front/4/a/4a08ca06-58db-4ce6-b490-be4bea8956a1.jpg",
+      "Rarity": "uncommon",
+      "Set": "chk",
+      "Colors": [],
+      "Text": "{1}: Look at the top three cards of your library, then put them back in any order.\n{T}: Draw a card, then put Sensei's Divining Top on top of its owner's library."
+    },
+    {
+      "Name": "The Wanderer",
+      "Cost": "{3}{W}",
+      "Cmc": 4,
+      "Image": "https://img.scryfall.com/cards/large/front/d/0/d0f0e463-9eed-4348-af7c-fde5f0d8188c.jpg",
+      "Rarity": "uncommon",
+      "Set": "war",
+      "Colors": ["W"],
+      "Text": "Prevent all noncombat damage that would be dealt to you and other permanents you control.\n−2: Exile target creature with power 4 or greater."
+    },
+    {
+      "Name": "Mystic Sanctuary",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/1/7/170e792c-80d5-4775-ad95-37614574ab84.jpg",
+      "Rarity": "common",
+      "Set": "eld",
+      "Colors": [],
+      "Text": "({T}: Add {U}.)\nMystic Sanctuary enters the battlefield tapped unless you control three or more other Islands.\nWhen Mystic Sanctuary enters the battlefield untapped, you may put target instant or sorcery card from your graveyard on top of your library."
+    },
+    {
+      "Name": "Midnight Clock",
+      "Cost": "{2}{U}",
+      "Cmc": 3,
+      "Image": "https://img.scryfall.com/cards/large/front/0/f/0f7f1148-7b1b-4969-a2f8-428de1e2e8ff.jpg",
+      "Rarity": "rare",
+      "Set": "eld",
+      "Colors": ["U"],
+      "Text": "{T}: Add {U}.\n{2}{U}: Put an hour counter on Midnight Clock.\nAt the beginning of each upkeep, put an hour counter on Midnight Clock.\nWhen the twelfth hour counter is put on Midnight Clock, shuffle your hand and graveyard into your library, then draw seven cards. Exile Midnight Clock."
+    },
+    {
+      "Name": "Mystical Tutor",
+      "Cost": "{U}",
+      "Cmc": 1,
+      "Image": "https://img.scryfall.com/cards/large/front/5/d/5d98101f-e32a-4a4a-a649-faa920d111ee.jpg",
+      "Rarity": "uncommon",
+      "Set": "mir",
+      "Colors": ["U"],
+      "Text": "Search your library for an instant or sorcery card and reveal that card. Shuffle your library, then put the card on top of it."
+    },
+    {
+      "Name": "Narset, Parter of Veils",
+      "Cost": "{1}{U}{U}",
+      "Cmc": 3,
+      "Image": "https://img.scryfall.com/cards/large/front/8/c/8c39f9b4-02b9-4d44-b8d6-4fd02ebbb0c5.jpg",
+      "Rarity": "uncommon",
+      "Set": "war",
+      "Colors": ["U"],
+      "Text": "Each opponent can't draw more than one card each turn.\n−2: Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
+    },
+    {
+      "Name": "Narset, Parter of Veils",
+      "Cost": "{1}{U}{U}",
+      "Cmc": 3,
+      "Image": "https://img.scryfall.com/cards/large/front/8/c/8c39f9b4-02b9-4d44-b8d6-4fd02ebbb0c5.jpg",
+      "Rarity": "uncommon",
+      "Set": "war",
+      "Colors": ["U"],
+      "Text": "Each opponent can't draw more than one card each turn.\n−2: Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."
+    },
+    {
+      "Name": "Prophetic Bolt",
+      "Cost": "{3}{U}{R}",
+      "Cmc": 5,
+      "Image": "https://img.scryfall.com/cards/large/front/7/9/79f74291-c452-4a60-bf5f-73efad6583d4.jpg",
+      "Rarity": "rare",
+      "Set": "apc",
+      "Colors": ["R", "U"],
+      "Text": "Prophetic Bolt deals 4 damage to any target. Look at the top four cards of your library. Put one of those cards into your hand and the rest on the bottom of your library in any order."
+    },
+    {
+      "Name": "Sol Ring",
+      "Cost": "{1}",
+      "Cmc": 1,
+      "Image": "https://img.scryfall.com/cards/large/front/c/4/c4300d24-1cae-4dd5-be7e-38cc677cf5bd.jpg",
+      "Rarity": "uncommon",
+      "Set": "lea",
+      "Colors": [],
+      "Text": "{T}: Add {C}{C}."
+    },
+    {
+      "Name": "Chandra, Fire Artisan",
+      "Cost": "{2}{R}{R}",
+      "Cmc": 4,
+      "Image": "https://img.scryfall.com/cards/large/front/d/2/d21a7b23-8827-49f2-ade4-75a602d17743.jpg",
+      "Rarity": "rare",
+      "Set": "war",
+      "Colors": ["R"],
+      "Text": "Whenever one or more loyalty counters are removed from Chandra, Fire Artisan, she deals that much damage to target opponent or planeswalker.\n+1: Exile the top card of your library. You may play it this turn.\n−7: Exile the top seven cards of your library. You may play them this turn."
+    },
+    {
+      "Name": "Inexorable Tide",
+      "Cost": "{3}{U}{U}",
+      "Cmc": 5,
+      "Image": "https://img.scryfall.com/cards/large/front/8/f/8f41e281-fcbb-450b-8a67-7b072c55c6f0.jpg",
+      "Rarity": "rare",
+      "Set": "som",
+      "Colors": ["U"],
+      "Text": "Whenever you cast a spell, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+    },
+    {
+      "Name": "Windswept Heath",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/7/a/7a7c5941-9c8a-4a40-9efb-a84f05c58e53.jpg",
+      "Rarity": "rare",
+      "Set": "ons",
+      "Colors": [],
+      "Text": "{T}, Pay 1 life, Sacrifice Windswept Heath: Search your library for a Forest or Plains card, put it onto the battlefield, then shuffle your library."
+    },
+    {
+      "Name": "Arcane Signet",
+      "Cost": "{2}",
+      "Cmc": 2,
+      "Image": "https://img.scryfall.com/cards/large/front/8/4/84128e98-87d6-4c2f-909b-9435a7833e63.jpg",
+      "Rarity": "common",
+      "Set": "eld",
+      "Colors": [],
+      "Text": "{T}: Add one mana of any color in your commander's color identity."
+    },
+    {
+      "Name": "Ral Zarek",
+      "Cost": "{2}{U}{R}",
+      "Cmc": 4,
+      "Image": "https://img.scryfall.com/cards/large/front/f/c/fcdbb062-0b0b-4b4c-b4db-dd149f744baa.jpg",
+      "Rarity": "mythic",
+      "Set": "dgm",
+      "Colors": ["R", "U"],
+      "Text": "+1: Tap target permanent, then untap another target permanent.\n−2: Ral Zarek deals 3 damage to any target.\n−7: Flip five coins. Take an extra turn after this one for each coin that comes up heads."
+    },
+    {
+      "Name": "Wash Out",
+      "Cost": "{3}{U}",
+      "Cmc": 4,
+      "Image": "https://img.scryfall.com/cards/large/front/7/7/7719d043-5827-4479-825b-23d9e979ead7.jpg",
+      "Rarity": "uncommon",
+      "Set": "inv",
+      "Colors": ["U"],
+      "Text": "Return all permanents of the color of your choice to their owners' hands."
+    },
+    {
+      "Name": "Aven Mindcensor",
+      "Cost": "{2}{W}",
+      "Cmc": 3,
+      "Image": "https://img.scryfall.com/cards/large/front/5/b/5b8ede8a-5317-4662-b964-a9bd202a4aab.jpg",
+      "Rarity": "uncommon",
+      "Set": "fut",
+      "Colors": ["W"],
+      "Text": "Flash\nFlying\nIf an opponent would search a library, that player searches the top four cards of that library instead."
+    },
+    {
+      "Name": "Empyrial Armor",
+      "Cost": "{1}{W}{W}",
+      "Cmc": 3,
+      "Image": "https://img.scryfall.com/cards/large/front/5/5/5518a79f-bcae-417a-b01b-b6ff572be0be.jpg",
+      "Rarity": "common",
+      "Set": "wth",
+      "Colors": ["W"],
+      "Text": "Enchant creature\nEnchanted creature gets +1/+1 for each card in your hand."
+    },
+    {
+      "Name": "Frantic Search",
+      "Cost": "{2}{U}",
+      "Cmc": 3,
+      "Image": "https://img.scryfall.com/cards/large/front/1/9/1904db14-6df7-424f-afa5-e3dfab31300a.jpg",
+      "Rarity": "common",
+      "Set": "ulg",
+      "Colors": ["U"],
+      "Text": "Draw two cards, then discard two cards. Untap up to three lands."
+    },
+    {
+      "Name": "Mind Stone",
+      "Cost": "{2}",
+      "Cmc": 2,
+      "Image": "https://img.scryfall.com/cards/large/front/1/6/162e81d3-6cd4-4cb8-8ed8-cfbd8d34ca71.jpg",
+      "Rarity": "common",
+      "Set": "wth",
+      "Colors": [],
+      "Text": "{T}: Add {C}.\n{1}, {T}, Sacrifice Mind Stone: Draw a card."
+    },
+    {
+      "Name": "Sacred Foundry",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/1/6/168ef687-5797-4b45-b75b-393d8117cebd.jpg",
+      "Rarity": "rare",
+      "Set": "rav",
+      "Colors": [],
+      "Text": "({T}: Add {R} or {W}.)\nAs Sacred Foundry enters the battlefield, you may pay 2 life. If you don't, it enters the battlefield tapped."
+    },
+    {
+      "Name": "Elsha of the Infinite",
+      "Cost": "{2}{U}{R}{W}",
+      "Cmc": 5,
+      "Image": "https://img.scryfall.com/cards/large/front/3/b/3b977c0b-07a1-4d16-9fdd-fc0563e0b68e.jpg",
+      "Rarity": "mythic",
+      "Set": "c19",
+      "Colors": ["R", "U", "W"],
+      "Text": "Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nYou may look at the top card of your library any time.\nYou may cast noncreature spells from the top of your library. If you cast a spell this way, you may cast it as though it had flash."
+    },
+    {
+      "Name": "Tibalt, Rakish Instigator",
+      "Cost": "{2}{R}",
+      "Cmc": 3,
+      "Image": "https://img.scryfall.com/cards/large/front/7/f/7f9a24dc-8bc3-4528-8780-57fb108fdfbf.jpg",
+      "Rarity": "uncommon",
+      "Set": "war",
+      "Colors": ["R"],
+      "Text": "Your opponents can't gain life.\n−2: Create a 1/1 red Devil creature token with \"When this creature dies, it deals 1 damage to any target.\""
+    },
+    {
+      "Name": "Exotic Orchard",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/6/a/6aae6480-4e71-4d94-a648-f80d3849d792.jpg",
+      "Rarity": "rare",
+      "Set": "con",
+      "Colors": [],
+      "Text": "{T}: Add one mana of any color that a land an opponent controls could produce."
+    },
+    {
+      "Name": "Flooded Strand",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/b/4/b4e3d844-d3b4-41d8-921d-c1cb3af343f8.jpg",
+      "Rarity": "rare",
+      "Set": "ons",
+      "Colors": [],
+      "Text": "{T}, Pay 1 life, Sacrifice Flooded Strand: Search your library for a Plains or Island card, put it onto the battlefield, then shuffle your library."
+    },
+    {
+      "Name": "Island",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/9/0/90a57c0e-fa61-45ef-955d-d296403967d5.jpg",
+      "Rarity": "common",
+      "Set": "lea",
+      "Colors": [],
+      "Text": "({T}: Add {U}.)"
+    },
+    {
+      "Name": "Island",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/9/0/90a57c0e-fa61-45ef-955d-d296403967d5.jpg",
+      "Rarity": "common",
+      "Set": "lea",
+      "Colors": [],
+      "Text": "({T}: Add {U}.)"
+    },
+    {
+      "Name": "Island",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/9/0/90a57c0e-fa61-45ef-955d-d296403967d5.jpg",
+      "Rarity": "common",
+      "Set": "lea",
+      "Colors": [],
+      "Text": "({T}: Add {U}.)"
+    },
+    {
+      "Name": "Island",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/9/0/90a57c0e-fa61-45ef-955d-d296403967d5.jpg",
+      "Rarity": "common",
+      "Set": "lea",
+      "Colors": [],
+      "Text": "({T}: Add {U}.)"
+    },
+    {
+      "Name": "Island",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/9/0/90a57c0e-fa61-45ef-955d-d296403967d5.jpg",
+      "Rarity": "common",
+      "Set": "lea",
+      "Colors": [],
+      "Text": "({T}: Add {U}.)"
+    },
+    {
+      "Name": "Island",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/9/0/90a57c0e-fa61-45ef-955d-d296403967d5.jpg",
+      "Rarity": "common",
+      "Set": "lea",
+      "Colors": [],
+      "Text": "({T}: Add {U}.)"
+    },
+    {
+      "Name": "Island",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/9/0/90a57c0e-fa61-45ef-955d-d296403967d5.jpg",
+      "Rarity": "common",
+      "Set": "lea",
+      "Colors": [],
+      "Text": "({T}: Add {U}.)"
+    },
+    {
+      "Name": "Chaos Warp",
+      "Cost": "{2}{R}",
+      "Cmc": 3,
+      "Image": "https://img.scryfall.com/cards/large/front/0/4/042431bc-0b21-4920-802f-6dd02e4c8721.jpg",
+      "Rarity": "rare",
+      "Set": "cmd",
+      "Colors": ["R"],
+      "Text": "The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield."
+    },
+    {
+      "Name": "Faithless Looting",
+      "Cost": "{R}",
+      "Cmc": 1,
+      "Image": "https://img.scryfall.com/cards/large/front/0/3/03e0147e-841c-4593-83ce-001bf03885f2.jpg",
+      "Rarity": "rare",
+      "Set": "pidw",
+      "Colors": ["R"],
+      "Text": "Draw two cards, then discard two cards.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"
+    },
+    {
+      "Name": "Gerrard, Weatherlight Hero",
+      "Cost": "{2}{R}{W}",
+      "Cmc": 4,
+      "Image": "https://img.scryfall.com/cards/large/front/c/8/c835a37a-776a-44ef-a252-4af1f31bf0b3.jpg",
+      "Rarity": "rare",
+      "Set": "c19",
+      "Colors": ["R", "W"],
+      "Text": "First strike\nWhen Gerrard, Weatherlight Hero dies, exile it and return to the battlefield all artifact and creature cards in your graveyard that were put there from the battlefield this turn."
+    },
+    {
+      "Name": "Insurrection",
+      "Cost": "{5}{R}{R}{R}",
+      "Cmc": 8,
+      "Image": "https://img.scryfall.com/cards/large/front/9/9/998bad32-1927-4e12-9527-efa55b86cae0.jpg",
+      "Rarity": "rare",
+      "Set": "ons",
+      "Colors": ["R"],
+      "Text": "Untap all creatures and gain control of them until end of turn. They gain haste until end of turn."
+    },
+    {
+      "Name": "Azorius Locket",
+      "Cost": "{3}",
+      "Cmc": 3,
+      "Image": "https://img.scryfall.com/cards/large/front/1/3/13aed078-9e29-48e7-b145-5252362031a0.jpg",
+      "Rarity": "common",
+      "Set": "rna",
+      "Colors": [],
+      "Text": "{T}: Add {W} or {U}.\n{W/U}{W/U}{W/U}{W/U}, {T}, Sacrifice Azorius Locket: Draw two cards."
+    },
+    {
+      "Name": "Hedron Archive",
+      "Cost": "{4}",
+      "Cmc": 4,
+      "Image": "https://img.scryfall.com/cards/large/front/2/5/2519149c-f8a3-413f-b7b2-cd596970be4c.jpg",
+      "Rarity": "uncommon",
+      "Set": "bfz",
+      "Colors": [],
+      "Text": "{T}: Add {C}{C}.\n{2}, {T}, Sacrifice Hedron Archive: Draw two cards."
+    },
+    {
+      "Name": "Infiltration Lens",
+      "Cost": "{1}",
+      "Cmc": 1,
+      "Image": "https://img.scryfall.com/cards/large/front/1/b/1baa10da-2733-4657-a1ea-74eb5a5a82b1.jpg",
+      "Rarity": "uncommon",
+      "Set": "som",
+      "Colors": [],
+      "Text": "Whenever equipped creature becomes blocked by a creature, you may draw two cards.\nEquip {1}"
+    },
+    {
+      "Name": "Mystic Confluence",
+      "Cost": "{3}{U}{U}",
+      "Cmc": 5,
+      "Image": "https://img.scryfall.com/cards/large/front/8/1/81bbffc2-6f58-4baa-8f95-168eab106b15.jpg",
+      "Rarity": "rare",
+      "Set": "c15",
+      "Colors": ["U"],
+      "Text": "Choose three. You may choose the same mode more than once.\n• Counter target spell unless its controller pays {3}.\n• Return target creature to its owner's hand.\n• Draw a card."
+    },
+    {
+      "Name": "Righteous Authority",
+      "Cost": "{3}{W}{U}",
+      "Cmc": 5,
+      "Image": "https://img.scryfall.com/cards/large/front/6/6/6695e5bb-56a9-49ab-8940-72336e845875.jpg",
+      "Rarity": "rare",
+      "Set": "rtr",
+      "Colors": ["U", "W"],
+      "Text": "Enchant creature\nEnchanted creature gets +1/+1 for each card in its controller's hand.\nAt the beginning of the draw step of enchanted creature's controller, that player draws an additional card."
+    },
+    {
+      "Name": "Time Wipe",
+      "Cost": "{2}{W}{W}{U}",
+      "Cmc": 5,
+      "Image": "https://img.scryfall.com/cards/large/front/6/4/645f6a71-c1df-43e2-b7a3-49088ed051e9.jpg",
+      "Rarity": "rare",
+      "Set": "prm",
+      "Colors": ["U", "W"],
+      "Text": "Return a creature you control to its owner's hand, then destroy all creatures."
+    },
+    {
+      "Name": "Karn's Bastion",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/b/9/b9d895af-7e8c-419f-bc5d-5596083fbfb6.jpg",
+      "Rarity": "rare",
+      "Set": "war",
+      "Colors": [],
+      "Text": "{T}: Add {C}.\n{4}, {T}: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+    },
+    {
+      "Name": "Comeuppance",
+      "Cost": "{3}{W}",
+      "Cmc": 4,
+      "Image": "https://img.scryfall.com/cards/large/front/9/2/92d59c06-41f7-4009-9157-70ba90cc978b.jpg",
+      "Rarity": "rare",
+      "Set": "c14",
+      "Colors": ["W"],
+      "Text": "Prevent all damage that would be dealt to you and planeswalkers you control this turn by sources you don't control. If damage from a creature source is prevented this way, Comeuppance deals that much damage to that creature. If damage from a noncreature source is prevented this way, Comeuppance deals that much damage to the source's controller."
+    },
+    {
+      "Name": "Divination",
+      "Cost": "{2}{U}",
+      "Cmc": 3,
+      "Image": "https://img.scryfall.com/cards/large/front/3/1/3102cec9-1cdc-4946-a2dd-caf04eaa8b97.jpg",
+      "Rarity": "common",
+      "Set": "m10",
+      "Colors": ["U"],
+      "Text": "Draw two cards."
+    },
+    {
+      "Name": "Narset Transcendent",
+      "Cost": "{2}{W}{U}",
+      "Cmc": 4,
+      "Image": "https://img.scryfall.com/cards/large/front/4/8/4816d092-e34b-4397-8599-43d8e85a8f39.jpg",
+      "Rarity": "mythic",
+      "Set": "dtk",
+      "Colors": ["U", "W"],
+      "Text": "+1: Look at the top card of your library. If it's a noncreature, nonland card, you may reveal it and put it into your hand.\n−2: When you cast your next instant or sorcery spell from your hand this turn, it gains rebound. (Exile the spell as it resolves. At the beginning of your next upkeep, you may cast that card from exile without paying its mana cost.)\n−9: You get an emblem with \"Your opponents can't cast noncreature spells.\""
+    },
+    {
+      "Name": "Steam Vents",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/0/5/054f2276-2dd5-43da-bb26-c57c560861fe.jpg",
+      "Rarity": "rare",
+      "Set": "gpt",
+      "Colors": [],
+      "Text": "({T}: Add {U} or {R}.)\nAs Steam Vents enters the battlefield, you may pay 2 life. If you don't, it enters the battlefield tapped."
+    },
+    {
+      "Name": "Temple of the False God",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/d/7/d7036f51-10a6-4036-8650-9bc12d2a55cb.jpg",
+      "Rarity": "uncommon",
+      "Set": "scg",
+      "Colors": [],
+      "Text": "{T}: Add {C}{C}. Activate this ability only if you control five or more lands."
+    },
+    {
+      "Name": "Dovin, Hand of Control",
+      "Cost": "{2}{W/U}",
+      "Cmc": 3,
+      "Image": "https://img.scryfall.com/cards/large/front/b/d/bd6ff745-919b-4688-9e9e-ab7835b3b891.jpg",
+      "Rarity": "uncommon",
+      "Set": "war",
+      "Colors": ["U", "W"],
+      "Text": "Artifact, instant, and sorcery spells your opponents cast cost {1} more to cast.\n−1: Until your next turn, prevent all damage that would be dealt to and dealt by target permanent an opponent controls."
+    },
+    {
+      "Name": "Leyline of Anticipation",
+      "Cost": "{2}{U}{U}",
+      "Cmc": 4,
+      "Image": "https://img.scryfall.com/cards/large/front/d/7/d7dbb092-3bb0-445e-ab26-d939cac92a73.jpg",
+      "Rarity": "rare",
+      "Set": "m11",
+      "Colors": ["U"],
+      "Text": "If Leyline of Anticipation is in your opening hand, you may begin the game with it on the battlefield.\nYou may cast spells as though they had flash."
+    },
+    {
+      "Name": "Ral, Izzet Viceroy",
+      "Cost": "{3}{U}{R}",
+      "Cmc": 5,
+      "Image": "https://img.scryfall.com/cards/large/front/2/7/2713d344-1062-48e9-a717-f50690dd2ef0.jpg",
+      "Rarity": "mythic",
+      "Set": "pana",
+      "Colors": ["R", "U"],
+      "Text": "+1: Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.\n−3: Ral, Izzet Viceroy deals damage to target creature equal to the total number of instant and sorcery cards you own in exile and in your graveyard.\n−8: You get an emblem with \"Whenever you cast an instant or sorcery spell, this emblem deals 4 damage to any target and you draw two cards.\""
+    },
+    {
+      "Name": "Tezzeret's Gambit",
+      "Cost": "{3}{U/P}",
+      "Cmc": 4,
+      "Image": "https://img.scryfall.com/cards/large/front/f/f/fff5a09e-9276-44b8-b374-4b84aebd47cc.jpg",
+      "Rarity": "uncommon",
+      "Set": "nph",
+      "Colors": ["U"],
+      "Text": "({U/P} can be paid with either {U} or 2 life.)\nDraw two cards, then proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"
+    },
+    {
+      "Name": "Bloodstained Mire",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/6/8/68c72226-6f52-4322-8b14-18737293dfa0.jpg",
+      "Rarity": "rare",
+      "Set": "ons",
+      "Colors": [],
+      "Text": "{T}, Pay 1 life, Sacrifice Bloodstained Mire: Search your library for a Swamp or Mountain card, put it onto the battlefield, then shuffle your library."
+    },
+    {
+      "Name": "Hallowed Fountain",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/c/2/c28aea19-2a39-4934-afda-909e234fa3ba.jpg",
+      "Rarity": "rare",
+      "Set": "dis",
+      "Colors": [],
+      "Text": "({T}: Add {W} or {U}.)\nAs Hallowed Fountain enters the battlefield, you may pay 2 life. If you don't, it enters the battlefield tapped."
+    },
+    {
+      "Name": "Omniscience",
+      "Cost": "{7}{U}{U}{U}",
+      "Cmc": 10,
+      "Image": "https://img.scryfall.com/cards/large/front/1/0/1088f33e-cb5f-4248-ae8e-280c4e41f291.jpg",
+      "Rarity": "mythic",
+      "Set": "m13",
+      "Colors": ["U"],
+      "Text": "You may cast spells from your hand without paying their mana costs."
+    },
+    {
+      "Name": "Saheeli, the Gifted",
+      "Cost": "{2}{U}{R}",
+      "Cmc": 4,
+      "Image": "https://img.scryfall.com/cards/large/front/c/a/ca095559-ac77-4186-8d9b-b75ce0607582.jpg",
+      "Rarity": "mythic",
+      "Set": "c18",
+      "Colors": ["R", "U"],
+      "Text": "+1: Create a 1/1 colorless Servo artifact creature token.\n+1: The next spell you cast this turn costs {1} less to cast for each artifact you control as you cast it.\n−7: For each artifact you control, create a token that's a copy of it. Those tokens gain haste. Exile those tokens at the beginning of the next end step.\nSaheeli, the Gifted can be your commander."
+    },
+    {
+      "Name": "Unwinding Clock",
+      "Cost": "{4}",
+      "Cmc": 4,
+      "Image": "https://img.scryfall.com/cards/large/front/4/9/495d520b-7560-4ecb-ae62-143eeec5682f.jpg",
+      "Rarity": "rare",
+      "Set": "nph",
+      "Colors": [],
+      "Text": "Untap all artifacts you control during each other player's untap step."
+    },
+    {
+      "Name": "Izzet Charm",
+      "Cost": "{U}{R}",
+      "Cmc": 2,
+      "Image": "https://img.scryfall.com/cards/large/front/6/1/61289196-a56b-4d24-b340-9cf067c77f45.jpg",
+      "Rarity": "uncommon",
+      "Set": "ddj",
+      "Colors": ["R", "U"],
+      "Text": "Choose one —\n• Counter target noncreature spell unless its controller pays {2}.\n• Izzet Charm deals 2 damage to target creature.\n• Draw two cards, then discard two cards."
+    },
+    {
+      "Name": "Kasmina, Enigmatic Mentor",
+      "Cost": "{3}{U}",
+      "Cmc": 4,
+      "Image": "https://img.scryfall.com/cards/large/front/c/7/c77d9454-a78c-4063-ad66-46b2f5a030aa.jpg",
+      "Rarity": "uncommon",
+      "Set": "war",
+      "Colors": ["U"],
+      "Text": "Spells your opponents cast that target a creature or planeswalker you control cost {2} more to cast.\n−2: Create a 2/2 blue Wizard creature token. Draw a card, then discard a card."
+    },
+    {
+      "Name": "Land Tax",
+      "Cost": "{W}",
+      "Cmc": 1,
+      "Image": "https://img.scryfall.com/cards/large/front/d/5/d53b20b0-67bc-4587-817b-efbf21cb2512.jpg",
+      "Rarity": "uncommon",
+      "Set": "leg",
+      "Colors": ["W"],
+      "Text": "At the beginning of your upkeep, if an opponent controls more lands than you, you may search your library for up to three basic land cards, reveal them, put them into your hand, then shuffle your library."
+    },
+    {
+      "Name": "Fabled Passage",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/b/8/b841bfa8-7c17-4df2-8466-780ab9a4a53a.jpg",
+      "Rarity": "rare",
+      "Set": "eld",
+      "Colors": [],
+      "Text": "{T}, Sacrifice Fabled Passage: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library. Then if you control four or more lands, untap that land."
+    },
+    {
+      "Name": "Glacial Fortress",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/e/e/ee834e27-595d-4d12-8e69-e94e84ef337a.jpg",
+      "Rarity": "rare",
+      "Set": "m10",
+      "Colors": [],
+      "Text": "Glacial Fortress enters the battlefield tapped unless you control a Plains or an Island.\n{T}: Add {W} or {U}."
+    },
+    {
+      "Name": "Mountain",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/e/a/eace2c85-976c-425e-9800-5a6ccbd91b56.jpg",
+      "Rarity": "common",
+      "Set": "lea",
+      "Colors": [],
+      "Text": "({T}: Add {R}.)"
+    },
+    {
+      "Name": "Mountain",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/e/a/eace2c85-976c-425e-9800-5a6ccbd91b56.jpg",
+      "Rarity": "common",
+      "Set": "lea",
+      "Colors": [],
+      "Text": "({T}: Add {R}.)"
+    },
+    {
+      "Name": "Mountain",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/e/a/eace2c85-976c-425e-9800-5a6ccbd91b56.jpg",
+      "Rarity": "common",
+      "Set": "lea",
+      "Colors": [],
+      "Text": "({T}: Add {R}.)"
+    },
+    {
+      "Name": "Mountain",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/e/a/eace2c85-976c-425e-9800-5a6ccbd91b56.jpg",
+      "Rarity": "common",
+      "Set": "lea",
+      "Colors": [],
+      "Text": "({T}: Add {R}.)"
+    },
+    {
+      "Name": "Mountain",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/e/a/eace2c85-976c-425e-9800-5a6ccbd91b56.jpg",
+      "Rarity": "common",
+      "Set": "lea",
+      "Colors": [],
+      "Text": "({T}: Add {R}.)"
+    },
+    {
+      "Name": "Plains",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/b/1/b1623d57-4729-4796-b3f7-f1837a05c6ed.jpg",
+      "Rarity": "common",
+      "Set": "lea",
+      "Colors": [],
+      "Text": "({T}: Add {W}.)"
+    },
+    {
+      "Name": "Plains",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/b/1/b1623d57-4729-4796-b3f7-f1837a05c6ed.jpg",
+      "Rarity": "common",
+      "Set": "lea",
+      "Colors": [],
+      "Text": "({T}: Add {W}.)"
+    },
+    {
+      "Name": "Plains",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/b/1/b1623d57-4729-4796-b3f7-f1837a05c6ed.jpg",
+      "Rarity": "common",
+      "Set": "lea",
+      "Colors": [],
+      "Text": "({T}: Add {W}.)"
+    },
+    {
+      "Name": "Plains",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/b/1/b1623d57-4729-4796-b3f7-f1837a05c6ed.jpg",
+      "Rarity": "common",
+      "Set": "lea",
+      "Colors": [],
+      "Text": "({T}: Add {W}.)"
+    },
+    {
+      "Name": "Sea of Clouds",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/0/8/080aebe8-535e-4632-b733-8aba98abff22.jpg",
+      "Rarity": "rare",
+      "Set": "bbd",
+      "Colors": [],
+      "Text": "Sea of Clouds enters the battlefield tapped unless you have two or more opponents.\n{T}: Add {W} or {U}."
+    },
+    {
+      "Name": "Boros Locket",
+      "Cost": "{3}",
+      "Cmc": 3,
+      "Image": "https://img.scryfall.com/cards/large/front/5/e/5e972d97-0df2-44e4-8ff2-cc8707316dc1.jpg",
+      "Rarity": "common",
+      "Set": "grn",
+      "Colors": [],
+      "Text": "{T}: Add {R} or {W}.\n{R/W}{R/W}{R/W}{R/W}, {T}, Sacrifice Boros Locket: Draw two cards."
+    },
+    {
+      "Name": "Contentious Plan",
+      "Cost": "{1}{U}",
+      "Cmc": 2,
+      "Image": "https://img.scryfall.com/cards/large/front/8/e/8e30deb6-9e1f-4545-ae30-c30ba6c7b3a0.jpg",
+      "Rarity": "common",
+      "Set": "war",
+      "Colors": ["U"],
+      "Text": "Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)\nDraw a card."
+    },
+    {
+      "Name": "Fact or Fiction",
+      "Cost": "{3}{U}",
+      "Cmc": 4,
+      "Image": "https://img.scryfall.com/cards/large/front/7/f/7fd4d018-dcf3-4439-8445-02d66e44f7d3.jpg",
+      "Rarity": "uncommon",
+      "Set": "inv",
+      "Colors": ["U"],
+      "Text": "Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard."
+    },
+    {
+      "Name": "Heartwarming Redemption",
+      "Cost": "{2}{R}{W}",
+      "Cmc": 4,
+      "Image": "https://img.scryfall.com/cards/large/front/a/f/af569235-f5cb-4e3e-ba77-c1c429ed0a60.jpg",
+      "Rarity": "uncommon",
+      "Set": "war",
+      "Colors": ["R", "W"],
+      "Text": "Discard all the cards in your hand, then draw that many cards plus one. You gain life equal to the number of cards in your hand."
+    },
+    {
+      "Name": "Command Tower",
+      "Cost": "",
+      "Cmc": 0,
+      "Image": "https://img.scryfall.com/cards/large/front/4/6/46982091-cc78-4171-8b3d-d07592684728.jpg",
+      "Rarity": "common",
+      "Set": "cmd",
+      "Colors": [],
+      "Text": "{T}: Add one mana of any color in your commander's color identity."
+    },
+    {
+      "Name": "Counterspell",
+      "Cost": "{U}{U}",
+      "Cmc": 2,
+      "Image": "https://img.scryfall.com/cards/large/front/0/d/0df55e3f-14de-46ef-b6b1-616618724d9e.jpg",
+      "Rarity": "uncommon",
+      "Set": "lea",
+      "Colors": ["U"],
+      "Text": "Counter target spell."
+    },
+    {
+      "Name": "Octopus Umbra",
+      "Cost": "{3}{U}{U}",
+      "Cmc": 5,
+      "Image": "https://img.scryfall.com/cards/large/front/9/e/9efcf24c-ad57-4320-9b85-c838f5ed659b.jpg",
+      "Rarity": "rare",
+      "Set": "c18",
+      "Colors": ["U"],
+      "Text": "Enchant creature\nEnchanted creature has base power and toughness 8/8 and has \"Whenever this creature attacks, you may tap target creature with power 8 or less.\"\nTotem armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)"
+    },
+    {
+      "Name": "Phyrexian Rebirth",
+      "Cost": "{4}{W}{W}",
+      "Cmc": 6,
+      "Image": "https://img.scryfall.com/cards/large/front/3/6/36b7536d-6b0b-4906-ba88-7fcfe9b854ee.jpg",
+      "Rarity": "rare",
+      "Set": "mbs",
+      "Colors": ["W"],
+      "Text": "Destroy all creatures, then create an X/X colorless Horror artifact creature token, where X is the number of creatures destroyed this way."
+    },
+    {
+      "Name": "Treasure Nabber",
+      "Cost": "{2}{R}",
+      "Cmc": 3,
+      "Image": "https://img.scryfall.com/cards/large/front/6/c/6c6049a0-2c13-41ae-8c73-978be8b13031.jpg",
+      "Rarity": "rare",
+      "Set": "c18",
+      "Colors": ["R"],
+      "Text": "Whenever an opponent taps an artifact for mana, gain control of that artifact until the end of your next turn."
+    }
+  ]
+}

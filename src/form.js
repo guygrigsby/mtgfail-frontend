@@ -4,6 +4,7 @@ import { Button } from "react-toolbox/lib/button";
 import FontIcon from "react-toolbox/lib/font_icon";
 import Input from "react-toolbox/lib/input";
 import ListDeck from "./ListDeck.js";
+import TestDeck from "./TestData.json";
 import App, { Upstream } from "./App.js";
 import SplitPane from "./SplitPane.js";
 
@@ -107,6 +108,16 @@ export const TabForm = props => {
       });
   };
 
+  const GetDeck = () => {
+    if (process.env.NODE_ENV === "development") {
+      return <ListDeck cards={TestDeck.Cards} />;
+    }
+    if (deckLoaded) {
+      return <ListDeck cards={deck} />;
+    }
+    return null;
+  };
+
   return (
     <div style={{ display: "flex" }}>
       <div style={{ flex: "2 200px" }}>
@@ -140,7 +151,7 @@ export const TabForm = props => {
           overflowY: "scroll"
         }}
       >
-        {deckLoaded ? <ListDeck cards={deck} /> : null}
+        {GetDeck()}
       </div>
     </div>
   );

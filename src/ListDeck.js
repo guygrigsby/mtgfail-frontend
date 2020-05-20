@@ -18,11 +18,11 @@ class ListDeck extends Component {
       selected: []
     };
   }
+
   static getDerivedStateFromProps(props, state) {
     console.log(props);
     return { cards: props.cards };
   }
-
   handleChange(event) {
     this.setState({ selected: event.target.value });
   }
