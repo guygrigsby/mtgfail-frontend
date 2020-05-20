@@ -5,6 +5,7 @@ import FontIcon from "react-toolbox/lib/font_icon";
 import Input from "react-toolbox/lib/input";
 import ListDeck from "./ListDeck.js";
 import App, { Upstream } from "./App.js";
+import SplitPane from "./SplitPane.js";
 
 export const TabForm = props => {
   const [index, setIndex] = useState(0);
@@ -144,30 +145,4 @@ export const TabForm = props => {
     </div>
   );
 };
-
-const SplitPane = props => {
-  return (
-    <>
-      <div
-        style={{
-          flex: 1,
-          flexDirection: "column"
-        }}
-      >
-        <div>{props.table}</div>
-      </div>
-      <div
-        style={{
-          flexDirection: "row",
-          justifyContent: "flex-start"
-        }}
-      >
-        {props.left}
-        {props.right}
-        <div>{props.button}</div>
-      </div>
-    </>
-  );
-};
-
 export default SplitPane;
