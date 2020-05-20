@@ -109,7 +109,12 @@ export const TabForm = props => {
   return (
     <div style={{ display: "flex" }}>
       <div style={{ flex: "2 200px" }}>
-        <Input type="text" label="Deck URI" name="deckuri" onChange={setURI} />
+        <Input
+          type="text"
+          label="Deck URI"
+          name="deckuri"
+          onChange={s => setURI(s.trim())}
+        />
         <Input
           type="text"
           label="Deck List"

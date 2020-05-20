@@ -8,16 +8,6 @@ const CardModel = {
   Name: { type: String },
   Image: { type: String }
 };
-
-const populate = arr => {
-  arr.map((item, idx) => {
-    <TableRow key={idx}>
-      <TableCell>{item.name}</TableCell>
-      <TableCell>{item.image}</TableCell>
-    </TableRow>;
-  });
-};
-
 class ListDeck extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +20,7 @@ class ListDeck extends Component {
   }
   static getDerivedStateFromProps(props, state) {
     console.log(props);
-    return { cards: props.cards, tableData: populate(props.cards) };
+    return { cards: props.cards };
   }
 
   handleChange(event) {
