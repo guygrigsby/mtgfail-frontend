@@ -53,7 +53,15 @@ class ListDeck extends Component {
           <TableCell string>name</TableCell>
           <TableCell numeric>image</TableCell>
         </TableHead>
-        {this.state.tableData}
+        {this.state.cards.map((item, idx) => (
+          <TableRow
+            key={idx}
+            selected={this.state.selected.indexOf(item.name) !== -1}
+          >
+            <TableCell>{item.Name}</TableCell>
+            <TableCell numeric>{item.Image}</TableCell>
+          </TableRow>
+        ))}
       </Table>
     );
   }
