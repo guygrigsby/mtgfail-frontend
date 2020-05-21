@@ -1,4 +1,5 @@
 import React, { Component, useState } from "react";
+import FileSaver from "file-saver";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import FontIcon from "react-toolbox/lib/font_icon";
@@ -20,16 +21,16 @@ export const TabForm = props => {
   const [loading, setLoading] = useState(false);
   const [deckLoaded, setDeckLoaded] = useState(false);
   const [error, setError] = useState({});
-  const [TTSdeck, setTTSDeck] = useState({});
+  const [TTSDeck, setTTSDeck] = useState(null);
   const [value, setValue] = React.useState(0);
 
   const loaded = () => deck !== null;
 
   const handleListSubmit = event => {
+    console.log(deckText);
     event.preventDefault();
     event.stopPropagation();
     // curl -X POST https://api.mtg.fail -H 'Content-Type: text/plain' --data-binary @deck.txt
-    const b = deckText;
     let url = new URL(Upstream);
 
     let requestOptions = {
@@ -40,9 +41,9 @@ export const TabForm = props => {
       redirect: "follow", // manual, *follow, error
       headers: {
         "Content-Type": "text/plain",
-        "Content-Length": b.length.toString()
+        "Content-Length": deckText.length.toString()
       },
-      body: b
+      body: deckText
     };
 
     callAPI(url, requestOptions);
@@ -116,10 +117,14 @@ export const TabForm = props => {
     setValue(newValue);
   };
 
+  const ttsDownload = event => {
+    FileSaver.saveAs(event.target.value, "deck.json");
+  };
+
   const GetDeck = () => {
-    if (process.env.NODE_ENV === "development") {
-      return <ListDeck cards={TestDeck.Cards} />;
-    }
+    //if (process.env.NODE_ENV === "development") {
+    //  return <ListDeck cards={TestDeck.Cards} />;
+    //}
     if (deckLoaded) {
       return <ListDeck cards={deck} />;
     }
@@ -135,50 +140,47 @@ export const TabForm = props => {
       justify="space-between"
       alignItems="flex-end"
     >
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        indicatorColor="primary"
-        textColor="primary"
-      >
-        <Tab label="Active">
-          <TextField
-            id="standard-basic"
-            label="Deck URI"
-            type="text"
-            label="Deck URI"
-            name="deckuri"
-            variant="outlined"
-            fullWidth
-            onChange={s => setURI(s.trim())}
-          />
-        </Tab>
-        <Tab label="Active">
-          <TextField
-            type="text"
-            label="Deck List"
-            name="decklist"
-            value={deckText}
-            onChange={setDeckText}
-            multiline
-            variant="outlined"
-            rows={5}
-            fullWidth
-          />
-        </Tab>
-      </Tabs>
-      <Grid item xs={6}></Grid>
-      <Grid item xs={6}></Grid>
-      <Grid item xs={12}>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={load}
-          raised
-          primary
-        >
+      <Grid item xs={6}>
+        <TextField
+          id="standard-basic"
+          type="text"
+          label="Deck URI"
+          name="deckuri"
+          variant="outlined"
+          fullWidth
+          onChange={s => setURI(s.trim())}
+        />
+      </Grid>
+      <Grid item xs={6}>
+        <TextField
+          type="text"
+          label="Deck List"
+          name="decklist"
+          onChange={event => setDeckText(event.target.value)}
+          multiline
+          variant="outlined"
+          rows={5}
+          fullWidth
+        />
+      </Grid>
+      <Grid item xs={6}>
+        <Button variant="contained" color="primary" onClick={load}>
           Import
         </Button>
+      </Grid>
+      <Grid item xs={3}>
+        <Button variant="contained" color="primary" onClick={handleListSubmit}>
+          Import
+        </Button>
+      </Grid>
+      <Grid item xs={3}>
+        {TTSDeck === null ? (
+          <div></div>
+        ) : (
+          <Button variant="contained" color="secondary" onClick={ttsDownload}>
+            Download
+          </Button>
+        )}
       </Grid>
       <Grid item xs={12}>
         {GetDeck()}
