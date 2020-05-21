@@ -90,7 +90,7 @@ export const TabForm = props => {
       mode: "cors", // no-cors, *cors, same-origin
       cache: "no-cache" // *default, no-cache, reload, force-cache, only-if-cached
     };
-    const fullURI = new URL(`${Upstream}/deck?deck=${uri}`);
+    const fullURI = new URL(`${Upstream}/deck?deck=${url}`);
     console.log("calling ", fullURI);
     fetch(fullURI, requestOptions)
       .then(async response => {
@@ -152,7 +152,7 @@ export const TabForm = props => {
           name="deckuri"
           variant="outlined"
           fullWidth
-          onChange={s => setURI(s.trim())}
+          onChange={s => setURI(event.target.value.trim())}
         />
       </Grid>
       <Grid item xs={6}>
