@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import Table, { TableHead, TableCell, TableRow } from "react-toolbox/lib/table";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import { ThemeProvider } from "@material-ui/core/styles";
+import theme from "./ListDeckTheme.js";
 
 import Card from "./Card.js";
 import ParseDeck from "./Deck.js";
@@ -66,23 +73,25 @@ class ListDeck extends Component {
 
   render() {
     return (
-      <Table
-        model={CardModel}
-        onRowSelect={this.handleRowSelect}
-        selectable
-        multiSelectable
-      >
-        <TableHead>
-          <TableCell string>name</TableCell>
-          <TableCell url>image</TableCell>
-        </TableHead>
-        {this.state.cards.map((item, idx) => (
-          <TableRow key={idx} selected={this.state.selected[idx]}>
-            <TableCell>{item.Name}</TableCell>
-            <TableCell numeric>{item.Image}</TableCell>
-          </TableRow>
-        ))}
-      </Table>
+      <ThemeProvider theme={theme}>
+        <Table
+          model={CardModel}
+          onRowSelect={this.handleRowSelect}
+          selectable
+          multiSelectable
+        >
+          <TableHead>
+            <TableCell string>name</TableCell>
+            <TableCell url>image</TableCell>
+          </TableHead>
+          {this.state.cards.map((item, idx) => (
+            <TableRow key={idx} selected={this.state.selected[idx]}>
+              <TableCell>{item.Name}</TableCell>
+              <TableCell numeric>{item.Image}</TableCell>
+            </TableRow>
+          ))}
+        </Table>
+      </ThemeProvider>
     );
   }
 }

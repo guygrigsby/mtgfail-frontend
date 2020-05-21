@@ -1,8 +1,10 @@
 import React, { Component, useState } from "react";
-import { Tab, Tabs } from "react-toolbox/lib/tabs";
-import { Button } from "react-toolbox/lib/button";
+import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
 import FontIcon from "react-toolbox/lib/font_icon";
-import Input from "react-toolbox/lib/input";
+import Input from "@material-ui/core/Input";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
 import ListDeck from "./ListDeck.js";
 import TestDeck from "./TestData.json";
 import App, { Upstream } from "./App.js";
@@ -119,33 +121,39 @@ export const TabForm = props => {
   };
 
   return (
-    <SplitPane
-      left={
-        <Input
+    <Grid container spacing={3}>
+      <Grid item xs={3}>
+        <TextField
+          id="standard-basic"
+          label="Deck URI"
           type="text"
           label="Deck URI"
           name="deckuri"
+          variant="outlined"
           onChange={s => setURI(s.trim())}
         />
-      }
-      right={
-        <Input
+      </Grid>
+      <Grid item xs={6}>
+        <TextField
           type="text"
           label="Deck List"
           name="decklist"
           value={deckText}
           onChange={setDeckText}
-          multiline={true}
+          multiline
+          variant="outlined"
           rows={5}
         />
-      }
-      button={
-        <Button label="Import" onClick={load} raised primary>
-          <FontIcon value="import_export" />
+      </Grid>
+      <Grid item xs={6}>
+        <Button onClick={load} raised primary>
+          Import
         </Button>
-      }
-      table={GetDeck()}
-    />
+      </Grid>
+      <Grid item xs={12}>
+        {GetDeck()}
+      </Grid>
+    </Grid>
   );
 };
 export default SplitPane;

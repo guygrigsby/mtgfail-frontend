@@ -3,14 +3,11 @@
 import React, { Component, useState } from "react";
 import ReactDOM from "react-dom";
 import { hot } from "react-hot-loader";
-import {
-  List,
-  ListItem,
-  ListSubHeader,
-  ListDivider,
-  ListCheckbox
-} from "react-toolbox/lib/list";
-import Dialog from "react-toolbox/lib/dialog";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListSubheader from "@material-ui/core/ListSubheader";
 import { Layout, Panel, NavDrawer } from "react-toolbox/lib/layout";
 import Link from "react-toolbox/lib/link";
 import GithubIcon from "./NavBar";
@@ -22,7 +19,8 @@ import Display from "./Display.js";
 import Page from "./Page.js";
 import Hero from "./Hero.js";
 import FileSaver from "file-saver";
-import "./App.scss";
+import { ThemeProvider } from "@material-ui/core/styles";
+import theme from "./AppTheme.js";
 
 const download = payload => {
   FileSaver.saveAs(payload, "deck.json");
@@ -107,23 +105,9 @@ class DeckConverter extends Component {
 
   render() {
     return (
-      <Page
-        drawerList={
-          <List selectable ripple>
-            <ListSubHeader caption="section i" />
-            <ListItem>
-              <Link href="mailto:devs@mtg.fail">Contact</Link>
-            </ListItem>
-            <ListItem>
-              <Link onClick={this.toggleModal}>Donate</Link>
-            </ListItem>
-            <ListSubHeader caption="section ii" />
-            <p>You are a failure. </p>
-          </List>
-        }
-        hero={<Hero msg="Welcome" />}
-        tabs={<TabForm />}
-      />
+      <ThemeProvider theme={theme}>
+        <Page hero={<Hero msg="Welcome" />} tabs={<TabForm />} />
+      </ThemeProvider>
     );
   }
 }
