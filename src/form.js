@@ -12,6 +12,9 @@ import ListDeck from "./ListDeck.js";
 import TestDeck from "./TestData.json";
 import App, { Upstream } from "./App.js";
 import SplitPane from "./SplitPane.js";
+import util from "util";
+
+const download = require("./Download.js");
 
 export const TabForm = props => {
   const [index, setIndex] = useState(0);
@@ -67,8 +70,8 @@ export const TabForm = props => {
         return response.json();
       })
       .then(data => {
-        setTTSDeck(data.Cards);
-        console.log("Set the deck", data.Cards);
+        setTTSDeck(data);
+        console.log("Set the deck", data);
       })
       .catch(error => {
         setError(error);
@@ -118,7 +121,8 @@ export const TabForm = props => {
   };
 
   const ttsDownload = event => {
-    FileSaver.saveAs(event.target.value, "deck.json");
+    console.log(util.inspect(TTSDeck));
+    download(TTSDeck, "deck.json", "text/json");
   };
 
   const GetDeck = () => {
