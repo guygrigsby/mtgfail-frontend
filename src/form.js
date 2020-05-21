@@ -29,7 +29,7 @@ export const TabForm = props => {
 
   const loaded = () => deck !== null;
 
-  const handleListSubmit = event => {
+  const convert = event => {
     console.log(deckText);
     event.preventDefault();
     event.stopPropagation();
@@ -49,10 +49,10 @@ export const TabForm = props => {
       body: deckText
     };
 
-    callAPI(url, requestOptions);
+    callConvertAPI(url, requestOptions);
   };
 
-  const callAPI = (url, requestOptions) => {
+  const callConvertAPI = (url, requestOptions) => {
     fetch(url, requestOptions)
       .then(response => {
         const contentType = response.headers.get("content-type");
@@ -81,7 +81,11 @@ export const TabForm = props => {
 
   const load = e => {
     setLoading(true);
-    callOut(uri);
+    if (uri === "") {
+      convert(e);
+    } else {
+      callOut(uri);
+    }
   };
 
   const callOut = url => {
@@ -152,7 +156,7 @@ export const TabForm = props => {
           name="deckuri"
           variant="outlined"
           fullWidth
-          onChange={s => setURI(event.target.value.trim())}
+          onChange={event => setURI(event.target.value.trim())}
         />
       </Grid>
       <Grid item xs={6}>
@@ -168,14 +172,23 @@ export const TabForm = props => {
         />
       </Grid>
       <Grid item xs={6}>
-        <Button variant="contained" color="primary" onClick={load}>
+        <Button
+          id="URLimport"
+          variant="contained"
+          color="primary"
+          onClick={load}
+        >
           Import
         </Button>
       </Grid>
       <Grid item xs={3}>
-        <Button variant="contained" color="primary" onClick={handleListSubmit}>
-          Import
-        </Button>
+        {deck === null ? (
+          <div></div>
+        ) : (
+          <Button variant="contained" color="primary" onClick={convert}>
+            Convert
+          </Button>
+        )}
       </Grid>
       <Grid item xs={3}>
         {TTSDeck === null ? (
