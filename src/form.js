@@ -5,6 +5,8 @@ import FontIcon from "react-toolbox/lib/font_icon";
 import Input from "@material-ui/core/Input";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 import ListDeck from "./ListDeck.js";
 import TestDeck from "./TestData.json";
 import App, { Upstream } from "./App.js";
@@ -19,6 +21,7 @@ export const TabForm = props => {
   const [deckLoaded, setDeckLoaded] = useState(false);
   const [error, setError] = useState({});
   const [TTSdeck, setTTSDeck] = useState({});
+  const [value, setValue] = React.useState(0);
 
   const loaded = () => deck !== null;
 
@@ -109,6 +112,9 @@ export const TabForm = props => {
         console.error("Error:", error.message);
       });
   };
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   const GetDeck = () => {
     if (process.env.NODE_ENV === "development") {
@@ -121,32 +127,56 @@ export const TabForm = props => {
   };
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={3}>
-        <TextField
-          id="standard-basic"
-          label="Deck URI"
-          type="text"
-          label="Deck URI"
-          name="deckuri"
-          variant="outlined"
-          onChange={s => setURI(s.trim())}
-        />
-      </Grid>
-      <Grid item xs={6}>
-        <TextField
-          type="text"
-          label="Deck List"
-          name="decklist"
-          value={deckText}
-          onChange={setDeckText}
-          multiline
-          variant="outlined"
-          rows={5}
-        />
-      </Grid>
-      <Grid item xs={6}>
-        <Button onClick={load} raised primary>
+    <Grid
+      container
+      spacing={3}
+      container
+      direction="row"
+      justify="space-between"
+      alignItems="flex-end"
+    >
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        indicatorColor="primary"
+        textColor="primary"
+      >
+        <Tab label="Active">
+          <TextField
+            id="standard-basic"
+            label="Deck URI"
+            type="text"
+            label="Deck URI"
+            name="deckuri"
+            variant="outlined"
+            fullWidth
+            onChange={s => setURI(s.trim())}
+          />
+        </Tab>
+        <Tab label="Active">
+          <TextField
+            type="text"
+            label="Deck List"
+            name="decklist"
+            value={deckText}
+            onChange={setDeckText}
+            multiline
+            variant="outlined"
+            rows={5}
+            fullWidth
+          />
+        </Tab>
+      </Tabs>
+      <Grid item xs={6}></Grid>
+      <Grid item xs={6}></Grid>
+      <Grid item xs={12}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={load}
+          raised
+          primary
+        >
           Import
         </Button>
       </Grid>

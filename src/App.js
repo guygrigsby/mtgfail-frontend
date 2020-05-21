@@ -29,86 +29,10 @@ export const Upstream =
   process.env.NODE_ENV === "development"
     ? "http://localhost:8080"
     : "https://api.mtg.fail";
-class DeckConverter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      decktext: "",
-      uri: "",
-      errorMessage: "",
-      isError: false,
-      urifieldActive: true,
-      wrapper: React.createRef()
-    };
-    this.makeErr = this.makeErr.bind(this);
-  }
-  readFile(path) {
-    if (path === undefined) {
-      path = "./motd.txt";
-    }
-    fetch(path, { mode: "no-cors" })
-      .then(res => res.text())
-      .then(data => {
-        this.setState({ motd: data });
-      })
-      .catch(error => {
-        console.error("Can't read file", path, error);
-      });
-  }
-
-  handleChange(value) {
-    this.setState({ decktext: value });
-  }
-  handleURIChange(value) {
-    this.setState({ uri: value });
-  }
-
-  handleURLSubmit(event) {
-    console.log("handling URI submission", event);
-    event.preventDefault();
-    event.stopPropagation();
-
-    let url = new URL(Upstream);
-    const uri = this.state.uri;
-    if (uri === "") {
-      this.popup("no URL");
-      return;
-    }
-    const params = { deck: uri };
-    Object.keys(params).forEach(key =>
-      url.searchParams.append(key, params[key])
-    );
-    let requestOptions = {
-      method: "GET",
-      mode: "cors", // no-cors, *cors, same-origin
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      headers: {
-        "Content-Type": "text/plain"
-      }
-      //deck\=https://tappedout.net/mtg-decks/22-01-20-kess-storm
-    };
-
-    this.callAPI(url, requestOptions);
-  }
-
-  popup(msg) {
-    console.error(msg);
-  }
-
-  hero() {
-    return <h1 className="text-center">Welcome to mtg.fail</h1>;
-  }
-  makeErr() {
-    this.setState({ isError: true });
-    this.setState({ errorMessage: "boom" });
-  }
-
-  render() {
-    return (
-      <ThemeProvider theme={theme}>
-        <Page hero={<Hero msg="Welcome" />} tabs={<TabForm />} />
-      </ThemeProvider>
-    );
-  }
+export default function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <Page hero={<Hero msg="Welcome" />} tabs={<TabForm />} />
+    </ThemeProvider>
+  );
 }
-export default DeckConverter;
