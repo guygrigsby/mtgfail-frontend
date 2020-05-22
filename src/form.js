@@ -10,6 +10,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import ListDeck from "./ListDeck.js";
 import TestDeck from "./TestData.json";
+import "regenerator-runtime/runtime";
 import App, { Upstream } from "./App.js";
 import SplitPane from "./SplitPane.js";
 import util from "util";
