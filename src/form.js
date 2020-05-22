@@ -39,7 +39,7 @@ export const TabForm = props => {
 
     let requestOptions = {
       method: "POST",
-      mode: "no-cors", // no-cors, *cors, same-origin
+      mode: "cors", // no-cors, *cors, same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       credentials: "omit", // include, *same-origin, omit
       redirect: "follow", // manual, *follow, error
@@ -51,6 +51,24 @@ export const TabForm = props => {
     };
 
     callConvertAPI(url, requestOptions);
+  };
+
+  const convertFromURL = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    // curl -X POST https://api.mtg.fail -H 'Content-Type: text/plain' --data-binary @deck.txt
+    const fullURI = new URL(`${Upstream}?deck=${uri}`);
+    console.log("FullURI", fullURI);
+
+    let requestOptions = {
+      method: "GET",
+      mode: "cors", // no-cors, *cors, same-origin
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: "omit", // include, *same-origin, omit
+      redirect: "follow" // manual, *follow, error
+    };
+
+    callConvertAPI(fullURI, requestOptions);
   };
 
   const callConvertAPI = (url, requestOptions) => {
@@ -82,17 +100,14 @@ export const TabForm = props => {
 
   const load = e => {
     setLoading(true);
-    if (uri === "") {
-      convert(e);
-    } else {
-      callOut(uri);
-    }
+    //callOut(uri);
+    convertFromURL(e);
   };
 
   const callOut = url => {
     const requestOptions = {
       method: "GET",
-      mode: "no-cors", // no-cors, *cors, same-origin
+      mode: "cors", // no-cors, *cors, same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       credentials: "omit", // include, *same-origin, omit
       redirect: "follow" // manual, *follow, error
@@ -100,7 +115,7 @@ export const TabForm = props => {
     const fullURI = new URL(`${Upstream}/deck?deck=${url}`);
     console.log("calling ", fullURI);
     fetch(fullURI, requestOptions)
-      .then(async response => {
+      .then(response => {
         const contentType = response.headers.get("content-type");
         console.log("Content-Type", contentType);
 
@@ -108,10 +123,17 @@ export const TabForm = props => {
         if (!response.ok) {
           // get error message from body or default to response status
           const error = response.status;
-          console.error("error", error, "status", response.status);
+          console.error(
+            "response",
+            response,
+            "error",
+            error,
+            "status",
+            response.status
+          );
           return Promise.reject(error);
         }
-        return await response.json();
+        return response.json();
       })
       .then(json => {
         setDeck(json.Cards);
@@ -172,6 +194,9 @@ export const TabForm = props => {
           variant="outlined"
           rows={5}
           fullWidth
+          disabled
+          color="secondary"
+          placeholde="Out of Order"
         />
       </Grid>
       <Grid item xs={6}>
