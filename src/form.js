@@ -39,7 +39,7 @@ export const TabForm = props => {
 
     let requestOptions = {
       method: "POST",
-      mode: "cors", // no-cors, *cors, same-origin
+      mode: "no-cors", // no-cors, *cors, same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       credentials: "omit", // include, *same-origin, omit
       redirect: "follow", // manual, *follow, error
@@ -92,8 +92,10 @@ export const TabForm = props => {
   const callOut = url => {
     const requestOptions = {
       method: "GET",
-      mode: "cors", // no-cors, *cors, same-origin
-      cache: "no-cache" // *default, no-cache, reload, force-cache, only-if-cached
+      mode: "no-cors", // no-cors, *cors, same-origin
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: "omit", // include, *same-origin, omit
+      redirect: "follow" // manual, *follow, error
     };
     const fullURI = new URL(`${Upstream}/deck?deck=${url}`);
     console.log("calling ", fullURI);
