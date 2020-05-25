@@ -12,12 +12,11 @@ import ListDeck from "./ListDeck.js";
 import TestDeck from "./TestData.json";
 import "regenerator-runtime/runtime";
 import App, { Upstream } from "./App.js";
-import SplitPane from "./SplitPane.js";
 import util from "util";
 
 const download = require("./Download.js");
 
-export const TabForm = props => {
+const TabForm = props => {
   const [index, setIndex] = useState(0);
   const [deckText, setDeckText] = useState("");
   const [uri, setURI] = useState("");
@@ -233,4 +232,4 @@ export const TabForm = props => {
     </Grid>
   );
 };
-export default SplitPane;
+export default TabForm;

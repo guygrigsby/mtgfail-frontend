@@ -11,7 +11,7 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import { Layout, Panel, NavDrawer } from "react-toolbox/lib/layout";
 import Link from "react-toolbox/lib/link";
 import GithubIcon from "./NavBar";
-import SplitPane, { TabForm } from "./form";
+import TabForm from "./form";
 import TestData from "./Data.js";
 import TTSDeck from "./TTSDeck.js";
 import TappedOut from "./Translate.js";
