@@ -82,7 +82,12 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Page hero={<Hero msg="Welcome" />} tabs={<Forms />} />
+      <Page
+        hero={
+          <Hero msg="Double sides cards are making problems right now. Working on a fix." />
+        }
+        tabs={<Forms />}
+      />
     </ThemeProvider>
   );
 }
