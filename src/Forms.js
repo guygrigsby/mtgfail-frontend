@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
 import FileSaver from "file-saver";
 import Button from "@material-ui/core/Button";
+import Alert from "@material-ui/lab/Alert";
 import Paper from "@material-ui/core/Paper";
 import FontIcon from "react-toolbox/lib/font_icon";
 import Input from "@material-ui/core/Input";
@@ -22,7 +23,7 @@ const Forms = props => {
   const [uri, setURI] = useState("");
   const [deck, setDeck] = useState(null);
   const [deckLoaded, setDeckLoaded] = useState(false);
-  const [error, setError] = useState({});
+  const [error, setError] = useState(null);
   const [TTSDeck, setTTSDeck] = useState(null);
   const [value, setValue] = React.useState(0);
 
@@ -70,17 +71,16 @@ const Forms = props => {
   const callConvertAPI = (url, requestOptions) => {
     fetch(url, requestOptions)
       .then(response => {
-        const contentType = response.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-          throw new TypeError("expected JSON response");
-        }
-
         // check for error response
         if (!response.ok) {
           // get error message from body or default to response status
-          const error = response.status;
+          const error = `Unexpected response: ${response.status}: ${response.statusText}`;
           console.error("error", error, "status", response.status);
           return Promise.reject(error);
+        }
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new TypeError("expected JSON response");
         }
         return response.json();
       })
@@ -90,7 +90,7 @@ const Forms = props => {
       })
       .catch(error => {
         setError(error);
-        console.error("Error:", error.message);
+        console.error("Error:", error);
       });
   };
 
@@ -167,6 +167,9 @@ const Forms = props => {
       justify="space-between"
       alignItems="flex-end"
     >
+      <Grid item xs={12}>
+        {error !== null ? <Alert severity="error">{error}</Alert> : null}
+      </Grid>
       <Grid item xs={6}>
         <TextField
           id="standard-basic"
