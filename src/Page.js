@@ -22,6 +22,16 @@ export default function Page(props) {
   return (
     <div className={classes.root}>
       <MenuAppBar />
+      <Grid
+        container
+        spacing={3}
+        container
+        direction="row"
+        justify="space-between"
+        alignItems="flex-end"
+      >
+        {props.hero}
+      </Grid>
       <Container maxWidth="lg">{props.tabs}</Container>
     </div>
   );

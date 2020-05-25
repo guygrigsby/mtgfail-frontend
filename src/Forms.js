@@ -12,23 +12,19 @@ import ListDeck from "./ListDeck.js";
 import TestDeck from "./TestData.json";
 import "regenerator-runtime/runtime";
 import App, { Upstream } from "./App.js";
-import SplitPane from "./SplitPane.js";
 import util from "util";
 
 const download = require("./Download.js");
 
-export const TabForm = props => {
+const Forms = props => {
   const [index, setIndex] = useState(0);
   const [deckText, setDeckText] = useState("");
   const [uri, setURI] = useState("");
   const [deck, setDeck] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [deckLoaded, setDeckLoaded] = useState(false);
   const [error, setError] = useState({});
   const [TTSDeck, setTTSDeck] = useState(null);
   const [value, setValue] = React.useState(0);
-
-  const loaded = () => deck !== null;
 
   const convert = event => {
     console.log(deckText);
@@ -57,7 +53,7 @@ export const TabForm = props => {
     event.preventDefault();
     event.stopPropagation();
     // curl -X POST https://api.mtg.fail -H 'Content-Type: text/plain' --data-binary @deck.txt
-    const fullURI = new URL(`${Upstream}?deck=${uri}`);
+    const fullURI = new URL(`${Upstream}/tts?deck=${uri}`);
     console.log("FullURI", fullURI);
 
     let requestOptions = {
@@ -76,7 +72,7 @@ export const TabForm = props => {
       .then(response => {
         const contentType = response.headers.get("content-type");
         if (!contentType || !contentType.includes("application/json")) {
-          throw new TypeError("Oops, we haven't got JSON!");
+          throw new TypeError("expected JSON response");
         }
 
         // check for error response
@@ -99,7 +95,6 @@ export const TabForm = props => {
   };
 
   const load = e => {
-    setLoading(true);
     //callOut(uri);
     convertFromURL(e);
   };
@@ -112,7 +107,7 @@ export const TabForm = props => {
       credentials: "omit", // include, *same-origin, omit
       redirect: "follow" // manual, *follow, error
     };
-    const fullURI = new URL(`${Upstream}/deck?deck=${url}`);
+    const fullURI = new URL(`${Upstream}/scryfall?deck=${url}`);
     console.log("calling ", fullURI);
     fetch(fullURI, requestOptions)
       .then(response => {
@@ -137,7 +132,6 @@ export const TabForm = props => {
       })
       .then(json => {
         setDeck(json.Cards);
-        setLoading(false);
         setDeckLoaded(true);
         console.log("Got deck set loaded", json.Cards);
       })
@@ -151,7 +145,7 @@ export const TabForm = props => {
 
   const ttsDownload = event => {
     console.log(util.inspect(TTSDeck));
-    download(TTSDeck, "deck.json", "text/json");
+    download(JSON.stringify(TTSDeck), "deck.json", "text/json");
   };
 
   const GetDeck = () => {
@@ -233,4 +227,4 @@ export const TabForm = props => {
     </Grid>
   );
 };
-export default SplitPane;
+export default Forms;

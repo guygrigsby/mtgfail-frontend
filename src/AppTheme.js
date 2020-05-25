@@ -5,6 +5,7 @@ import blue from "@material-ui/core/colors/blue";
 
 const AppTheme = createMuiTheme({
   palette: {
+    //type: "dark"
     //primary: blue,
     //secondary: green
   },
