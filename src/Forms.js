@@ -53,7 +53,7 @@ const Forms = props => {
     event.preventDefault();
     event.stopPropagation();
     // curl -X POST https://api.mtg.fail -H 'Content-Type: text/plain' --data-binary @deck.txt
-    const fullURI = new URL(`${Upstream}/tts?deck=${uri}`);
+    const fullURI = new URL(`${Upstream}?deck=${uri}`);
     console.log("FullURI", fullURI);
 
     let requestOptions = {
