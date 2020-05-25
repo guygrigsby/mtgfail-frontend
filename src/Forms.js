@@ -202,6 +202,13 @@ const Forms = props => {
         >
           Import
         </Button>
+        {TTSDeck === null ? (
+          <div></div>
+        ) : (
+          <Button variant="contained" color="secondary" onClick={ttsDownload}>
+            Download
+          </Button>
+        )}
       </Grid>
       <Grid item xs={3}>
         {deck === null ? (
@@ -212,15 +219,7 @@ const Forms = props => {
           </Button>
         )}
       </Grid>
-      <Grid item xs={3}>
-        {TTSDeck === null ? (
-          <div></div>
-        ) : (
-          <Button variant="contained" color="secondary" onClick={ttsDownload}>
-            Download
-          </Button>
-        )}
-      </Grid>
+      <Grid item xs={3}></Grid>
       <Grid item xs={12}>
         {GetDeck()}
       </Grid>
