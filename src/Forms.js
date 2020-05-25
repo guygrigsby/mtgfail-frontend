@@ -16,7 +16,7 @@ import util from "util";
 
 const download = require("./Download.js");
 
-const TabForm = props => {
+const Forms = props => {
   const [index, setIndex] = useState(0);
   const [deckText, setDeckText] = useState("");
   const [uri, setURI] = useState("");
@@ -232,4 +232,4 @@ const TabForm = props => {
     </Grid>
   );
 };
-export default TabForm;
+export default Forms;

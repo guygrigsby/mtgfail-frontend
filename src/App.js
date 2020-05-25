@@ -11,7 +11,7 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import { Layout, Panel, NavDrawer } from "react-toolbox/lib/layout";
 import Link from "react-toolbox/lib/link";
 import GithubIcon from "./NavBar";
-import TabForm from "./form";
+import Forms from "./Forms";
 import TestData from "./Data.js";
 import TTSDeck from "./TTSDeck.js";
 import TappedOut from "./Translate.js";
@@ -82,7 +82,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Page hero={<Hero msg="Welcome" />} tabs={<TabForm />} />
+      <Page hero={<Hero msg="Welcome" />} tabs={<Forms />} />
     </ThemeProvider>
   );
 }
