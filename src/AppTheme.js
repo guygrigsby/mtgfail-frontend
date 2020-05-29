@@ -10,7 +10,7 @@ const AppTheme = createMuiTheme({
     //secondary: green
   },
   status: {
-    danger: "orange"
+		    danger: "orange"
   }
 });
 
