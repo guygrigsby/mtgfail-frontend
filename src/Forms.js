@@ -95,7 +95,7 @@ const Forms = props => {
   };
 
   const load = e => {
-    //callOut(uri);
+    callOut(uri);
     convertFromURL(e);
   };
 
@@ -181,21 +181,7 @@ const Forms = props => {
           onChange={event => setURI(event.target.value.trim())}
         />
       </Grid>
-      <Grid item xs={6}>
-        <TextField
-          type="text"
-          label="Deck List"
-          name="decklist"
-          onChange={event => setDeckText(event.target.value)}
-          multiline
-          variant="outlined"
-          rows={5}
-          fullWidth
-          disabled
-          color="secondary"
-          placeholde="Out of Order"
-        />
-      </Grid>
+      <Grid item xs={6}></Grid>
       <Grid item xs={6}>
         <Button
           id="URLimport"
@@ -213,16 +199,8 @@ const Forms = props => {
           </Button>
         )}
       </Grid>
-      <Grid item xs={3}>
-        {deck === null ? (
-          <div></div>
-        ) : (
-          <Button variant="contained" color="primary" onClick={convert}>
-            Convert
-          </Button>
-        )}
-      </Grid>
-      <Grid item xs={3}></Grid>
+
+      <Grid item xs={6}></Grid>
       <Grid item xs={12}>
         {GetDeck()}
       </Grid>

@@ -4,11 +4,14 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 import MenuIcon from "@material-ui/icons/Menu";
 import Switch from "@material-ui/core/Switch";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import GithubIcon from "./NavBar";
+import Icon from "@material-ui/core/Icon";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -59,18 +62,41 @@ export default function MenuAppBar() {
               anchorEl={anchorEl}
               anchorOrigin={{
                 vertical: "top",
-                horizontal: "right"
+                horizontal: "left"
               }}
               keepMounted
               transformOrigin={{
                 vertical: "top",
-                horizontal: "right"
+                horizontal: "left"
               }}
               open={open}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Placeholder</MenuItem>
-              <MenuItem onClick={handleClose}>Placeholder</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  window.open("https://www.patreon.com/guygrigsby", "_blank");
+                }}
+              >
+                <ListItemIcon>
+                  <Icon>payment</Icon>
+                </ListItemIcon>
+                <ListItemText primary="Donate" />
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  window.open(
+                    "https://github.com/guygrigsby/mtgfail-frontend/issues",
+                    "_blank"
+                  );
+                }}
+              >
+                <ListItemIcon>
+                  <GithubIcon />
+                </ListItemIcon>
+                <ListItemText primary="Feature/Bug Report" />
+              </MenuItem>
             </Menu>
           </div>
           <Typography variant="h6" className={classes.title}>

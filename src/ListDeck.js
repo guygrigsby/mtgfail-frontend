@@ -19,7 +19,7 @@ const CardModel = {
   Cost: { type: String },
   Image: { type: String },
   Colors: { type: [String] },
-  Text: { type: String},
+  Text: { type: String }
 };
 class ListDeck extends Component {
   state = {
@@ -53,13 +53,13 @@ class ListDeck extends Component {
         <Table size="small">
           <TableHead>
             <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Cost</TableCell>
-                <TableCell>CMC</TableCell>
-                <TableCell>Rarity</TableCell>
-                <TableCell>Set</TableCell>
-                <TableCell>Colors</TableCell>
-                <TableCell>Text</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Cost</TableCell>
+              <TableCell>CMC</TableCell>
+              <TableCell>Rarity</TableCell>
+              <TableCell>Set</TableCell>
+              <TableCell>Colors</TableCell>
+              <TableCell>Text</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
