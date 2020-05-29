@@ -84,7 +84,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <Page
         hero={
-          <Hero msg="Double sides cards are making problems right now. Working on a fix." />
+		<Hero msg='Double sided cards have been fixed (I think) Please report bugs here <a href=\"https://github.com/guygrigsby/mtgfail-frontend/issues\" />' />
         }
         tabs={<Forms />}
       />
