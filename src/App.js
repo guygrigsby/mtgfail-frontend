@@ -5,7 +5,6 @@ import ReactDOM from "react-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { hot } from "react-hot-loader";
 import { instanceOf } from "prop-types";
-import cookie from "react-cookies";
 import Forms from "./Forms";
 import Alert from "@material-ui/lab/Alert";
 import TestData from "./Data.js";
@@ -20,6 +19,7 @@ import Grid from "@material-ui/core/Grid";
 import SimpleTabs from "./Tabs.js";
 import TestDeck from "./TestData.json";
 import EnhancedTable from "./EnhancedTable.js";
+import SimpleStorage from "react-simple-storage";
 
 import motd, { haveMODT } from "./motd";
 
@@ -39,20 +39,41 @@ class App extends Component {
       TTSDeck: null
     };
   }
-  //componentWillMount() {
-  //  this.setState(() => {
-  //    {
-  //      deck: cookie.load("deck");
-  //    }
-  //  });
-  //}
+
+  deleteAll = () => this.setDeck(null);
+
+  saveLocal(key, thing) {
+    localStorage.setItem(key, JSON.stringify(thing));
+  }
+  getLocal(key) {
+    return JSON.parse(localStorage.getItem(key));
+  }
+
   setDeck = d => {
     const deck = d;
     this.setState(() => {
-      //cookie.save("deck", deck, { path: "/" });
+      if (deck === null) {
+        localStorage.clear();
+        return { deck: null };
+      }
+
+      this.saveLocal("deck", deck);
+      console.log("setting state", JSON.stringify(deck.Cards));
       return { deck };
     });
   };
+  componentDidMount() {
+    const deck = this.getLocal("deck");
+
+    if (deck !== null) {
+      this.setDeck(deck);
+    }
+  }
+
+  deckLoaded = () => {
+    return this.state.deck !== null;
+  };
+
   setError = error => {
     this.setState(() => ({ error }));
   };
@@ -177,6 +198,7 @@ class App extends Component {
       },
       { key: "tab2", Name: "Build", Content: null, Enabled: () => true }
     ];
+    console.log("deck loaded", this.deckLoaded());
     return (
       <>
         <CssBaseline />
@@ -202,7 +224,9 @@ class App extends Component {
               </Grid>
             </Grid>
             <Grid item lg={12}>
-              {this.state.deck && <EnhancedTable rows={this.state.deck} />}
+              {this.deckLoaded() && (
+                <EnhancedTable clear={this.deleteAll} rows={this.state.deck} />
+              )}
             </Grid>
           </Container>
         </div>

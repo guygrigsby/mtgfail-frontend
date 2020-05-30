@@ -138,7 +138,7 @@ const useToolbarStyles = makeStyles(theme => ({
 
 const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
-  const { numSelected } = props;
+  const { numSelected, clear } = props;
 
   return (
     <Toolbar
@@ -166,19 +166,11 @@ const EnhancedTableToolbar = props => {
         </Typography>
       )}
 
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton aria-label="delete">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton aria-label="filter list">
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )}
+      <Tooltip title="Delete">
+        <IconButton aria-label="delete" onClick={() => clear(numSelected)}>
+          <DeleteIcon />
+        </IconButton>
+      </Tooltip>
     </Toolbar>
   );
 };
@@ -211,13 +203,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function EnhancedTable(props) {
+export default function EnhancedTable({ rows, clear, ...o }) {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("name");
   const [selected, setSelected] = React.useState([]);
 
-  const rows = props.rows;
   console.log("Rows in EnhancedTable", rows);
 
   const handleRequestSort = (event, property) => {
@@ -273,7 +264,7 @@ export default function EnhancedTable(props) {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar clear={clear} numSelected={selected.length} />
         <TableContainer>
           <Table
             className={classes.table}

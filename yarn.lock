@@ -11761,6 +11761,13 @@ react-redux@^7.2.0:
     prop-types "^15.7.2"
     react-is "^16.9.0"
 
+react-simple-storage@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/react-simple-storage/-/react-simple-storage-1.4.2.tgz#d058b099e99f00daa46f0828fbcb5c410badd4f4"
+  integrity sha512-g6PlWVTBDVr57rRACg03I0joFfmvKapC3nv8WGzMAIU5NAoiKzRH5NF7TehgM8eBx3ebUMsyvYSQdxL4V02V0Q==
+  dependencies:
+    store "^2.0.12"
+
 react-style-proptype@^3.0.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/react-style-proptype/-/react-style-proptype-3.2.2.tgz#d8e998e62ce79ec35b087252b90f19f1c33968a0"
@@ -13047,6 +13054,11 @@ stdout-stream@^1.4.0:
   integrity sha512-j4emi03KXqJWcIeF8eIXkjMFN1Cmb8gUlDYGeBALLPo5qdyTfA9bOtl8m33lRoC+vFMkP3gl0WsDr6+gzxbbTA==
   dependencies:
     readable-stream "^2.0.1"
+
+store@^2.0.12:
+  version "2.0.12"
+  resolved "https://registry.yarnpkg.com/store/-/store-2.0.12.tgz#8c534e2a0b831f72b75fc5f1119857c44ef5d593"
+  integrity sha1-jFNOKguDH3K3X8XxEZhXxE711ZM=
 
 stream-browserify@^2.0.1:
   version "2.0.2"
