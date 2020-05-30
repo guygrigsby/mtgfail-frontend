@@ -139,11 +139,13 @@ class App extends Component {
       {
         key: "tab1",
         Name: "Import",
+        Enabled: () => true,
         Content: <Forms setDeckURL={this.load} />
       },
       {
         key: "tab2",
         Name: "Export",
+        Enabled: () => (this.state.TTSDeck === null ? false : ""),
         Content: (
           <div>
             {this.state.TTSDeck === null ? (
@@ -160,7 +162,7 @@ class App extends Component {
           </div>
         )
       },
-      { key: "tab2", Name: "Build", Content: null }
+      { key: "tab2", Name: "Build", Content: null, Enabled: () => true }
     ];
     console.log(this.state);
     return (
@@ -177,17 +179,17 @@ class App extends Component {
               justify="space-between"
               alignItems="flex-end"
             >
-              <Grid item xs={12}>
+              <Grid item lg={12}>
                 {motd}
                 {this.state.error !== null ? (
                   <Alert severity="error">{this.state.error}</Alert>
                 ) : null}
               </Grid>
-              <Grid item xs={12}>
+              <Grid item lg={12}>
                 <SimpleTabs tabs={tabs} />
               </Grid>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item lg={12}>
               {this.state.deck === null ? (
                 <div></div>
               ) : (

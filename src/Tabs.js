@@ -33,14 +33,6 @@ TabPanel.propTypes = {
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired
 };
-
-function a11yProps(index) {
-  return {
-    id: `tab-${index}`,
-    "aria-controls": `tabpanel-${index}`
-  };
-}
-
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -61,7 +53,7 @@ export default function SimpleTabs({ tabs, ...others }) {
       <Toolbar>
         <Tabs value={value} onChange={handleChange} aria-label="tabs">
           {tabs.map((tab, idx) => {
-            return <Tab label={tab.Name} {...a11yProps({ idx })} />;
+            return <Tab label={tab.Name} disabled={/*!tab.Enabled()*/ ""} />;
           })}
         </Tabs>
       </Toolbar>
