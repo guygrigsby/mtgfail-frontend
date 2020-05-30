@@ -58,11 +58,14 @@
     "postcss-safe-parser": "4.0.1",
     "react": "^16.13.1",
     "react-app-polyfill": "^1.0.6",
+    "react-cookie": "^4.0.3",
+    "react-cookies": "^0.1.1",
     "react-css-themr": "^2.1.2",
     "react-dev-utils": "^10.2.1",
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",
     "react-redux": "^7.2.0",
+    "react-simple-storage": "^1.4.2",
     "react-table": "^7.1.0",
     "react-test-renderer": "16.8.4",
     "react-toolbox": "^2.0.0-beta.13",
@@ -85,8 +88,8 @@
     "workbox-webpack-plugin": "4.3.1"
   },
   "scripts": {
-    "start": "MODT_LOCATION='./motd.txt' node --max_old_space_size=40960 scripts/start.js",
-    "build": "node --max_old_space_size=40960 scripts/build.js",
+    "start": "MODT_LOCATION='./motd.txt' node scripts/start.js",
+    "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
   "devDependencies": {
