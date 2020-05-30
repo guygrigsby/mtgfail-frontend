@@ -218,6 +218,7 @@ export default function EnhancedTable(props) {
   const [selected, setSelected] = React.useState([]);
 
   const rows = props.rows;
+  console.log("Rows in EnhancedTable", rows);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -252,7 +253,6 @@ export default function EnhancedTable(props) {
     }
 
     setSelected(newSelected);
-    console.log("index", selectedIndex);
   };
 
   const handleChangePage = (event, newPage) => {

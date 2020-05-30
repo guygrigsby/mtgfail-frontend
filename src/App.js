@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { hot } from "react-hot-loader";
 import { instanceOf } from "prop-types";
-import { withCookies, Cookies } from "react-cookie";
+import cookie from "react-cookies";
 import Forms from "./Forms";
 import Alert from "@material-ui/lab/Alert";
 import TestData from "./Data.js";
@@ -19,7 +19,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import SimpleTabs from "./Tabs.js";
 import TestDeck from "./TestData.json";
-import ListDeck from "./ListDeck.js";
+import EnhancedTable from "./EnhancedTable.js";
 
 import motd, { haveMODT } from "./motd";
 
@@ -31,23 +31,27 @@ export const Upstream =
     : "https://api.mtg.fail";
 
 class App extends Component {
-  static propTypes = {
-    cookies: instanceOf(Cookies).isRequired
-  };
   constructor(props) {
     super(props);
     this.state = {
       deck: null,
-      //deck: props.cookies.get("deck") || null,
       error: null,
       TTSDeck: null
     };
   }
-  setDeck = deck => {
-    //const { cookies } = this.props;
-
-    //cookies.set("deck", deck, { path: "/" });
-    this.setState(() => ({ deck }));
+  //componentWillMount() {
+  //  this.setState(() => {
+  //    {
+  //      deck: cookie.load("deck");
+  //    }
+  //  });
+  //}
+  setDeck = d => {
+    const deck = d;
+    this.setState(() => {
+      //cookie.save("deck", deck, { path: "/" });
+      return { deck };
+    });
   };
   setError = error => {
     this.setState(() => ({ error }));
@@ -100,7 +104,6 @@ class App extends Component {
   };
 
   load = uri => {
-    console.log("URI in App", uri);
     this.callOut(uri);
     this.convertFromURL(uri);
   };
@@ -117,7 +120,6 @@ class App extends Component {
     fetch(fullURI, requestOptions)
       .then(response => {
         const contentType = response.headers.get("content-type");
-        console.log("Content-Type", contentType);
 
         // check for error response
         if (!response.ok) {
@@ -136,7 +138,6 @@ class App extends Component {
         return response.json();
       })
       .then(json => {
-        console.log("Got deck set loaded", json.Cards);
         this.setDeck(json.Cards);
         console.log("Got deck set loaded", json.Cards);
       })
@@ -176,7 +177,6 @@ class App extends Component {
       },
       { key: "tab2", Name: "Build", Content: null, Enabled: () => true }
     ];
-    console.log(this.state);
     return (
       <>
         <CssBaseline />
@@ -202,11 +202,7 @@ class App extends Component {
               </Grid>
             </Grid>
             <Grid item lg={12}>
-              {this.state.deck === null ? (
-                <div></div>
-              ) : (
-                <ListDeck cards={this.state.deck} />
-              )}
+              {this.state.deck && <EnhancedTable rows={this.state.deck} />}
             </Grid>
           </Container>
         </div>
@@ -214,4 +210,4 @@ class App extends Component {
     );
   }
 }
-export default withCookies(App);
+export default App;
