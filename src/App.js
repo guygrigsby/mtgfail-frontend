@@ -2,7 +2,6 @@
 /* eslint-disable */
 import React, { Component, useState } from "react";
 import ReactDOM from "react-dom";
-import { makeStyles } from "@material-ui/core/styles";
 import { hot } from "react-hot-loader";
 import { instanceOf } from "prop-types";
 import Forms from "./Forms";
@@ -10,9 +9,10 @@ import Alert from "@material-ui/lab/Alert";
 import TestData from "./Data.js";
 import TTSDeck from "./TTSDeck.js";
 import Container from "@material-ui/core/Container";
-import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import Button from "./Button.js";
 import Hero from "./Hero.js";
-import CssBaseline from "@material-ui/core/CssBaseline";
+//import CssBaseline from "@material-ui/core/CssBaseline";
 import MenuAppBar from "./MenuAppBar.js";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -20,8 +20,6 @@ import SimpleTabs from "./Tabs.js";
 import TestDeck from "./TestData.json";
 import EnhancedTable from "./EnhancedTable.js";
 import SimpleStorage from "react-simple-storage";
-
-import motd, { haveMODT } from "./motd";
 
 const download = require("./Download.js");
 
@@ -202,11 +200,7 @@ class App extends Component {
             {this.state.deck === null ? (
               <div></div>
             ) : (
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={this.ttsDownload}
-              >
+              <Button variant="contained" onClick={this.ttsDownload}>
                 TTS Download
               </Button>
             )}
@@ -217,9 +211,8 @@ class App extends Component {
     ];
     return (
       <>
-        <CssBaseline />
         <div className="root">
-          <Container maxWidth="lg">
+          <Container className="sheet" maxWidth="lg">
             <MenuAppBar />
             <Grid
               container
@@ -230,10 +223,11 @@ class App extends Component {
               alignItems="flex-end"
             >
               <Grid item lg={12}>
-                {motd}
                 {this.state.error !== null ? (
-                  <Alert severity="error">{this.state.error.toString()}</Alert>
-                ) : null}
+                  <Hero severity="warning">{`Error: ${this.state.error.toString()}`}</Hero>
+                ) : (
+                  <Hero severity="info">Welcome, failures...</Hero>
+                )}
               </Grid>
               <Grid item lg={12}>
                 <SimpleTabs tabs={tabs} />
