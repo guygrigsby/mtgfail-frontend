@@ -47,12 +47,12 @@ function stableSort(array, comparator) {
   return stabilizedThis.map(el => el[0]);
 }
 const headCells = [
-  { id: "name", numeric: false, disablePadding: true, label: "Name" },
-  { id: "cost", numeric: false, disablePadding: false, label: "Cost" },
-  { id: "cmc", numeric: true, disablePadding: false, label: "CMC" },
-  { id: "rarity", numeric: false, disablePadding: false, label: "Rarity" },
-  { id: "set", numeric: false, disablePadding: false, label: "Set" },
-  { id: "Text", numeric: false, disablePadding: false, label: "Text" }
+  { id: "Name", numeric: false, disablePadding: true, label: "Name" },
+  //{ id: "Image", numeric: false, disablePadding: true, label: "Type" },
+  { id: "Cost", numeric: false, disablePadding: false, label: "Cost" },
+  { id: "Cmc", numeric: true, disablePadding: false, label: "CMC" },
+  { id: "Rarity", numeric: false, disablePadding: false, label: "Rarity" },
+  { id: "Set", numeric: false, disablePadding: false, label: "Set" }
 ];
 
 function EnhancedTableHead(props) {
@@ -214,11 +214,9 @@ const useStyles = makeStyles(theme => ({
 export default function EnhancedTable(props) {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("calories");
+  const [orderBy, setOrderBy] = React.useState("name");
   const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
   const rows = props.rows;
 
   const handleRequestSort = (event, property) => {
@@ -272,9 +270,6 @@ export default function EnhancedTable(props) {
 
   const isSelected = name => selected.indexOf(name) !== -1;
 
-  const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -283,7 +278,7 @@ export default function EnhancedTable(props) {
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
+            size="small"
             aria-label="enhanced table"
           >
             <EnhancedTableHead
@@ -296,66 +291,49 @@ export default function EnhancedTable(props) {
               rowCount={rows.length}
             />
             <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
+              {stableSort(rows, getComparator(order, orderBy)).map(
+                (row, index) => {
                   const isItemSelected = isSelected(row.Name);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow
-                      hover
-                      onClick={event => handleClick(event, row.Name)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.Name}
-                      selected={isItemSelected}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          checked={isItemSelected}
-                          inputProps={{ "aria-labelledby": labelId }}
-                        />
-                      </TableCell>
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
+                    <Tooltip title={row.Text}>
+                      <TableRow
+                        hover
+                        onClick={event => handleClick(event, row.Name)}
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={row.Name}
+                        selected={isItemSelected}
                       >
-                        {row.Name}
-                      </TableCell>
-                      <TableCell align="right">{row.Cost}</TableCell>
-                      <TableCell align="right">{row.Cmc}</TableCell>
-                      <TableCell align="right">{row.Rarity}</TableCell>
-                      <TableCell align="right">{row.Set}</TableCell>
-                      <TableCell align="right">{row.Text}</TableCell>
-                    </TableRow>
+                        <TableCell padding="checkbox">
+                          <Checkbox
+                            checked={isItemSelected}
+                            inputProps={{ "aria-labelledby": labelId }}
+                          />
+                        </TableCell>
+                        <TableCell
+                          component="th"
+                          id={labelId}
+                          scope="row"
+                          padding="none"
+                        >
+                          {row.Name}
+                        </TableCell>
+                        <TableCell align="left">{row.Cost}</TableCell>
+                        <TableCell align="right">{row.Cmc}</TableCell>
+                        <TableCell align="left">{row.Rarity}</TableCell>
+                        <TableCell align="left">{row.Set}</TableCell>
+                      </TableRow>
+                    </Tooltip>
                   );
-                })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
+                }
               )}
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
     </div>
   );
 }
