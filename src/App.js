@@ -184,30 +184,6 @@ class App extends Component {
         this.setError(error);
       });
   };
-<<<<<<< HEAD
-  const useStyles = makeStyles(theme => ({
-    root: {
-      "& > * + *": {
-        marginLeft: theme.spacing(2)
-      }
-    }
-  }));
-  const classes = useStyles(theme);
-
-  const hero = (
-    <Typography className={classes.root}>
-      Double sided cards have been fixed (I think)
-      <Link
-        href=" https://github.com/guygrigsby/mtgfail-frontend/issues"
-        target="_blank"
-        rel="noreferrer"
-      >
-        Please report bugs here.
-      </Link>
-    </Typography>
-  );
-
-
 
   render() {
     const tabs = [
