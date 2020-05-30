@@ -7,6 +7,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import EnhancedTable from "./EnhancedTable.js";
 
 import Card from "./Card.js";
 import ParseDeck from "./Deck.js";
@@ -41,34 +42,7 @@ class ListDeck extends Component {
   };
 
   render() {
-    return (
-      <TableContainer className="table" component={Paper}>
-        <Table size="small">
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Cost</TableCell>
-              <TableCell>CMC</TableCell>
-              <TableCell>Rarity</TableCell>
-              <TableCell>Set</TableCell>
-              <TableCell>Text</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {this.state.cards.map((item, idx) => (
-              <TableRow key={idx} selected={this.state.selected[idx]}>
-                <TableCell>{item.Name}</TableCell>
-                <TableCell>{item.Cost}</TableCell>
-                <TableCell>{item.Cmc}</TableCell>
-                <TableCell>{item.Rarity}</TableCell>
-                <TableCell>{item.Set}</TableCell>
-                <TableCell>{item.Text}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
+    return <EnhancedTable rows={this.state.cards} />;
   }
 }
 export default ListDeck;
