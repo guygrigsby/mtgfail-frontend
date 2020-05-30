@@ -4,38 +4,89 @@ import React, { Component, useState } from "react";
 import ReactDOM from "react-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { hot } from "react-hot-loader";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import { Layout, Panel, NavDrawer } from "react-toolbox/lib/layout";
-import Link from "react-toolbox/lib/link";
-import GithubIcon from "./NavBar";
+import { instanceOf } from "prop-types";
 import Forms from "./Forms";
+import Alert from "@material-ui/lab/Alert";
 import TestData from "./Data.js";
 import TTSDeck from "./TTSDeck.js";
-import TappedOut from "./Translate.js";
-import Display from "./Display.js";
-import Page from "./Page.js";
+import Container from "@material-ui/core/Container";
+import Button from "@material-ui/core/Button";
 import Hero from "./Hero.js";
-import FileSaver from "file-saver";
-import Typography from "@material-ui/core/Typography";
-import { ThemeProvider } from "@material-ui/core/styles";
-import theme from "./AppTheme.js";
 
-const download = payload => {
-  FileSaver.saveAs(payload, "deck.json");
-};
+import CssBaseline from "@material-ui/core/CssBaseline";
+import MenuAppBar from "./MenuAppBar.js";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import SimpleTabs from "./Tabs.js";
+import TestDeck from "./TestData.json";
+import EnhancedTable from "./EnhancedTable.js";
+import SimpleStorage from "react-simple-storage";
+
+import motd, { haveMODT } from "./motd";
+
+const download = require("./Download.js");
+
 export const Upstream =
   process.env.NODE_ENV === "development"
     ? "http://localhost:8080"
     : "https://api.mtg.fail";
-export default function App() {
-  const handleListSubmit = event => {
-    // curl -X POST https://api.mtg.fail -H 'Content-Type: text/plain' --data-binary @deck.txt
-    const b = this.state.deck;
-    let url = new URL(Upstream);
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      deck: null,
+      error: null
+    };
+  }
+
+  deleteAll = () => this.setDeck(null);
+
+  saveLocal(key, thing) {
+    localStorage.setItem(key, JSON.stringify(thing));
+  }
+  getLocal(key) {
+    return JSON.parse(localStorage.getItem(key));
+  }
+
+  setDeck = d => {
+    const deck = d;
+    this.setState(() => {
+      if (deck === undefined) {
+        return;
+      }
+      if (deck === null) {
+        localStorage.clear();
+        return { deck: null };
+      }
+
+      this.saveLocal("deck", deck);
+      return { deck };
+    });
+  };
+  componentDidMount() {
+    const deck = this.getLocal("deck");
+
+    if (deck !== null) {
+      this.setDeck(deck);
+    }
+  }
+
+  deckLoaded = () => {
+    return this.state.deck !== null;
+  };
+
+  setError = error => {
+    this.setState(() => ({ error }));
+  };
+
+  ttsDownload = event => {
+    this.convertFromDeck(this.state.deck);
+  };
+  convertFromDeck = deck => {
+    const fullURI = new URL(`${Upstream}/tts`);
+
+    const body = JSON.stringify({ Cards: this.state.deck });
 
     let requestOptions = {
       method: "POST",
@@ -43,42 +94,95 @@ export default function App() {
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       credentials: "omit", // include, *same-origin, omit
       redirect: "follow", // manual, *follow, error
-      headers: {
-        "Content-Type": "text/plain",
-        "Content-Length": b.length.toString()
-      },
-      body: b
+      body: body,
+      headers: new Headers({
+        "Content-Type": "application/json"
+      })
     };
 
-    this.callAPI(url, requestOptions);
+    return this.callConvertAPI(fullURI, requestOptions);
+  };
+  convertFromURL = uri => {
+    // curl -X POST https://api.mtg.fail -H 'Content-Type: text/plain' --data-binary @deck.txt
+    const fullURI = new URL(`${Upstream}/tts?deck=${uri}`);
+
+    let requestOptions = {
+      method: "GET",
+      mode: "cors", // no-cors, *cors, same-origin
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: "omit", // include, *same-origin, omit
+      redirect: "follow" // manual, *follow, error
+    };
+
+    return this.callConvertAPI(fullURI, requestOptions);
   };
 
-  const callAPI = (url, requestOptions) => {
-    fetch(url, requestOptions)
-      .then(async response => {
-        const contentType = response.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-          throw new TypeError("Oops, we haven't got JSON!");
+  callConvertAPI = (url, requestOptions) => {
+    return fetch(url, requestOptions)
+      .then(response => {
+        // check for error response
+        if (!response.ok) {
+          // get error message from body or default to response status
+          const error = `Unexpected response: ${response.status}: ${response.statusText}`;
+          console.error("error", error, "status", response.status);
+          return Promise.reject(error);
         }
+        const contentType = response.headers.get("Content-Type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new TypeError("expected JSON response");
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log("setting tts deck", data);
+        download(JSON.stringify(data), "deck.json", "text/json");
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        this.setError(error);
+        console.error("Error:", error);
+      });
+  };
+
+  load = uri => {
+    this.callOut(uri);
+  };
+
+  callOut = url => {
+    const requestOptions = {
+      method: "GET",
+      mode: "cors", // no-cors, *cors, same-origin
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: "omit", // include, *same-origin, omit
+      redirect: "follow" // manual, *follow, error
+    };
+    const fullURI = new URL(`${Upstream}/scryfall?deck=${url}`);
+    fetch(fullURI, requestOptions)
+      .then(response => {
+        const contentType = response.headers.get("content-type");
 
         // check for error response
         if (!response.ok) {
           // get error message from body or default to response status
           const error = response.status;
-          console.error("error", error, "status", response.status);
+          console.error(
+            "response",
+            response,
+            "error",
+            error,
+            "status",
+            response.status
+          );
           return Promise.reject(error);
         }
-        return await response.json();
+        return response.json();
       })
-      .then(data => {
-        this.setState({ convertedDeck: data });
-        this.setState({ converted: true });
-        console.log(data);
+      .then(json => {
+        this.setDeck(json.Cards);
       })
       .catch(error => {
-        this.setState({ errorMessage: error.message });
-        this.setState({ isError: true });
         console.error("Error:", error.message);
+        this.setError(error);
       });
   };
   const useStyles = makeStyles(theme => ({
@@ -104,8 +208,71 @@ export default function App() {
   );
 
   return (
-    <ThemeProvider theme={theme}>
       <Page hero=<Hero msg={hero} /> tabs={<Forms />} />
-    </ThemeProvider>
   );
+  render() {
+    const tabs = [
+      {
+        key: "tab1",
+        Name: "Import",
+        Enabled: () => true,
+        Content: <Forms setDeckURL={this.load} />
+      },
+      {
+        key: "tab2",
+        Name: "Export",
+        Enabled: () => (this.state.deck === null ? false : ""),
+        Content: (
+          <div>
+            {this.state.deck === null ? (
+              <div></div>
+            ) : (
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={this.ttsDownload}
+              >
+                TTS Download
+              </Button>
+            )}
+          </div>
+        )
+      },
+      { key: "tab2", Name: "Build", Content: null, Enabled: () => true }
+    ];
+    return (
+      <>
+        <CssBaseline />
+        <div className="root">
+          <Container maxWidth="lg">
+            <MenuAppBar />
+            <Grid
+              container
+              spacing={3}
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="flex-end"
+            >
+              <Grid item lg={12}>
+                {motd}
+                {this.state.error !== null ? (
+                  <Alert severity="error">{this.state.error.toString()}</Alert>
+                ) : null}
+              </Grid>
+              <Grid item lg={12}>
+                <SimpleTabs tabs={tabs} />
+              </Grid>
+            </Grid>
+            <Grid item lg={12}>
+              {this.deckLoaded() && (
+                <EnhancedTable clear={this.deleteAll} rows={this.state.deck} />
+              )}
+            </Grid>
+          </Container>
+        </div>
+      </>
+    );
+  }
 }
+export default App;
