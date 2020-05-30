@@ -37,15 +37,16 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deck: props.cookies.get("deck") || null,
+      deck: null,
+      //deck: props.cookies.get("deck") || null,
       error: null,
       TTSDeck: null
     };
   }
   setDeck = deck => {
-    const { cookies } = this.props;
+    //const { cookies } = this.props;
 
-    cookies.set("deck", deck, { path: "/" });
+    //cookies.set("deck", deck, { path: "/" });
     this.setState(() => ({ deck }));
   };
   setError = error => {
