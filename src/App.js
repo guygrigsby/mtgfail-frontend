@@ -35,8 +35,7 @@ class App extends Component {
     super(props);
     this.state = {
       deck: null,
-      error: null,
-      TTSDeck: null
+      error: null
     };
   }
 
@@ -52,13 +51,15 @@ class App extends Component {
   setDeck = d => {
     const deck = d;
     this.setState(() => {
+      if (deck === undefined) {
+        return;
+      }
       if (deck === null) {
         localStorage.clear();
         return { deck: null };
       }
 
       this.saveLocal("deck", deck);
-      console.log("setting state", JSON.stringify(deck.Cards));
       return { deck };
     });
   };
@@ -77,12 +78,28 @@ class App extends Component {
   setError = error => {
     this.setState(() => ({ error }));
   };
-  setTTSDeck = TTSdeck => {
-    this.setState(() => ({ TTSDeck }));
-  };
 
   ttsDownload = event => {
-    download(JSON.stringify(TTSDeck), "deck.json", "text/json");
+    this.convertFromDeck(this.state.deck);
+  };
+  convertFromDeck = deck => {
+    const fullURI = new URL(`${Upstream}/tts`);
+
+    const body = JSON.stringify({ Cards: this.state.deck });
+
+    let requestOptions = {
+      method: "POST",
+      mode: "cors", // no-cors, *cors, same-origin
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: "omit", // include, *same-origin, omit
+      redirect: "follow", // manual, *follow, error
+      body: body,
+      headers: new Headers({
+        "Content-Type": "application/json"
+      })
+    };
+
+    return this.callConvertAPI(fullURI, requestOptions);
   };
   convertFromURL = uri => {
     // curl -X POST https://api.mtg.fail -H 'Content-Type: text/plain' --data-binary @deck.txt
@@ -96,11 +113,11 @@ class App extends Component {
       redirect: "follow" // manual, *follow, error
     };
 
-    this.callConvertAPI(fullURI, requestOptions);
+    return this.callConvertAPI(fullURI, requestOptions);
   };
 
   callConvertAPI = (url, requestOptions) => {
-    fetch(url, requestOptions)
+    return fetch(url, requestOptions)
       .then(response => {
         // check for error response
         if (!response.ok) {
@@ -109,16 +126,18 @@ class App extends Component {
           console.error("error", error, "status", response.status);
           return Promise.reject(error);
         }
-        const contentType = response.headers.get("content-type");
+        const contentType = response.headers.get("Content-Type");
         if (!contentType || !contentType.includes("application/json")) {
           throw new TypeError("expected JSON response");
         }
         return response.json();
       })
       .then(data => {
-        this.setTTSDeck(data);
+        console.log("setting tts deck", data);
+        download(JSON.stringify(data), "deck.json", "text/json");
       })
       .catch(error => {
+        console.error("Error:", error);
         this.setError(error);
         console.error("Error:", error);
       });
@@ -126,7 +145,6 @@ class App extends Component {
 
   load = uri => {
     this.callOut(uri);
-    this.convertFromURL(uri);
   };
 
   callOut = url => {
@@ -160,11 +178,10 @@ class App extends Component {
       })
       .then(json => {
         this.setDeck(json.Cards);
-        console.log("Got deck set loaded", json.Cards);
       })
       .catch(error => {
         console.error("Error:", error.message);
-        this.setError(error.message);
+        this.setError(error);
       });
   };
 
@@ -179,10 +196,10 @@ class App extends Component {
       {
         key: "tab2",
         Name: "Export",
-        Enabled: () => (this.state.TTSDeck === null ? false : ""),
+        Enabled: () => (this.state.deck === null ? false : ""),
         Content: (
           <div>
-            {this.state.TTSDeck === null ? (
+            {this.state.deck === null ? (
               <div></div>
             ) : (
               <Button
@@ -198,7 +215,6 @@ class App extends Component {
       },
       { key: "tab2", Name: "Build", Content: null, Enabled: () => true }
     ];
-    console.log("deck loaded", this.deckLoaded());
     return (
       <>
         <CssBaseline />
@@ -216,7 +232,7 @@ class App extends Component {
               <Grid item lg={12}>
                 {motd}
                 {this.state.error !== null ? (
-                  <Alert severity="error">{this.state.error}</Alert>
+                  <Alert severity="error">{this.state.error.toString()}</Alert>
                 ) : null}
               </Grid>
               <Grid item lg={12}>

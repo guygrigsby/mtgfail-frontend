@@ -19,7 +19,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
-import FilterListIcon from "@material-ui/icons/FilterList";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -167,7 +166,7 @@ const EnhancedTableToolbar = props => {
       )}
 
       <Tooltip title="Delete">
-        <IconButton aria-label="delete" onClick={() => clear(numSelected)}>
+        <IconButton aria-label="delete" onClick={() => clear()}>
           <DeleteIcon />
         </IconButton>
       </Tooltip>
@@ -208,8 +207,6 @@ export default function EnhancedTable({ rows, clear, ...o }) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("name");
   const [selected, setSelected] = React.useState([]);
-
-  console.log("Rows in EnhancedTable", rows);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
