@@ -71,7 +71,7 @@ export default function App() {
   return (
     <>
       <CssBaseline />
-      <Page Hero msg={motd} tabs={<Forms />} />
+      <Page Hero msg={motd} tabs={[<Forms />]} />
     </>
   );
 }

@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
+import SimpleTabs from "./Tabs.js";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,18 +22,24 @@ export default function Page(props) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <MenuAppBar />
-      <Grid
-        container
-        spacing={3}
-        container
-        direction="row"
-        justify="space-between"
-        alignItems="flex-end"
-      >
-        {props.hero}
-      </Grid>
-      <Container maxWidth="lg">{props.tabs}</Container>
+      <Container maxWidth="lg">
+        <MenuAppBar />
+        <Grid
+          container
+          spacing={3}
+          container
+          direction="row"
+          justify="space-between"
+          alignItems="flex-end"
+        >
+          <Grid item xs={12}>
+            {props.hero}
+          </Grid>
+          <Grid item xs={12}>
+            <SimpleTabs tabs={props.tabs} />
+          </Grid>
+        </Grid>
+      </Container>
     </div>
   );
 }

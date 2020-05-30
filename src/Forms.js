@@ -27,29 +27,6 @@ const Forms = props => {
   const [TTSDeck, setTTSDeck] = useState(null);
   const [value, setValue] = React.useState(0);
 
-  const convert = event => {
-    console.log(deckText);
-    event.preventDefault();
-    event.stopPropagation();
-    // curl -X POST https://api.mtg.fail -H 'Content-Type: text/plain' --data-binary @deck.txt
-    let url = new URL(Upstream);
-
-    let requestOptions = {
-      method: "POST",
-      mode: "cors", // no-cors, *cors, same-origin
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "omit", // include, *same-origin, omit
-      redirect: "follow", // manual, *follow, error
-      headers: {
-        "Content-Type": "text/plain",
-        "Content-Length": deckText.length.toString()
-      },
-      body: deckText
-    };
-
-    callConvertAPI(url, requestOptions);
-  };
-
   const convertFromURL = event => {
     event.preventDefault();
     event.stopPropagation();
@@ -159,51 +136,53 @@ const Forms = props => {
   };
 
   return (
-    <Grid
-      container
-      spacing={3}
-      container
-      direction="row"
-      justify="space-between"
-      alignItems="flex-end"
-    >
-      <Grid item xs={12}>
-        {error !== null ? <Alert severity="error">{error}</Alert> : null}
-      </Grid>
-      <Grid item xs={6}>
-        <TextField
-          id="standard-basic"
-          type="text"
-          label="Deck URI"
-          name="deckuri"
-          variant="outlined"
-          fullWidth
-          onChange={event => setURI(event.target.value.trim())}
-        />
-      </Grid>
-      <Grid item xs={6}></Grid>
-      <Grid item xs={6}>
-        <Button
-          id="URLimport"
-          variant="contained"
-          color="primary"
-          onClick={load}
-        >
-          Import
-        </Button>
-        {TTSDeck === null ? (
-          <div></div>
-        ) : (
-          <Button variant="contained" color="secondary" onClick={ttsDownload}>
-            Download
+    <>
+      <Grid
+        container
+        spacing={3}
+        container
+        direction="row"
+        justify="space-between"
+        alignItems="flex-end"
+      >
+        <Grid item xs={12}>
+          {error !== null ? <Alert severity="error">{error}</Alert> : null}
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            id="standard-basic"
+            type="text"
+            label="Deck URI"
+            name="deckuri"
+            variant="outlined"
+            fullWidth
+            onChange={event => setURI(event.target.value.trim())}
+          />
+        </Grid>
+        <Grid item xs={6}></Grid>
+        <Grid item xs={6}>
+          <Button
+            id="URLimport"
+            variant="contained"
+            color="primary"
+            onClick={load}
+          >
+            Import
           </Button>
-        )}
+          {TTSDeck === null ? (
+            <div></div>
+          ) : (
+            <Button variant="contained" color="secondary" onClick={ttsDownload}>
+              Download
+            </Button>
+          )}
+        </Grid>
+        <Grid></Grid>
+        <Grid item xs={12}>
+          {GetDeck()}
+        </Grid>
       </Grid>
-      <Grid></Grid>
-      <Grid item xs={12}>
-        {GetDeck()}
-      </Grid>
-    </Grid>
+    </>
   );
 };
 export default Forms;
