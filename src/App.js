@@ -4,6 +4,8 @@ import React, { Component, useState } from "react";
 import ReactDOM from "react-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { hot } from "react-hot-loader";
+import { instanceOf } from "prop-types";
+import { withCookies, Cookies } from "react-cookie";
 import Forms from "./Forms";
 import Alert from "@material-ui/lab/Alert";
 import TestData from "./Data.js";
@@ -29,19 +31,28 @@ export const Upstream =
     : "https://api.mtg.fail";
 
 class App extends Component {
-  state = {
-    deck: null,
-    error: null,
-    TTSDeck: null
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      deck: props.cookies.get("deck") || null,
+      error: null,
+      TTSDeck: null
+    };
+  }
   setDeck = deck => {
-    this.setState(() => ({ deck: deck }));
+    const { cookies } = this.props;
+
+    cookies.set("deck", deck, { path: "/" });
+    this.setState(() => ({ deck }));
   };
-  setError = errr => {
-    this.setState(() => ({ error: error }));
+  setError = error => {
+    this.setState(() => ({ error }));
   };
-  setTTSDeck = deck => {
-    this.setState(() => ({ TTSDeck: deck }));
+  setTTSDeck = TTSdeck => {
+    this.setState(() => ({ TTSDeck }));
   };
 
   ttsDownload = event => {
@@ -202,4 +213,4 @@ class App extends Component {
     );
   }
 }
-export default App;
+export default withCookies(App);

@@ -19,11 +19,7 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box p={3}>{children}</Box>}
     </div>
   );
 }
@@ -53,7 +49,7 @@ export default function SimpleTabs({ tabs, ...others }) {
       <Toolbar>
         <Tabs value={value} onChange={handleChange} aria-label="tabs">
           {tabs.map((tab, idx) => {
-            return <Tab label={tab.Name} disabled={/*!tab.Enabled()*/ ""} />;
+            return <Tab key={idx} label={tab.Name} />;
           })}
         </Tabs>
       </Toolbar>
