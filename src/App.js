@@ -68,10 +68,14 @@ export default function App() {
       });
   };
 
+  const tabs = [
+    { key: "tab1", Name: "Import", Content: <Forms /> },
+    { key: "tab2", Name: "Build", Content: <Forms /> }
+  ];
   return (
     <>
       <CssBaseline />
-      <Page Hero msg={motd} tabs={[<Forms />]} />
+      <Page Hero msg={motd} tabs={tabs} />
     </>
   );
 }

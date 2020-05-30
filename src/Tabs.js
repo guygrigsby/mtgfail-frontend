@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
@@ -35,8 +36,8 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
   return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`
+    id: `tab-${index}`,
+    "aria-controls": `tabpanel-${index}`
   };
 }
 
@@ -50,7 +51,6 @@ const useStyles = makeStyles(theme => ({
 export default function SimpleTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  console.log(props.tabs);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -58,19 +58,19 @@ export default function SimpleTabs(props) {
 
   return (
     <div className={classes.root}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        aria-label="simple tabs example"
-      >
-        {props.tabs.map((tab, idx) => {
-          <Tab label="tab.Name" {...a11yProps({ idx })} />;
-        })}
-      </Tabs>
+      <Toolbar>
+        <Tabs value={value} onChange={handleChange} aria-label="tabs">
+          {props.tabs.map((tab, idx) => {
+            return <Tab label={tab.Name} {...a11yProps({ idx })} />;
+          })}
+        </Tabs>
+      </Toolbar>
       {props.tabs.map((tab, idx) => {
-        <TabPanel value={value} index={0}>
-          {tab}
-        </TabPanel>;
+        return (
+          <TabPanel value={value} index={0}>
+            {tab.Content}
+          </TabPanel>
+        );
       })}
     </div>
   );
