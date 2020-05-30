@@ -12,8 +12,6 @@ const AppTheme = createMuiTheme({
     //primary: blue,
     //secondary: blue
   },
-  status: {
-		    danger: "orange"
   table: {
     minWidth: 650
   }

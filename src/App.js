@@ -12,7 +12,6 @@ import TTSDeck from "./TTSDeck.js";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import Hero from "./Hero.js";
-
 import CssBaseline from "@material-ui/core/CssBaseline";
 import MenuAppBar from "./MenuAppBar.js";
 import Paper from "@material-ui/core/Paper";
@@ -185,6 +184,7 @@ class App extends Component {
         this.setError(error);
       });
   };
+<<<<<<< HEAD
   const useStyles = makeStyles(theme => ({
     root: {
       "& > * + *": {
@@ -207,9 +207,8 @@ class App extends Component {
     </Typography>
   );
 
-  return (
-      <Page hero=<Hero msg={hero} /> tabs={<Forms />} />
-  );
+
+
   render() {
     const tabs = [
       {
