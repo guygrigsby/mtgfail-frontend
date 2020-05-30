@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SimpleTabs(props) {
+export default function SimpleTabs({ tabs, ...others }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -60,14 +60,14 @@ export default function SimpleTabs(props) {
     <div className={classes.root}>
       <Toolbar>
         <Tabs value={value} onChange={handleChange} aria-label="tabs">
-          {props.tabs.map((tab, idx) => {
+          {tabs.map((tab, idx) => {
             return <Tab label={tab.Name} {...a11yProps({ idx })} />;
           })}
         </Tabs>
       </Toolbar>
-      {props.tabs.map((tab, idx) => {
+      {tabs.map((tab, idx) => {
         return (
-          <TabPanel value={value} index={0}>
+          <TabPanel key={idx} value={value} index={idx}>
             {tab.Content}
           </TabPanel>
         );
