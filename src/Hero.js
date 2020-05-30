@@ -23,7 +23,7 @@ const Hero = props => {
       }}
     >
       <div className={classes.root}>
-        <Alert severity="info">{props.msg}</Alert>
+        <Alert severity={props.severity}>{props.msg}</Alert>
       </div>
     </header>
   );

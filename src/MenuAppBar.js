@@ -79,7 +79,7 @@ export default function MenuAppBar() {
                 }}
               >
                 <ListItemIcon>
-                  <Icon>payment</Icon>
+                  <Icon color="secondary">payment</Icon>
                 </ListItemIcon>
                 <ListItemText primary="Donate" />
               </MenuItem>
@@ -93,7 +93,7 @@ export default function MenuAppBar() {
                 }}
               >
                 <ListItemIcon>
-                  <GithubIcon />
+                  <Icon color="secondary">github</Icon>
                 </ListItemIcon>
                 <ListItemText primary="Feature/Bug Report" />
               </MenuItem>

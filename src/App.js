@@ -4,29 +4,15 @@ import React, { Component, useState } from "react";
 import ReactDOM from "react-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { hot } from "react-hot-loader";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import { Layout, Panel, NavDrawer } from "react-toolbox/lib/layout";
-import Link from "react-toolbox/lib/link";
-import GithubIcon from "./NavBar";
 import Forms from "./Forms";
 import TestData from "./Data.js";
 import TTSDeck from "./TTSDeck.js";
-import TappedOut from "./Translate.js";
-import Display from "./Display.js";
 import Page from "./Page.js";
 import Hero from "./Hero.js";
-import FileSaver from "file-saver";
-import Typography from "@material-ui/core/Typography";
-import { ThemeProvider } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "./AppTheme.js";
+import motd, { haveMODT } from "./motd";
 
-const download = payload => {
-  FileSaver.saveAs(payload, "deck.json");
-};
 export const Upstream =
   process.env.NODE_ENV === "development"
     ? "http://localhost:8080"
@@ -81,31 +67,11 @@ export default function App() {
         console.error("Error:", error.message);
       });
   };
-  const useStyles = makeStyles(theme => ({
-    root: {
-      "& > * + *": {
-        marginLeft: theme.spacing(2)
-      }
-    }
-  }));
-  const classes = useStyles(theme);
-
-  const hero = (
-    <Typography className={classes.root}>
-      Double sided cards have been fixed (I think)
-      <Link
-        href=" https://github.com/guygrigsby/mtgfail-frontend/issues"
-        target="_blank"
-        rel="noreferrer"
-      >
-        Please report bugs here.
-      </Link>
-    </Typography>
-  );
 
   return (
-    <ThemeProvider theme={theme}>
-      <Page hero=<Hero msg={hero} /> tabs={<Forms />} />
-    </ThemeProvider>
+    <>
+      <CssBaseline />
+      <Page Hero msg={motd} tabs={<Forms />} />
+    </>
   );
 }

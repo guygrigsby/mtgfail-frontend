@@ -1,16 +1,13 @@
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import purple from "@material-ui/core/colors/purple";
-import green from "@material-ui/core/colors/green";
-import blue from "@material-ui/core/colors/blue";
+import { createMuiTheme } from "@material-ui/core/styles";
 
 const AppTheme = createMuiTheme({
   palette: {
-    //type: "dark"
+    type: "dark"
     //primary: blue,
-    //secondary: green
+    //secondary: blue
   },
-  status: {
-		    danger: "orange"
+  table: {
+    minWidth: 650
   }
 });
 

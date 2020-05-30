@@ -1,6 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.scss";
 import App from "./App";
+import { ThemeProvider } from "@material-ui/core/styles";
+import theme from "./AppTheme.js";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <React.StrictMode>
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  </React.StrictMode>,
+  document.getElementById("root")
+);

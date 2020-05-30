@@ -149,13 +149,13 @@ const Forms = props => {
   };
 
   const GetDeck = () => {
-    //if (process.env.NODE_ENV === "development") {
-    //  return <ListDeck cards={TestDeck.Cards} />;
-    //}
+    if (process.env.NODE_ENV === "development") {
+      return <ListDeck cards={TestDeck.Cards} />;
+    }
     if (deckLoaded) {
       return <ListDeck cards={deck} />;
     }
-    return null;
+    return <div></div>;
   };
 
   return (
@@ -199,8 +199,7 @@ const Forms = props => {
           </Button>
         )}
       </Grid>
-
-      <Grid item xs={6}></Grid>
+      <Grid></Grid>
       <Grid item xs={12}>
         {GetDeck()}
       </Grid>

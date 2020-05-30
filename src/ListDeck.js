@@ -5,9 +5,8 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import { ThemeProvider } from "@material-ui/core/styles";
-import theme from "./ListDeckTheme.js";
 
 import Card from "./Card.js";
 import ParseDeck from "./Deck.js";
@@ -21,6 +20,7 @@ const CardModel = {
   Colors: { type: [String] },
   Text: { type: String }
 };
+
 class ListDeck extends Component {
   state = {
     cards: null,
@@ -28,15 +28,8 @@ class ListDeck extends Component {
   };
 
   static getDerivedStateFromProps(props, state) {
-    let sel;
-    if (state.selected.length === 0) {
-      sel = props.cards.map(() => false);
-    } else {
-      sel = state.selected;
-    }
     return {
-      cards: props.cards,
-      selected: sel
+      cards: props.cards
     };
   }
 
@@ -49,7 +42,7 @@ class ListDeck extends Component {
 
   render() {
     return (
-      <TableContainer component={Paper}>
+      <TableContainer className="table" component={Paper}>
         <Table size="small">
           <TableHead>
             <TableRow>
@@ -58,7 +51,6 @@ class ListDeck extends Component {
               <TableCell>CMC</TableCell>
               <TableCell>Rarity</TableCell>
               <TableCell>Set</TableCell>
-              <TableCell>Colors</TableCell>
               <TableCell>Text</TableCell>
             </TableRow>
           </TableHead>
@@ -70,7 +62,6 @@ class ListDeck extends Component {
                 <TableCell>{item.Cmc}</TableCell>
                 <TableCell>{item.Rarity}</TableCell>
                 <TableCell>{item.Set}</TableCell>
-                <TableCell>{item.Colors}</TableCell>
                 <TableCell>{item.Text}</TableCell>
               </TableRow>
             ))}
