@@ -54,7 +54,7 @@ const headCells = [
   { id: "Set", numeric: false, disablePadding: false, label: "Set" }
 ];
 
-function EnhancedTableHead(props) {
+const EnhancedTableHead = props => {
   const {
     classes,
     onSelectAllClick,
@@ -103,7 +103,7 @@ function EnhancedTableHead(props) {
       </TableRow>
     </TableHead>
   );
-}
+};
 
 EnhancedTableHead.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -226,8 +226,12 @@ export default function EnhancedTable({ rows, clear, ...o }) {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar clear={clear} numSelected={selected.length} />
-        <TableContainer component={classes.container}>
+        <EnhancedTableToolbar
+          {...o}
+          clear={clear}
+          numSelected={selected.length}
+        />
+        <TableContainer className={classes.container}>
           <Table
             stickyHeader
             className={classes.table}
@@ -251,14 +255,14 @@ export default function EnhancedTable({ rows, clear, ...o }) {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <Tooltip title={row.Text}>
+                    <Tooltip title={row.Text} key={`${labelId}-tooltip`}>
                       <TableRow
+                        key={`${labelId}-row`}
                         hover
                         onClick={event => handleClick(event, row.Name)}
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={row.Name}
                         selected={isItemSelected}
                       >
                         <TableCell padding="checkbox">
@@ -270,6 +274,7 @@ export default function EnhancedTable({ rows, clear, ...o }) {
                         <TableCell
                           component="th"
                           id={labelId}
+                          key={labelId}
                           scope="row"
                           padding="none"
                         >
