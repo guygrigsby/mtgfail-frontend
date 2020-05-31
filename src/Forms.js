@@ -1,5 +1,4 @@
 import React, { Component, useState } from "react";
-import FileSaver from "file-saver";
 import Button from "./Button.js";
 import Paper from "@material-ui/core/Paper";
 import FontIcon from "react-toolbox/lib/font_icon";
