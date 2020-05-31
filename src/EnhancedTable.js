@@ -47,7 +47,7 @@ function stableSort(array, comparator) {
 }
 const headCells = [
   { id: "Name", numeric: false, disablePadding: true, label: "Name" },
-  //{ id: "Image", numeric: false, disablePadding: true, label: "Type" },
+  //{ id: "Image", numeric: false, disablePadding: true, label: "Image" },
   { id: "Cost", numeric: false, disablePadding: false, label: "Cost" },
   { id: "Cmc", numeric: true, disablePadding: false, label: "CMC" },
   { id: "Rarity", numeric: false, disablePadding: false, label: "Rarity" },
@@ -69,7 +69,7 @@ function EnhancedTableHead(props) {
   };
 
   return (
-    <TableHead className="deckTable">
+    <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
           <Checkbox
@@ -118,23 +118,21 @@ const EnhancedTableToolbar = props => {
   const { numSelected, clear } = props;
 
   return (
-    <Toolbar>
-      {numSelected > 0 ? (
-        <Typography color="inherit" variant="subtitle1" component="div">
-          {numSelected} selected
-        </Typography>
-      ) : (
-        <Typography variant="h6" id="tableTitle" component="div">
-          Deck
-        </Typography>
-      )}
+    <Paper>
+      <Toolbar>
+        {numSelected > 0 && (
+          <Typography color="inherit" variant="subtitle1" component="div">
+            {numSelected} selected
+          </Typography>
+        )}
 
-      <Tooltip title="Delete">
-        <IconButton aria-label="delete" onClick={() => clear()}>
-          <DeleteIcon />
-        </IconButton>
-      </Tooltip>
-    </Toolbar>
+        <Tooltip title="Delete">
+          <IconButton aria-label="delete" onClick={() => clear()}>
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
+      </Toolbar>
+    </Paper>
   );
 };
 
@@ -144,7 +142,10 @@ EnhancedTableToolbar.propTypes = {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: "100%"
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2)
+    }
   },
   paper: {
     width: "100%",
@@ -163,6 +164,9 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     top: 20,
     width: 1
+  },
+  container: {
+    maxHeight: 440
   }
 }));
 
@@ -226,12 +230,13 @@ export default function EnhancedTable({ rows, clear, ...o }) {
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <EnhancedTableToolbar clear={clear} numSelected={selected.length} />
-        <TableContainer>
+        <TableContainer component={classes.container}>
           <Table
+            stickyHeader
             className={classes.table}
             aria-labelledby="tableTitle"
             size="small"
-            aria-label="enhanced table"
+            aria-label="deck table"
           >
             <EnhancedTableHead
               classes={classes}

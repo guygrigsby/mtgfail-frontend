@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Paper from "@material-ui/core/Paper";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
@@ -32,7 +33,8 @@ TabPanel.propTypes = {
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper
+    backgroundcolor: theme.palette.background.paper,
+    minHeight: "200px"
   }
 }));
 
@@ -45,14 +47,22 @@ export default function SimpleTabs({ tabs, ...others }) {
   };
 
   return (
-    <div className={classes.root}>
-      <Toolbar>
-        <Tabs value={value} onChange={handleChange} aria-label="tabs">
+    <Paper elevation={3} className={classes.root}>
+      <Box backgroundcolor="primary">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="tabs"
+          variant="fullWidth"
+          indicatorColor="primary"
+          textColor="primary"
+          centered
+        >
           {tabs.map((tab, idx) => {
             return <Tab key={idx} label={tab.Name} />;
           })}
         </Tabs>
-      </Toolbar>
+      </Box>
       {tabs.map((tab, idx) => {
         return (
           <TabPanel key={idx} value={value} index={idx}>
@@ -60,6 +70,6 @@ export default function SimpleTabs({ tabs, ...others }) {
           </TabPanel>
         );
       })}
-    </div>
+    </Paper>
   );
 }

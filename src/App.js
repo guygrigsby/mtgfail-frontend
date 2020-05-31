@@ -3,7 +3,7 @@
 import React, { Component, useState } from "react";
 import ReactDOM from "react-dom";
 import { hot } from "react-hot-loader";
-import { instanceOf } from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
 import Forms from "./Forms";
 import Alert from "@material-ui/lab/Alert";
 import TestData from "./Data.js";
@@ -20,6 +20,7 @@ import SimpleTabs from "./Tabs.js";
 import TestDeck from "./TestData.json";
 import EnhancedTable from "./EnhancedTable.js";
 import SimpleStorage from "react-simple-storage";
+import theme from "./AppTheme.js";
 
 const download = require("./Download.js");
 
@@ -27,6 +28,19 @@ export const Upstream =
   process.env.NODE_ENV === "development"
     ? "http://localhost:8080"
     : "https://api.mtg.fail";
+
+const useStyles = withStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  paper: {
+    padding: theme.spacing(3),
+    overflowY: "visible",
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+    elevation: 3
+  }
+}));
 
 class App extends Component {
   constructor(props) {
@@ -209,38 +223,41 @@ class App extends Component {
       },
       { key: "tab2", Name: "Build", Content: null, Enabled: () => true }
     ];
+
+    const classes = useStyles(theme);
     return (
-      <>
-        <div className="root">
-          <Container className="sheet" maxWidth="lg">
-            <MenuAppBar />
-            <Grid
-              container
-              spacing={3}
-              container
-              direction="row"
-              justify="space-between"
-              alignItems="flex-end"
-            >
-              <Grid item lg={12}>
-                {this.state.error !== null ? (
-                  <Hero severity="warning">{`Error: ${this.state.error.toString()}`}</Hero>
-                ) : (
-                  <Hero severity="info">Welcome, failures...</Hero>
-                )}
-              </Grid>
-              <Grid item lg={12}>
-                <SimpleTabs tabs={tabs} />
-              </Grid>
-            </Grid>
-            <Grid item lg={12}>
+      <div className={classes.root}>
+        <Grid
+          container
+          spacing={3}
+          direction="column"
+          justify="center"
+          alignItems="stretch"
+        >
+          <Grid item xs={12}>
+            <Paper elevation={3}>
+              <MenuAppBar />
+            </Paper>
+          </Grid>
+          <Grid item xs={12}>
+            {this.state.error !== null ? (
+              <Hero severity="warning">{`Error: ${this.state.error.toString()}`}</Hero>
+            ) : (
+              <Hero severity="info">Welcome, failures...</Hero>
+            )}
+          </Grid>
+          <Grid item xs={12}>
+            <Paper elevation={3}>
+              <SimpleTabs tabs={tabs} />
+            </Paper>
+            <Paper elevation={3}>
               {this.deckLoaded() && (
                 <EnhancedTable clear={this.deleteAll} rows={this.state.deck} />
               )}
-            </Grid>
-          </Container>
-        </div>
-      </>
+            </Paper>
+          </Grid>
+        </Grid>
+      </div>
     );
   }
 }
