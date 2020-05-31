@@ -1,6 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
 import Alert from "@material-ui/lab/Alert";
+import Typography from "@material-ui/core/Typography";
+import theme from "./AppTheme.js";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -12,19 +15,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Hero = props => {
-  const classes = useStyles();
+  const classes = useStyles(theme);
   return (
     <header
       style={{
         flex: 1,
         overflowY: "visible",
-        padding: "1.8rem",
         textAlign: "center"
       }}
     >
-      <div className={classes.root}>
-        <Alert severity={props.severity}>{props.msg}</Alert>
-      </div>
+      <Paper elevation={3}>
+        <Alert severity={props.severity}>{props.children}</Alert>
+      </Paper>
     </header>
   );
 };

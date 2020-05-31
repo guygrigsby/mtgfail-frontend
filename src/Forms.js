@@ -1,6 +1,6 @@
 import React, { Component, useState } from "react";
 import FileSaver from "file-saver";
-import Button from "@material-ui/core/Button";
+import Button from "./Button.js";
 import Paper from "@material-ui/core/Paper";
 import FontIcon from "react-toolbox/lib/font_icon";
 import Input from "@material-ui/core/Input";
@@ -43,7 +43,6 @@ const Forms = ({ setDeckURL, ...others }) => {
           <Button
             id="URLimport"
             variant="contained"
-            color="primary"
             onClick={event => setDeckURL(uri)}
           >
             Import
