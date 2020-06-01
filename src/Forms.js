@@ -26,18 +26,17 @@ const Forms = ({ setDeckURL, ...others }) => {
         justify="space-between"
         alignItems="flex-end"
       >
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <TextField
             id="standard-basic"
+            size="small"
             type="text"
             label="Deck URI"
             name="deckuri"
-            variant="outlined"
             onChange={event => setURI(event.target.value.trim())}
             fullWidth
           />
         </Grid>
-        <Grid item xs={6}></Grid>
         <Grid item xs={6}>
           <Button
             id="URLimport"

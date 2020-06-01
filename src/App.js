@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import { hot } from "react-hot-loader";
 import { withStyles } from "@material-ui/core/styles";
 import Forms from "./Forms";
+import AddForm from "./AddForm";
 import Alert from "@material-ui/lab/Alert";
 import TestData from "./Data.js";
 import TTSDeck from "./TTSDeck.js";
@@ -50,6 +51,18 @@ class App extends Component {
       error: null
     };
   }
+
+  addCard = card => {
+    this.setState((state, props) => {
+      let deck = state.deck;
+      if (deck === null) {
+        deck = [];
+      }
+      deck.push(card);
+      this.saveLocal("deck", deck);
+      return { deck };
+    });
+  };
 
   deleteAll = () => this.setDeck(null);
 
@@ -221,7 +234,12 @@ class App extends Component {
           </div>
         )
       },
-      { key: "tab2", Name: "Build", Content: null, Enabled: () => true }
+      {
+        key: "tab2",
+        Name: "Build",
+        Content: <AddForm addCard={this.addCard} />,
+        Enabled: () => true
+      }
     ];
 
     const classes = useStyles(theme);
@@ -250,11 +268,11 @@ class App extends Component {
             <Paper elevation={3}>
               <SimpleTabs tabs={tabs} />
             </Paper>
-            <Paper elevation={3}>
-              {this.deckLoaded() && (
-                <EnhancedTable clear={this.deleteAll} rows={this.state.deck} />
-              )}
-            </Paper>
+          </Grid>
+          <Grid item xs={12}>
+            {this.deckLoaded() && (
+              <EnhancedTable clear={this.deleteAll} rows={this.state.deck} />
+            )}
           </Grid>
         </Grid>
       </div>
