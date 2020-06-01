@@ -68,6 +68,7 @@
     "react-redux": "^7.2.0",
     "react-simple-storage": "^1.4.2",
     "react-table": "^7.1.0",
+    "react-tap-event-plugin": "^3.0.3",
     "react-test-renderer": "16.8.4",
     "react-toolbox": "^2.0.0-beta.13",
     "redux": "^4.0.5",

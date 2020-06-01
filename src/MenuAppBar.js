@@ -17,6 +17,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import Icon from "@material-ui/core/Icon";
+import injectTapEventPlugin from "react-tap-event-plugin";
 
 import PaymentIcon from "@material-ui/icons/Payment";
 import CloudIcon from "@material-ui/icons/Cloud";
@@ -26,6 +27,8 @@ import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import BookIcon from "@material-ui/icons/Book";
 import BugReportIcon from "@material-ui/icons/BugReport";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+
+injectTapEventPlugin();
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -99,6 +102,7 @@ export default function MenuAppBar() {
       Divider: false
     }
   ];
+  const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   return (
     <div className={classes.root}>
@@ -116,6 +120,8 @@ export default function MenuAppBar() {
           </IconButton>
           <div>
             <SwipeableDrawer
+              disableBackdropTransition={!iOS}
+              disableDiscovery={iOS}
               id="menu-appbar"
               anchorEl={anchorEl}
               anchorOrigin={{
