@@ -54,7 +54,10 @@ class App extends Component {
 
   addCard = card => {
     this.setState((state, props) => {
-      const deck = state.deck;
+      let deck = state.deck;
+      if (deck === null) {
+        deck = [];
+      }
       deck.push(card);
       this.saveLocal("deck", deck);
       return { deck };

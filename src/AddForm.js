@@ -8,15 +8,52 @@ import TextField from "@material-ui/core/TextField";
 import AutoComplete from "./AutoComplete";
 //import AutoComplete from "./Auto";
 import util from "util";
+
+const requestOptions = {
+  method: "GET",
+  mode: "cors", // no-cors, *cors, same-origin
+  cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+  credentials: "omit", // include, *same-origin, omit
+  redirect: "follow" // manual, *follow, error
+};
 const AddForm = ({ addCard, ...others }) => {
-  const [card, setCard] = useState(null);
+  const [cardName, setCardName] = useState(null);
   const [error, setError] = useState(null);
-  const [aulist, setAuList] = useState(null);
-  const [popup, setPopup] = useState(null);
 
-  console.log(aulist);
+  const getCardData = name => {
+    const fullURI = new URL(
+      `https://api.scryfall.com/cards/named?exact=${name}`
+    );
 
-  const callback = fire => setPopup(fire);
+    return fetch(fullURI, requestOptions)
+      .then(response => {
+        if (!response.ok) {
+          const error = `Unexpected response: ${response.status}: ${response.statusText}`;
+          console.error("error", error, "status", response.status);
+          return Promise.reject(error);
+        }
+        const contentType = response.headers.get("Content-Type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new TypeError("expected JSON response");
+        }
+        return response.json();
+      })
+      .then(data => {
+        addCard({
+          Name: data.name,
+          Image: data.image_uris.small,
+          Cost: data.mana_cost,
+          Cmc: data.cmc,
+          Type: data.type_line,
+          Set: data.set,
+          Rarity: data.rarity
+        });
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
+  };
+
   return (
     <>
       <Grid
@@ -27,29 +64,15 @@ const AddForm = ({ addCard, ...others }) => {
         justify="space-between"
         alignItems="flex-start"
       >
-        <Grid item xs={6}>
-          <AutoComplete />
-        </Grid>
-
-        <Grid item xs={6}>
-          <TextField
-            id="multilineAdd"
-            variant="outlined"
-            size="small"
-            label="Add Multiple"
-            multiline
-            fullWidth
-            rows={4}
-            disabled
-          />
+        <Grid item xs={12}>
+          <AutoComplete setCardName={setCardName} />
         </Grid>
         <Grid item xs={6}>
-          <Button id="addCardButton" onClick={event => addCard(card)}>
+          <Button id="addCardButton" onClick={event => getCardData(cardName)}>
             Add
           </Button>
         </Grid>
       </Grid>
-      <div>{aulist !== null && <AutoComplete candidates={aulist} />}</div>
     </>
   );
 };

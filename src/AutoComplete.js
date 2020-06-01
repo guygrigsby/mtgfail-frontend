@@ -19,59 +19,49 @@ const requestOptions = {
   credentials: "omit", // include, *same-origin, omit
   redirect: "follow" // manual, *follow, error
 };
-function sleep(delay = 0) {
-  return new Promise(resolve => {
-    setTimeout(resolve, delay);
-  });
-}
-const def = ["test", "test3"];
-const AsyncAutoComplete = () => {
+
+const AsyncAutoComplete = ({ setCardName, ...others }) => {
   const [open, setOpen] = React.useState(false);
   const [cards, setCards] = React.useState([]);
-  const [text, setText] = React.useState("");
   const [loading, setLoading] = React.useState(false);
 
-  useEffect(() => {
-    console.log("use", text, "options", cards);
-    let active = true;
-    console.log("use", text, "options", cards);
+  const aulist = async (event, value, reason) => {
+    setCardName(value);
+    setLoading(true);
+    const fullURI = new URL(
+      `https://api.scryfall.com/cards/autocomplete?q=${value}`
+    );
+    fetch(fullURI, requestOptions)
+      .then(response => {
+        if (!response.ok) {
+          const error = `Unexpected response: ${response.status}: ${response.statusText}`;
+          console.error("error", error, "status", response.status);
+          return Promise.reject(error);
+        }
+        const contentType = response.headers.get("Content-Type");
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new TypeError("expected JSON response");
+        }
+        return response.json();
+      })
+      .then(data => {
+        setCards(data.data);
+        setLoading(false);
 
-    if (!loading || text.length < 3) {
+        return data;
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    let active = true;
+
+    if (!loading) {
       return undefined;
     }
-
-    const fullURI = new URL(
-      `https://api.scryfall.com/cards/autocomplete?q=${text}`
-    );
-    (async () => {
-      const cards = fetch(fullURI, requestOptions)
-        .then(response => {
-          if (!response.ok) {
-            const error = `Unexpected response: ${response.status}: ${response.statusText}`;
-            console.error("error", error, "status", response.status);
-            return Promise.reject(error);
-          }
-          const contentType = response.headers.get("Content-Type");
-          if (!contentType || !contentType.includes("application/json")) {
-            throw new TypeError("expected JSON response");
-          }
-          return response.json();
-        })
-        .then(data => {
-          console.log("setting au list", JSON.stringify(data));
-          return data;
-        })
-        .catch(error => {
-          console.error("Error:", error);
-          return { data: def };
-        });
-
-      await sleep(1e3); // For demo purposes.
-      if (active) {
-        setCards(cards);
-      }
-      setLoading(false);
-    })();
 
     return () => {
       active = false;
@@ -79,18 +69,15 @@ const AsyncAutoComplete = () => {
   }, [loading]);
 
   useEffect(() => {
-    console.log("use other", text, "options", cards);
     if (!open) {
       setCards([]);
     }
-    console.log("use other close", text, "options", cards);
   }, [open]);
 
   return (
     <Autocomplete
       id="card search"
       freeSolo
-      style={{ width: 300 }}
       open={open}
       onOpen={() => {
         setOpen(true);
@@ -102,12 +89,14 @@ const AsyncAutoComplete = () => {
       getOptionLabel={option => option}
       options={cards}
       loading={loading}
+      loadingText="Scrying..."
+      autoHighlight
+      onInputChange={aulist}
       renderInput={params => (
         <TextField
           {...params}
           label="Card Search"
-          variant="outlined"
-          onChange={e => setLoading(true) && setText(e.target.value)}
+          size="small"
           InputProps={{
             ...params.InputProps,
             endAdornment: (

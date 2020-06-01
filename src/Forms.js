@@ -29,12 +29,10 @@ const Forms = ({ setDeckURL, ...others }) => {
         <Grid item xs={12}>
           <TextField
             id="standard-basic"
-            variant="filled"
             size="small"
             type="text"
             label="Deck URI"
             name="deckuri"
-            variant="outlined"
             onChange={event => setURI(event.target.value.trim())}
             fullWidth
           />
