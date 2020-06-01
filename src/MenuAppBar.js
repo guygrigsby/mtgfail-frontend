@@ -1,17 +1,28 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import Divider from "@material-ui/core/Divider";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import MenuIcon from "@material-ui/icons/Menu";
 import Switch from "@material-ui/core/Switch";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import GithubIcon from "./NavBar";
+import ListSubheader from "@material-ui/core/ListSubheader";
 import Icon from "@material-ui/core/Icon";
+
+import PaymentIcon from "@material-ui/icons/Payment";
+import CloudIcon from "@material-ui/icons/Cloud";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,6 +53,8 @@ export default function MenuAppBar() {
     setAnchorEl(null);
   };
 
+  const menuItems = [{}];
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -57,7 +70,7 @@ export default function MenuAppBar() {
             <MenuIcon />
           </IconButton>
           <div>
-            <Menu
+            <Drawer
               id="menu-appbar"
               anchorEl={anchorEl}
               anchorOrigin={{
@@ -72,32 +85,67 @@ export default function MenuAppBar() {
               open={open}
               onClose={handleClose}
             >
-              <MenuItem
-                onClick={() => {
-                  handleClose();
-                  window.open("https://www.patreon.com/guygrigsby", "_blank");
-                }}
-              >
-                <ListItemIcon>
-                  <Icon color="secondary">payment</Icon>
-                </ListItemIcon>
-                <ListItemText primary="Donate" />
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  handleClose();
-                  window.open(
-                    "https://github.com/guygrigsby/mtgfail-frontend/issues",
-                    "_blank"
-                  );
-                }}
-              >
-                <ListItemIcon>
-                  <Icon color="secondary">github</Icon>
-                </ListItemIcon>
-                <ListItemText primary="Feature/Bug Report" />
-              </MenuItem>
-            </Menu>
+              <List>
+                <ListItem
+                  button
+                  onClick={() => {
+                    window.open("https://www.patreon.com/guygrigsby", "_blank");
+                  }}
+                >
+                  <ListItemIcon>
+                    <PaymentIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Donate" />
+                </ListItem>
+                <ListItem
+                  button
+                  onClick={() => {
+                    window.open(
+                      "https://github.com/guygrigsby/mtgfail-frontend/issues",
+                      "_blank"
+                    );
+                  }}
+                >
+                  <ListItemIcon>
+                    <GitHubIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Feature/Bug Report" />
+                </ListItem>
+                <ListSubheader component="div" id="nested-list-subheader">
+                  About Me
+                </ListSubheader>
+
+                <ListItem
+                  button
+                  onClick={() => {
+                    window.open(
+                      "https://www.twitter.com/usernamevalid",
+                      "_blank"
+                    );
+                  }}
+                >
+                  <ListItemIcon>
+                    <TwitterIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Twitter" />
+                </ListItem>
+
+                <ListItem
+                  button
+                  onClick={() => {
+                    window.open(
+                      "https://www.linkedin.com/guygrigsby",
+                      "_blank"
+                    );
+                  }}
+                >
+                  <ListItemIcon>
+                    <LinkedInIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="LinkedIn" />
+                </ListItem>
+              </List>
+            </Drawer>
           </div>
           <Typography variant="h6" className={classes.title}>
             mtg.fail
