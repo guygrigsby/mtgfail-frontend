@@ -66,6 +66,19 @@ class App extends Component {
 
   deleteAll = () => this.setDeck(null);
 
+  remove = cardNames =>
+    this.setState(prevState => {
+      const deck = [...prevState.deck];
+      console.log("removing", cardNames);
+      for (var i = cardNames.length - 1; i >= 0; i--) {
+        const selectedIndex = deck.indexOf(cardNames[i]);
+        deck.splice(selectedIndex, 1);
+      }
+      console.log("After removing ", cardNames, " new deck is ", deck);
+      this.saveLocal("deck", deck);
+      return { deck };
+    });
+
   saveLocal(key, thing) {
     localStorage.setItem(key, JSON.stringify(thing));
   }
@@ -271,7 +284,11 @@ class App extends Component {
           </Grid>
           <Grid item xs={12}>
             {this.deckLoaded() && (
-              <EnhancedTable clear={this.deleteAll} rows={this.state.deck} />
+              <EnhancedTable
+                remove={this.remove}
+                clear={this.deleteAll}
+                rows={this.state.deck}
+              />
             )}
           </Grid>
         </Grid>

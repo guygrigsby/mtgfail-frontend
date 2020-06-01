@@ -115,7 +115,7 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired
 };
 const EnhancedTableToolbar = props => {
-  const { numSelected, clear } = props;
+  const { numSelected, clear, remove } = props;
 
   return (
     <Paper>
@@ -127,7 +127,7 @@ const EnhancedTableToolbar = props => {
         )}
 
         <Tooltip title="Delete">
-          <IconButton aria-label="delete" onClick={() => clear()}>
+          <IconButton aria-label="delete" onClick={remove}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -167,7 +167,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function EnhancedTable({ rows, clear, ...o }) {
+export default function EnhancedTable({ rows, remove, clear, ...o }) {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("name");
@@ -204,23 +204,9 @@ export default function EnhancedTable({ rows, clear, ...o }) {
         selected.slice(selectedIndex + 1)
       );
     }
-
+    console.log("selected", newSelected);
     setSelected(newSelected);
   };
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = event => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  const handleChangeDense = event => {
-    setDense(event.target.checked);
-  };
-
   const isSelected = name => selected.indexOf(name) !== -1;
 
   return (
@@ -229,6 +215,7 @@ export default function EnhancedTable({ rows, clear, ...o }) {
         <EnhancedTableToolbar
           {...o}
           clear={clear}
+          remove={async () => remove([...selected]) && setSelected([])}
           numSelected={selected.length}
         />
         <TableContainer className={classes.container}>
