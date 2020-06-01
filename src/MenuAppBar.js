@@ -23,6 +23,9 @@ import CloudIcon from "@material-ui/icons/Cloud";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import BookIcon from "@material-ui/icons/Book";
+import BugReportIcon from "@material-ui/icons/BugReport";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -53,7 +56,49 @@ export default function MenuAppBar() {
     setAnchorEl(null);
   };
 
-  const menuItems = [{}];
+  const socialItems = [
+    {
+      Label: "Twitter",
+      Icon: <TwitterIcon />,
+      Link: "https://www.twitter.com/usernamevalid"
+    },
+    {
+      Label: "LinkedIn",
+      Icon: <LinkedInIcon />,
+      Link: "https://www.linkedin.com/guygrigsby"
+    },
+    {
+      Label: "Github",
+      Icon: <GitHubIcon />,
+      Link: "https://www.github.com/guygrigsby"
+    },
+    {
+      Label: "Blog",
+      Icon: <BookIcon />,
+      Link: "https://grigsby.dev"
+    }
+  ];
+
+  const siteItems = [
+    {
+      Label: "Donate",
+      Icon: <PaymentIcon />,
+      Link: "https://www.patreon.com/guygrigsby",
+      Divider: true
+    },
+    {
+      Label: "Report Bugs",
+      Icon: <BugReportIcon />,
+      Link: "https://www.github.com/guygrigsby/mtgfail-frontend/issues",
+      Divider: false
+    },
+    {
+      Label: "Request Feature",
+      Icon: <AddCircleOutlineIcon />,
+      Link: "https://www.github.com/guygrigsby/mtgfail-frontend/issues",
+      Divider: false
+    }
+  ];
 
   return (
     <div className={classes.root}>
@@ -86,64 +131,48 @@ export default function MenuAppBar() {
               onClose={handleClose}
             >
               <List>
-                <ListItem
-                  button
-                  onClick={() => {
-                    window.open("https://www.patreon.com/guygrigsby", "_blank");
-                  }}
+                <ListSubheader
+                  color="primary"
+                  component="div"
+                  id="sitenav-subheader"
                 >
-                  <ListItemIcon>
-                    <PaymentIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Donate" />
-                </ListItem>
-                <ListItem
-                  button
-                  onClick={() => {
-                    window.open(
-                      "https://github.com/guygrigsby/mtgfail-frontend/issues",
-                      "_blank"
-                    );
-                  }}
+                  Site Navigation
+                </ListSubheader>
+                {siteItems.map((e, i) => (
+                  <>
+                    <ListItem
+                      key={i}
+                      button
+                      onClick={() => {
+                        window.open(e.Link, "_blank");
+                      }}
+                    >
+                      <ListItemIcon>{e.Icon}</ListItemIcon>
+                      <ListItemText primary={e.Label} />
+                    </ListItem>
+
+                    {e.Divider && <Divider />}
+                  </>
+                ))}
+                <ListSubheader
+                  color="primary"
+                  component="div"
+                  id="abt-me-subheader"
                 >
-                  <ListItemIcon>
-                    <GitHubIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Feature/Bug Report" />
-                </ListItem>
-                <ListSubheader component="div" id="nested-list-subheader">
                   About Me
                 </ListSubheader>
-
-                <ListItem
-                  button
-                  onClick={() => {
-                    window.open(
-                      "https://www.twitter.com/usernamevalid",
-                      "_blank"
-                    );
-                  }}
-                >
-                  <ListItemIcon>
-                    <TwitterIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Twitter" />
-                </ListItem>
-
-                <ListItem
-                  button
-                  onClick={() => {
-                    window.open(
-                      "https://www.linkedin.com/guygrigsby",
-                      "_blank"
-                    );
-                  }}
-                >
-                  <ListItemIcon>
-                    <LinkedInIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="LinkedIn" />
-                </ListItem>
+                {socialItems.map((e, i) => (
+                  <ListItem
+                    key={i}
+                    button
+                    onClick={() => {
+                      window.open(e.Link, "_blank");
+                    }}
+                  >
+                    <ListItemIcon>{e.Icon}</ListItemIcon>
+                    <ListItemText primary={e.Label} />
+                  </ListItem>
+                ))}
               </List>
             </Drawer>
           </div>
