@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -99,6 +99,7 @@ export default function MenuAppBar() {
       Divider: false
     }
   ];
+  const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   return (
     <div className={classes.root}>
@@ -115,7 +116,9 @@ export default function MenuAppBar() {
             <MenuIcon />
           </IconButton>
           <div>
-            <Drawer
+            <SwipeableDrawer
+              disableBackdropTransition={!iOS}
+              disableDiscovery={iOS}
               id="menu-appbar"
               anchorEl={anchorEl}
               anchorOrigin={{
@@ -174,7 +177,7 @@ export default function MenuAppBar() {
                   </ListItem>
                 ))}
               </List>
-            </Drawer>
+            </SwipeableDrawer>
           </div>
           <Typography variant="h6" className={classes.title}>
             mtg.fail
