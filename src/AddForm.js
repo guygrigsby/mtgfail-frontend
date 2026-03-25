@@ -1,7 +1,6 @@
 import React, { Component, useState } from "react";
 import Button from "./Button.js";
 import Paper from "@material-ui/core/Paper";
-import FontIcon from "react-toolbox/lib/font_icon";
 import Input from "@material-ui/core/Input";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";

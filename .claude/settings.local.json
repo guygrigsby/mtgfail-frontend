@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /Users/guygrigsby/projects/guygrigsby/mtgfail-frontend/node_modules -type f -name *.js)",
+      "Bash(find /Users/guygrigsby/projects/guygrigsby/mtgfail-frontend/node_modules/@svgr -type f -name *.js)",
+      "Bash(grep -E \"\\\\.\\(js|jsx\\)$\")"
+    ]
+  }
+}
